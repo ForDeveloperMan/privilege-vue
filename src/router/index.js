@@ -15,7 +15,9 @@ let components = [
 	['implemented', 'projects/implemented', Projects_cat, '/projects/implemented'],
 	['investment', 'projects/investment', Projects_cat, '/projects/investment'],
 	['in-progress', 'projects/in-progress', Projects_cat, '/projects/in-progress'],
-	['project_implemented', 'projects/implemented/:project', Project, '/projects/implemented/'],
+	['project_implemented', 'projects/implemented/:project', Project, '/projects/implemented/', 'implemented'],
+	['project_investment', 'projects/investment/:project', Project, '/projects/investment/', 'investment'],
+	['project_in-progress', 'projects/in-progress/:project', Project, '/projects/in-progress/', 'in-progress'],
 ];
 
 let routes = []
@@ -53,6 +55,7 @@ for(var l=0; l<components.length; l++){
 				'languages':  languages,
 				'linkHome': linkHome,
 				'slug': components[l][0],
+				'category': components[l][4],
 			},
 		});
 	}

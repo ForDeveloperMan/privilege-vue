@@ -10,7 +10,7 @@
 	<img v-if="!this.$store.state.project_bg_main" v-show="showAnim" v-on:load="this.loadImg" class="sec-projects__content-bg" :src="this.projects_info.bg">
 </transition>
 <transition name="fade">
-	<img v-if="this.$store.state.project_bg_main" v-show="showAnim" v-on:load="this.loadImg" :src="this.$store.state.project_bg_main" alt="" class="sec-projects-cat__bg">
+	<img v-if="this.$store.state.project_bg_main" v-show="mounted" v-on:load="this.loadImg" :src="this.$store.state.project_bg_main" alt="" class="sec-projects-cat__bg">
 </transition>
 
 <div class="sec-projects__line sec-projects__line_1"></div>
@@ -45,11 +45,35 @@
 					<p v-show="showAnim" style="animation-delay: 0.5s" class="text-info sec-projects__text-text">{{ this.projects_info.text }}</p>
 				</transition>
 			</div>
+			<transition name="fadeRight">
+				<router-link :to="this.$route.meta.linkHome+'projects/'+this.projects_cats[0]['slug']" v-show="showAnim" style="animation-delay: 1s" class="sec-projects__el sec-projects__el_1" @mouseenter="showBg" @mouseleave="hideBg" data-bg="0">
+					<div class="project-el">
+						<img :src="this.projects_cats[0]['acf_icon']" :alt="this.projects_cats[0]['name']" class="project-el__icon">
+						<p class="project-el__text">{{this.projects_cats[0]['name']}}</p>
+					</div>
+				</router-link>
+			</transition>
+			<transition name="fadeRight">
+				<router-link :to="this.$route.meta.linkHome+'projects/'+this.projects_cats[1]['slug']" v-show="showAnim" style="animation-delay: 1.3s" class="sec-projects__el sec-projects__el_2" @mouseenter="showBg" @mouseleave="hideBg" data-bg="1">
+					<div class="project-el">
+						<img :src="this.projects_cats[1]['acf_icon']" :alt="this.projects_cats[1]['name']" class="project-el__icon">
+						<p class="project-el__text">{{this.projects_cats[1]['name']}}</p>
+					</div>
+				</router-link>
+			</transition>
+			<transition name="fadeRight">
+				<router-link :to="this.$route.meta.linkHome+'projects/'+this.projects_cats[2]['slug']" v-show="showAnim" style="animation-delay: 1.6s" class="sec-projects__el sec-projects__el_3" @mouseenter="showBg" @mouseleave="hideBg" data-bg="2">
+					<div class="project-el">
+						<img :src="this.projects_cats[2]['acf_icon']" :alt="this.projects_cats[2]['name']" class="project-el__icon">
+						<p class="project-el__text">{{this.projects_cats[2]['name']}}</p>
+					</div>
+				</router-link>
+			</transition>
 			<transition name="fadeUp">
 				<div v-show="showAnim" style="animation-delay: 1.9s" class="sec-page__bottom">
 					<router-link :to="this.$route.meta.linkHome" class="iconLink">
 						<svg class="iconLink__icon iconLink__margin" width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="1" width="6" height="1" transform="rotate(90 4 1)" fill="white"/><rect x="9" y="8" width="6" height="1" transform="rotate(-180 9 8)" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 3.24324L6.18333 4L3.5 1.51351L0.816666 4L9.02423e-09 3.24324L3.5 -4.17371e-08L7 3.24324Z" fill="white"/></svg>
-						<span class="iconLink__text">{{ this.projects_info.goHome }}</span>
+						<span class="iconLink__text">{{ this.projects_info.goPrev }}</span>
 					</router-link>
 					<div class="block-links">
 						<a href="#" class="block-links__el iconLink">
@@ -62,30 +86,6 @@
 						</a>
 					</div>
 				</div>
-			</transition>
-			<transition name="fadeRight">
-				<router-link :to="this.$route.meta.linkHome+'projects/'+this.projects_cats[0]['slug']" v-show="showAnim" style="animation-delay: 1s" class="sec-projects__el sec-projects__el_1" @mouseenter="showBg" @mouseleave="bg = false" data-bg="0">
-					<div class="project-el">
-						<img :src="this.projects_cats[0]['acf_icon']" :alt="this.projects_cats[0]['name']" class="project-el__icon">
-						<p class="project-el__text">{{this.projects_cats[0]['name']}}</p>
-					</div>
-				</router-link>
-			</transition>
-			<transition name="fadeRight">
-				<router-link :to="this.$route.meta.linkHome+'projects/'+this.projects_cats[1]['slug']" v-show="showAnim" style="animation-delay: 1.3s" class="sec-projects__el sec-projects__el_2" @mouseenter="showBg" @mouseleave="bg = false" data-bg="1">
-					<div class="project-el">
-						<img :src="this.projects_cats[1]['acf_icon']" :alt="this.projects_cats[1]['name']" class="project-el__icon">
-						<p class="project-el__text">{{this.projects_cats[1]['name']}}</p>
-					</div>
-				</router-link>
-			</transition>
-			<transition name="fadeRight">
-				<router-link :to="this.$route.meta.linkHome+'projects/'+this.projects_cats[2]['slug']" v-show="showAnim" style="animation-delay: 1.6s" class="sec-projects__el sec-projects__el_3" @mouseenter="showBg" @mouseleave="bg = false" data-bg="2">
-					<div class="project-el">
-						<img :src="this.projects_cats[2]['acf_icon']" :alt="this.projects_cats[2]['name']" class="project-el__icon">
-						<p class="project-el__text">{{this.projects_cats[2]['name']}}</p>
-					</div>
-				</router-link>
 			</transition>
 		</div>
 	</div>
@@ -109,6 +109,7 @@ export default {
 			projects_cats: Object,
 			projects_info: Object,
 			activeHover: false,
+			mounted: false,
 			images: {
 				count: 4,
 				loaded: 0,
@@ -120,10 +121,11 @@ export default {
 	},
 	mounted() {
 		this.getProjects();
+		this.mounted = true;
 	},
 	beforeRouteLeave(to, from, next) {
-		console.log('leave');
 		this.showAnim = false;
+		this.activeHover = false;
 		setTimeout(next, 1700);
 	},
 	watch:{
@@ -146,6 +148,11 @@ export default {
 			if ( this.activeHover ) {
 				this.bg = e.target.getAttribute('data-bg');
 				this.$store.commit('changeProjectBg', this.projects_cats[this.bg]['acf_bg']);
+			}
+		},
+		hideBg(e){
+			if ( this.activeHover ) {
+				this.bg = false;
 			}
 		},
 		getProjects(){

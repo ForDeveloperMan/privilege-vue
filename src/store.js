@@ -5,6 +5,8 @@ export default {
 			language_def: 'uk',
 			project_bg: false,
 			project_bg_main: false,
+			project_page_bg: false,
+			projectLanguages: false,
 		}
 	},
 	mutations: {
@@ -16,6 +18,12 @@ export default {
 		},
 		changeProjectBgMain(state, val) {
 			state.project_bg_main = val;
+		},
+		changePageProjectBg(state, val) {
+			state.project_page_bg = val;
+		},
+		setProjectLanguages(state, val) {
+			state.projectLanguages = val;
 		},
 	},
 	getters:{

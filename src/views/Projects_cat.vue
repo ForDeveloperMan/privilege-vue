@@ -1,13 +1,11 @@
 <template>
 <div class="wrapper">
 	<div class="sec-page sec-projects-cat">
-		<Header></Header>
 		<transition name="fade">
 			<img v-if="!this.$store.state.project_bg && showAnimMain" v-show="showAnim" v-on:load="this.loadImg" :src="this.pageInfo.bg" alt="" class="sec-projects-cat__bg">
 		</transition>
-		<transition name="fade">
-			<img v-if="this.$store.state.project_bg" v-on:load="this.loadImg" :src="this.$store.state.project_bg" alt="" class="sec-projects-cat__bg">
-		</transition>
+		<img v-if="this.$store.state.project_bg" v-show="mounted" v-on:load="this.loadImg" :src="this.$store.state.project_bg" alt="" class="sec-projects-cat__bg">
+		<Header></Header>
 		<div class="sec-page__wrap sec-projects-cat__wrap" v-if="showAnimMain">
 			<div class="sec-projects-cat__line sec-projects-cat__line_1"></div>
 			<div class="sec-projects-cat__line sec-projects-cat__line_2"></div>
@@ -37,7 +35,7 @@
 				<div class="sec-projects-cat__projects">
 					<template v-for="(item, index) in this.projects" v-bind:key="index">
 						<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight">
-							<router-link :to="this.$route.fullPath + '/' + item.post_name" v-show="showAnim" @mouseenter="showBg" @mouseleave="bg = false" :data-bg="index" class="sec-projects-cat__el"><div class="project-el-cat"><div class="project-el-cat__title">{{ item.post_title }}</div></div></router-link>
+							<router-link :to="this.$route.path + '/' + item.post_name" v-show="showAnim" @mouseenter="showBg" @mouseleave="hideBg" :data-bg="index" class="sec-projects-cat__el"><div class="project-el-cat"><div class="project-el-cat__title">{{ item.post_title }}</div></div></router-link>
 						</transition>
 					</template>
 				</div>
@@ -45,7 +43,7 @@
 					<div v-show="showAnim" style="animation-delay: 1.9s" class="sec-page__bottom">
 						<router-link :to="this.$route.meta.linkHome + 'projects/'" class="iconLink">
 							<svg class="iconLink__icon iconLink__margin" width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="1" width="6" height="1" transform="rotate(90 4 1)" fill="white"/><rect x="9" y="8" width="6" height="1" transform="rotate(-180 9 8)" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 3.24324L6.18333 4L3.5 1.51351L0.816666 4L9.02423e-09 3.24324L3.5 -4.17371e-08L7 3.24324Z" fill="white"/></svg>
-							<span class="iconLink__text">Проекти</span>
+							<span class="iconLink__text">{{ this.pageInfo.goPrev }}</span>
 						</router-link>
 						<div class="block-links">
 							<a href="#" class="block-links__el iconLink">
@@ -78,6 +76,7 @@ export default {
 			projects: Object,
 			pageInfo: Object,
 			activeHover: false,
+			mounted: false,
 			images: {
 				count: Number,
 				loaded: 0,
@@ -90,10 +89,13 @@ export default {
 	beforeRouteLeave(to, from, next) {
 		console.log('leave');
 		this.showAnim = false;
+		this.activeHover = false;
+		this.$store.commit('changeProjectBg', this.pageInfo.bg);
 		setTimeout(next, 1500);
 	},
 	mounted() {
 		this.getProjects();
+		this.mounted = true;
 		console.log(this.$route);
 	},
 	watch:{
@@ -108,6 +110,12 @@ export default {
 		showBg(e){
 			if ( this.activeHover ) {
 				this.bg = e.target.getAttribute('data-bg');
+				this.$store.commit('changePageProjectBg', this.projects[this.bg].acf_bg[0]['sizes']['large']);
+			}
+		},
+		hideBg(e){
+			if ( this.activeHover ) {
+				this.bg = false;
 			}
 		},
 		loadImg() {

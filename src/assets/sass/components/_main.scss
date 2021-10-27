@@ -10,6 +10,7 @@ body{
 	font-weight: 400;
 	overflow: hidden;
 	max-width: 100vw;
+	background: #303030;
 }
 
 .sec-home{
@@ -171,9 +172,9 @@ body{
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
 		object-fit: cover;
 		z-index: 1;
+		height: 100vh;
 	}
 	&::after{
 		content: '';
@@ -368,13 +369,14 @@ body{
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
+		height: 110vh;
 		z-index: 5;
 		pointer-events: none;
 		&.fade-leave-active{
 			transition: 0 !important;
 		}
 		object-fit: cover;
+		object-position: top;
 	}
 	&::after{
 		content: '';
@@ -480,11 +482,16 @@ body{
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
-		height: 100%;
-		object-position: cover;
 		pointer-events: none;
 		z-index: 1;
+		width: 100%;
+		height: 110vh;
+		object-fit: cover;
+		object-position: top;
+		transition: 1s;
+		&.anim{
+			transform: translate3d(0px, -10vh, 0px);
+		}
 	}
 	&__wrap{
 		position: relative;
@@ -493,11 +500,16 @@ body{
 	&__text{
 		position: absolute;
 		top: 50vh;
-		left: 0;
-		width: 24.4vw;
+		left: -20vw;
 		height: 50vh;
+		width: 0vw;
+		transition: 0.9s;
 		.project-info{
 			height: 100%;
+		}
+		&.anim{
+			left: 0;
+			width: 24.4vw;
 		}
 	}
 	&__info{
@@ -514,7 +526,15 @@ body{
 		}
 	}
 	&__contentInfo{
+		position: absolute;
+		left: 0;
 		width: 100%;
-		height: 25vh;
+		height: 0vh;
+		transition: 0.9s;
+		bottom: -25vh;
+		&.anim{
+			height: 25vh;
+			bottom: 0;
+		}
 	}
 }
