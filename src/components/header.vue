@@ -2,9 +2,9 @@
 <header class="block-header">
 	<div class="block-header__wrap">
 		<div class="block-header__content">
-			<div class="block-header__left">
+			<router-link :to="this.$route.meta.linkHome" class="block-header__left">
 				<img src="../assets/img/logo_small.png" alt="logo" class="block-header__logo">
-			</div>
+			</router-link>
 			<div class="block-header__right wrap-menu" v-click-away="hideMenu" v-bind:class="{active: isActive}">
 				<btnLanguage></btnLanguage>
 				<Menu v-bind:isActive="isActive" v-on:openMenu="openMenu"></Menu>

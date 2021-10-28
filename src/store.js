@@ -3,6 +3,7 @@ export default {
 		return {
 			language: 'uk',
 			language_def: 'uk',
+			home_bg: false,
 			project_bg: false,
 			project_bg_main: false,
 			project_page_bg: false,
@@ -12,6 +13,9 @@ export default {
 	mutations: {
 		changeLanguage(state, val_language) {
 			state.language = val_language;
+		},
+		setHomeBg(state, val) {
+			state.home_bg = val;
 		},
 		changeProjectBg(state, val) {
 			state.project_bg = val;

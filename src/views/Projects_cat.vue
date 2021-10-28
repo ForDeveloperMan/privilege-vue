@@ -4,7 +4,7 @@
 		<transition name="fade">
 			<img v-if="!this.$store.state.project_bg && showAnimMain" v-show="showAnim" v-on:load="this.loadImg" :src="this.pageInfo.bg" alt="" class="sec-projects-cat__bg">
 		</transition>
-		<img v-if="this.$store.state.project_bg" v-show="mounted" v-on:load="this.loadImg" :src="this.$store.state.project_bg" alt="" class="sec-projects-cat__bg">
+		<img v-if="this.$store.state.project_bg" v-show="mounted" :src="this.$store.state.project_bg" alt="" class="sec-projects-cat__bg">
 		<Header></Header>
 		<div class="sec-page__wrap sec-projects-cat__wrap" v-if="showAnimMain">
 			<div class="sec-projects-cat__line sec-projects-cat__line_1"></div>
@@ -96,13 +96,17 @@ export default {
 	mounted() {
 		this.getProjects();
 		this.mounted = true;
-		console.log(this.$route);
+		if ( this.$store.state.project_bg ) {
+			this.images.loaded = 1;
+		}
 	},
 	watch:{
 		$route() {
 			this.showAnimMain = false;
 			this.showAnim = false;
-			this.images.loaded = 1;
+			if ( this.$store.state.project_bg ) {
+				this.images.loaded = 1;
+			}
 			this.getProjects();
 		}
 	},

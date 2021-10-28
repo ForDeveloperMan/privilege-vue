@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import Projects from '@/views/Projects.vue'
 import Projects_cat from '@/views/Projects_cat.vue'
 import Project from '@/views/Project.vue'
+import Partners from '@/views/Partners.vue'
 
 let languages = ['ru', 'uk', 'en', 'et'];
 let language_def = 'uk';
@@ -11,13 +12,14 @@ let language_def = 'uk';
 
 let components = [
 	['home', '/', Home, '/'], 
-	['projects', 'projects', Projects, '/projects'], 
+	['projects', 'projects', Projects, '/projects'],
 	['implemented', 'projects/implemented', Projects_cat, '/projects/implemented'],
 	['investment', 'projects/investment', Projects_cat, '/projects/investment'],
 	['in-progress', 'projects/in-progress', Projects_cat, '/projects/in-progress'],
 	['project_implemented', 'projects/implemented/:project', Project, '/projects/implemented/', 'implemented'],
 	['project_investment', 'projects/investment/:project', Project, '/projects/investment/', 'investment'],
 	['project_in-progress', 'projects/in-progress/:project', Project, '/projects/in-progress/', 'in-progress'],
+	['partners', 'partners', Partners, '/partners'],
 ];
 
 let routes = []

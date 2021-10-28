@@ -44,7 +44,7 @@
 </div>
 
 <div class="sec-project__info">
-	<transition name="fade" style="animation-delay: 0.5s">
+	<transition name="fade" style="animation-delay: 0s">
 		<div class="sec-project__info-top" v-show="showAnim">
 			<h2 class="title title_main sec-project__title">{{ this.project['post_title'] }}</h2>
 		</div>
@@ -131,6 +131,7 @@ export default{
 		this.goFrom = true;
 		this.$store.commit('setProjectLanguages', false);
 		setTimeout(next, 1500);
+		console.log('from');
 	},
 	watch:{
 		$route(to, from) {

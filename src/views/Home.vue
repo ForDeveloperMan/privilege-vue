@@ -1,8 +1,14 @@
 <template>
 <btnLanguage class="fixed"></btnLanguage>
+<div class="sec-home" v-if="showAnimMain">
 <transition name="fade">
-<div class="sec-home" v-if="showAnim">
-	<div class="sec-home__wrap">
+	<img v-if="!this.$store.state.home_bg" :src="pageInfo.bg" v-show="showAnim" v-on:load="this.loadImg" alt="" class="sec-home__bg">
+</transition>
+<transition name="fade">
+	<img v-if="this.$store.state.home_bg" :src="this.$store.state.home_bg" v-show="showAnim" alt="" class="sec-home__bg">
+</transition>
+<transition name="fade">
+	<div class="sec-home__wrap" v-show="showAnim">
 		<div class="sec-home__content">
 			<div class="sec-home__line sec-home__line_1"></div>
 			<div class="sec-home__line sec-home__line_2"></div>
@@ -12,17 +18,16 @@
 			<div class="sec-home__line sec-home__line_6"></div>
 
 			<router-link :to="this.$route.meta.linkHome+'projects'" class="sec-home__link sec-home__link_1 sec-home__link_left">{{ this.pageInfo.projects_title }}</router-link>
-			<div class="sec-home__link sec-home__link_2 sec-home__link_right">Партнери</div>
+			<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_2 sec-home__link_right">Партнери</router-link>
 			<div class="sec-home__link sec-home__link_3 sec-home__link_left">Про компанію</div>
 			<div class="sec-home__link sec-home__link_4 sec-home__link_right">Контакти</div>
 			<div class="sec-home__center"><img :src="this.pageInfo.logo" alt="" class="sec-home__logo"></div>
 			<div class="sec-home__text">{{ this.pageInfo.text }}</div>
 		</div>
 	</div>
-</div>
 </transition>
+</div>
 </template>
-
 <script>
 import axios from 'axios'
 import btnLanguage from '../components/btnLanguage.vue'
@@ -32,30 +37,65 @@ export default {
 	data(){
 		return{
 			showAnim: false,
+			showAnimMain: false,
+			fromPage: false,
 			pageInfo: Object,
+			images: {
+				count: 1,
+				loaded: 0,
+			},
 		};
 	},
 	components: {
 		btnLanguage,
 	},
+	watch:{
+		'$route.params.search': {
+			deep: true,
+		},
+		$route() {
+			this.showAnim = false;
+			this.fromPage = false;
+			this.getInfo();
+			if ( this.$store.state.home_bg ) {
+				this.showPage();
+			}
+		},
+	},
 	created(){
-		this.getProjects();
+		this.getInfo();
 	},
-	beforeUpdate(){
+	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;
+		this.fromPage = true;
+		this.$store.commit('setHomeBg', this.pageInfo.bg);
+		setTimeout(next, 1000);
 	},
-	updated(){
-		this.getProjects();
+	mounted() {
+		if ( this.$store.state.home_bg ) {
+			this.showPage();
+		}
 	},
 	methods: {
-		getProjects(){
+		loadImg(){
+			this.images.loaded = this.images.loaded+1;
+			console.log(this.images.loaded);
+			if ( this.images.loaded === this.images.count ) {
+				this.loadedBg = true;
+				this.showPage();
+			}
+		},
+		showPage() {
+			this.showAnim = true;
+		},
+		getInfo() {
 			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/home', {
 				params:{
 					lang: this.$route.meta.language,
 				}
 			}).then(response => {
 				this.pageInfo = response.data.pageInfo;
-				this.showAnim = true;
+				this.showAnimMain = true;
 			});
 		},
 	},
