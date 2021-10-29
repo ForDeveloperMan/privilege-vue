@@ -26,7 +26,7 @@
         </ul>
       </div>
       <div class="block-menu__dropdown-block">
-        <a href="#" class="block-menu__dropdown-title">Партнери</a>
+        <router-link :to="this.$route.meta.linkHome+'partners'" class="block-menu__dropdown-title">{{ info.goPartners }}</router-link>
       </div>
       <div class="block-menu__dropdown-block">
         <a href="#" class="block-menu__dropdown-title">Контакти</a>
@@ -42,17 +42,29 @@
     </div>
   </div>
 </template>
-
 <script>
+import axios from 'axios'
 
 export default {
   name: 'menu',
   data(){
     return{
       isActicveHere: false,
+      info: Object,
     };
   },
-  methods:{
+  beforeMount() {
+    this.getInfo();
+  },
+  props:{
+    isActive: Boolean,
+  },
+  watch:{
+    $route() {
+      this.getInfo();
+    }
+  },
+  methods: {
     click(){
       if ( this.isActive ) {
         this.isActicveHere = false;
@@ -60,10 +72,17 @@ export default {
         this.isActicveHere = true;
       }
       this.$emit("openMenu", this.isActicveHere);
-    }
+    },
+    getInfo() {
+      axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/menu', {
+        params:{
+          lang: this.$route.meta.language,
+        }
+      }).then(response => {
+        this.info = response.data;
+        console.log(this.info);
+      });
+    },
   },
-  props:{
-    isActive: Boolean,
-  }
 }
 </script>

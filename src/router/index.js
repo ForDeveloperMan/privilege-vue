@@ -63,7 +63,6 @@ for(var l=0; l<components.length; l++){
 	}
 }
 
-console.log(routes);
 
 const router = createRouter({
     routes,

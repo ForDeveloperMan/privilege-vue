@@ -642,4 +642,27 @@ body{
 	&__title{
 		margin-bottom: 44px;
 	}
+	&__items{
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 24.4vw;
+		width: 51.2vw;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+	&__item{
+		width: 50%;
+		height: 25vh;
+		display: flex;
+		align-items: flex-end;
+		padding: 40px 40px;
+		cursor: pointer;
+		transition: .2s;
+		&:hover{
+			background: rgba(255, 255, 255, 0.26);
+		}
+	}
 }

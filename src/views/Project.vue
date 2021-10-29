@@ -130,8 +130,10 @@ export default{
 		this.showAnim = false;
 		this.goFrom = true;
 		this.$store.commit('setProjectLanguages', false);
-		setTimeout(next, 1500);
-		console.log('from');
+		function n() {
+			next();
+		}
+		setTimeout(n, 1500);
 	},
 	watch:{
 		$route(to, from) {

@@ -8,6 +8,7 @@ export default {
 			project_bg_main: false,
 			project_page_bg: false,
 			projectLanguages: false,
+			partnersBg: false,
 		}
 	},
 	mutations: {
@@ -28,6 +29,9 @@ export default {
 		},
 		setProjectLanguages(state, val) {
 			state.projectLanguages = val;
+		},
+		setPartnersBg(state, val) {
+			state.partnersBg = val;
 		},
 	},
 	getters:{
