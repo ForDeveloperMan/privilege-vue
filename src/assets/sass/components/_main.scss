@@ -666,3 +666,137 @@ body{
 		}
 	}
 }
+
+.sec-partner{
+	position: relative;
+	background: #3A5899;
+	&__line{
+		position: absolute;
+		z-index: 3;
+		pointer-events: none;
+		background-color: #FFFFFF;
+		opacity: 0.4;
+		&_1{
+			width: 100vw;
+			height: 1px;
+			top: 25vh;
+			left: 0;
+		}
+		&_2{
+			width: 24.4vw;
+			height: 1px;
+			top: 75vh;
+			left: 0;
+		}
+		&_3{
+			height: 1px;
+			left: 50vw;
+			top: 50vh;
+			width: 25.7vw;
+		}
+		&_4{
+			top: 0;
+			height: 100vh;
+			width: 1px;
+			left: 24.4vw;
+		}
+		&_5{
+			top: 0;
+			height: 100vh;
+			width: 1px;
+			left: 50vw;
+		}
+		&_6{
+			top: 0;
+			height: 100vh;
+			width: 1px;
+			left: 75.6vw;
+		}
+	}
+	&__wrap{
+		position: relative;
+		width: 100vw;
+		height: 100vh;
+		z-index: 10;
+	}
+	&__img{
+		position: absolute;
+		z-index: 5;
+		object-fit: cover;
+		object-position: center;
+		&_1{
+			top: 25vh;
+			left: 24.4vw;
+			width: 25.6vw;
+			height: 50vh;
+		}
+		&_2{
+			top: 0;
+			left: 50vw;
+			width: 25.6vw;
+			height: 25vh;
+		}
+		&_3{
+			right: 0;
+			width: 24.4vw;
+			height: 25vh;
+			top: 50vh;
+		}
+	}
+	&__content{
+		position: absolute;
+		top: 25vh;
+		width: 24.4vw;
+		left: 0;
+		z-index: 10;
+		&-body{
+			height: 50vh;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+			padding: 40px 64px;
+			padding-right: 20px;
+		}
+	}
+	&__text{
+		position: absolute;
+		z-index: 10;
+		left: 50vw;
+		top: 50vh;
+		width: 25.6vw;
+		height: 50vh;
+		padding: 39px 41px;
+		padding-right: 76px;
+		overflow: hidden;
+		p{
+			margin-bottom: 25px;
+			&:last-child{
+				margin-bottom: 0;
+			}
+		}
+	}
+	&__info{
+		position: absolute;
+		right: 0;
+		top: 25vh;
+		width: 24.4vw;
+		height: 25vh;
+		z-index: 10;
+		padding: 47px 40px;
+		padding-right: 55px;
+		&-title{
+			font-family: 'Raleway';
+			font-weight: 600;
+			font-size: 80px;
+			color: #FFFFFF;
+			margin-bottom: 32px;
+		}
+		&-text{
+			font-family: 'Gilroy';
+			font-weight: 500;
+			font-size: 18px;
+			color: #FFFFFF;
+			line-height: 1.3;
+		}
+	}
+}

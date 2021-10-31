@@ -33,8 +33,9 @@
 	&__dropdown{
 		position: absolute;
 		top: 0;
-		right: -110%;
+		right: -110vw;
 		width: 100%;
+		min-width: 375px;
 		z-index: 1;
 		background: #FFFFFF;
 		height: 75vh;
@@ -157,7 +158,6 @@
 		font-size: 16px;
 		color: #FFFFFF;
 		text-transform: capitalize;
-		mix-blend-mode:difference;
 		&:first-child{
 			margin-left: 0;
 		}
@@ -204,6 +204,7 @@
 	color: #FFFFFF;
 	&_sec{
 		font-size: 32px;
+		line-height: 1.2;
 	}
 	&_main{
 		font-weight: bold;
@@ -422,4 +423,12 @@
 		font-size: 16px;
 		color: #FFFFFF;
 	}
+}
+
+.text-link{
+	font-family: 'Gilroy';
+	font-weight: bold;
+	font-size: 18px;
+	color: #FFFFFF;
+	opacity: 0.4;
 }

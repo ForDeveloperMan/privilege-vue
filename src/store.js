@@ -3,11 +3,12 @@ export default {
 		return {
 			language: 'uk',
 			language_def: 'uk',
+			projectLanguages: false,
+			partnerLanguages: false,
 			home_bg: false,
 			project_bg: false,
 			project_bg_main: false,
 			project_page_bg: false,
-			projectLanguages: false,
 			partnersBg: false,
 		}
 	},
@@ -29,6 +30,9 @@ export default {
 		},
 		setProjectLanguages(state, val) {
 			state.projectLanguages = val;
+		},
+		setPartnerLanguages(state, val) {
+			state.partnerLanguages = val;
 		},
 		setPartnersBg(state, val) {
 			state.partnersBg = val;

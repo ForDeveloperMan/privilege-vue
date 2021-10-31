@@ -13,7 +13,7 @@
 <transition name="fade" v-if="!this.$store.state.project_page_bg && showAnimMain">
 	<img :src="gallery[0].src" alt="" v-on:load="this.loadImg" class="sec-project__bg" v-bind:class="{anim: showAnim}">
 </transition>
-<transition name="fade" v-if="this.$store.state.project_page_bg" v-show="!goFrom">
+<transition name="fade" v-if="this.$store.state.project_page_bg  && showAnimMain" v-show="!goFrom">
 	<img :src="this.$store.state.project_page_bg" v-on:load="this.loadImg" alt="" class="sec-project__bg" v-bind:class="{anim: showAnim}">
 </transition>
 
@@ -73,7 +73,7 @@
 
 <transition name="fadeUp">
 <div v-show="showAnim" style="animation-delay: 0s" class="sec-page__bottom">
-	<router-link :to="this.$route.meta.linkHome + 'projects/' + this.$route.meta.category" class="iconLink">
+	<router-link :to="this.$route.meta.linkHome + 'projects/' + this.$route.meta.category" class="iconLink sec-page__bottom-prev">
 		<svg class="iconLink__icon iconLink__margin" width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="1" width="6" height="1" transform="rotate(90 4 1)" fill="white"/><rect x="9" y="8" width="6" height="1" transform="rotate(-180 9 8)" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 3.24324L6.18333 4L3.5 1.51351L0.816666 4L9.02423e-09 3.24324L3.5 -4.17371e-08L7 3.24324Z" fill="white"/></svg>
 		<span class="iconLink__text">{{ pageInfo.goPrev }}</span>
 	</router-link>
@@ -124,9 +124,8 @@ export default{
 	},
 	mounted() {
 		this.getProject();
-		console.log(this.$route);
 	},
-	beforeRouteLeave(to, from, next) {
+	beforeRouteUpdate(to, from, next) {
 		this.showAnim = false;
 		this.goFrom = true;
 		this.$store.commit('setProjectLanguages', false);
@@ -137,13 +136,11 @@ export default{
 	},
 	watch:{
 		$route(to, from) {
-			console.log(to);
 			if ( to.matched[0].components.default.name === "Project" ) {
 				this.showAnimMain = false;
 				this.showAnim = false;
 				this.images.loaded = 0;
 				this.getProject();
-				console.log('watch rout project active');
 			}
 			if ( to.matched[0].components.default.name === "Project" && from.matched[0].components.default.name === "Project" ) {
 				this.goFrom = false;

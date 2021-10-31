@@ -9,11 +9,9 @@
   <div class="block-menu__dropdown" v-bind:class="{active: isActive}">
     <div class="block-menu__dropdown-content">
       <div class="block-menu__dropdown-block">
-        <a href="#" class="block-menu__dropdown-title margin">Проекти</a>
+        <a href="#" class="block-menu__dropdown-title margin">{{ info.goProjects }}</a>
         <ul class="block-menu__dropdown-links">
-          <li><a href="#">Реалізовані</a></li>
-          <li><a href="#">В роботі</a></li>
-          <li><a href="#">Інвест проекти</a></li>
+          <li v-for="(item, index) in info.projects" v-bind:key="index"><router-link :to="this.$route.meta.linkHome+'projects/' + item.slug" >{{ item.cat_name }}</router-link></li>
         </ul>
       </div>
       <div class="block-menu__dropdown-block">
@@ -62,6 +60,13 @@ export default {
   watch:{
     $route() {
       this.getInfo();
+    },
+    isActicveHere: function () {
+      if ( this.isActicveHere ) {
+        document.body.classList.add('menuOpen');
+      }else{
+        document.body.classList.remove('menuOpen');
+      }
     }
   },
   methods: {
@@ -80,7 +85,6 @@ export default {
         }
       }).then(response => {
         this.info = response.data;
-        console.log(this.info);
       });
     },
   },

@@ -1,5 +1,5 @@
 <template>
-<btnLanguage class="fixed"></btnLanguage>
+<btnLanguage classEl="fixed"></btnLanguage>
 <div class="sec-home" v-if="showAnimMain">
 <transition name="fade">
 	<img v-if="!this.$store.state.home_bg" :src="pageInfo.bg" v-show="showAnim" v-on:load="this.loadImg" alt="" class="sec-home__bg">
@@ -79,7 +79,6 @@ export default {
 	methods: {
 		loadImg(){
 			this.images.loaded = this.images.loaded+1;
-			console.log(this.images.loaded);
 			if ( this.images.loaded === this.images.count ) {
 				this.loadedBg = true;
 				this.showPage();
