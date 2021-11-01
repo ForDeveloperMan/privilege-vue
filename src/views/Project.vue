@@ -10,12 +10,17 @@
 <div class="sec-project__line sec-project__line_5"></div>
 <div class="sec-project__line sec-project__line_6"></div>
 
+
+
 <transition name="fade" v-if="!this.$store.state.project_page_bg && showAnimMain">
 	<img :src="gallery[0].src" alt="" v-on:load="this.loadImg" class="sec-project__bg" v-bind:class="{anim: showAnim}">
 </transition>
-<transition name="fade" v-if="this.$store.state.project_page_bg  && showAnimMain" v-show="!goFrom">
+
+<transition name="fade" v-if="this.$store.state.project_page_bg">
 	<img :src="this.$store.state.project_page_bg" v-on:load="this.loadImg" alt="" class="sec-project__bg" v-bind:class="{anim: showAnim}">
 </transition>
+
+
 
 <Header></Header>
 
@@ -127,6 +132,7 @@ export default{
 	},
 	beforeRouteUpdate(to, from, next) {
 		this.showAnim = false;
+		this.showAnimMain = false;
 		this.goFrom = true;
 		this.$store.commit('setProjectLanguages', false);
 		function n() {
@@ -134,20 +140,20 @@ export default{
 		}
 		setTimeout(n, 1500);
 	},
-	watch:{
-		$route(to, from) {
-			if ( to.matched[0].components.default.name === "Project" ) {
-				this.showAnimMain = false;
-				this.showAnim = false;
-				this.images.loaded = 0;
-				this.getProject();
-			}
-			if ( to.matched[0].components.default.name === "Project" && from.matched[0].components.default.name === "Project" ) {
-				this.goFrom = false;
-				this.loadImg();
-			}
-		}
-	},
+	// watch:{
+	// 	$route(to, from) {
+	// 		if ( to.matched[0].components.default.name === "Project" ) {
+	// 			this.showAnimMain = false;
+	// 			this.showAnim = false;
+	// 			this.images.loaded = 0;
+	// 			this.getProject();
+	// 		}
+	// 		if ( to.matched[0].components.default.name === "Project" && from.matched[0].components.default.name === "Project" ) {
+	// 			this.goFrom = false;
+	// 			this.loadImg();
+	// 		}
+	// 	}
+	// },
 	methods: {
 		loadImg() {
 			this.images.loaded = this.images.loaded + 1;

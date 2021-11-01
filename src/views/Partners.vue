@@ -1,7 +1,6 @@
 <template>
 <div class="wrapper">
 
-<Header></Header>
 <div class="sec-page sec-partners">
 	<div class="sec-partners__line sec-partners__line_1"></div>
 	<div class="sec-partners__line sec-partners__line_2"></div>
@@ -9,6 +8,7 @@
 	<div class="sec-partners__line sec-partners__line_4"></div>
 	<div class="sec-partners__line sec-partners__line_5"></div>
 	<div class="sec-partners__line sec-partners__line_6"></div>
+	<Header></Header>
 
 	<transition name="fade">
 		<img v-if="!this.$store.state.partnersBg" v-show="showAnim" v-on:load="this.loadImg" class="sec-partners__bg" :src="this.pageInfo.bg">

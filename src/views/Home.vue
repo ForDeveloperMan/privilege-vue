@@ -18,7 +18,7 @@
 			<div class="sec-home__line sec-home__line_6"></div>
 
 			<router-link :to="this.$route.meta.linkHome+'projects'" class="sec-home__link sec-home__link_1 sec-home__link_left">{{ this.pageInfo.projects_title }}</router-link>
-			<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_2 sec-home__link_right">Партнери</router-link>
+			<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_2 sec-home__link_right">{{ this.pageInfo.partners_title }}</router-link>
 			<div class="sec-home__link sec-home__link_3 sec-home__link_left">Про компанію</div>
 			<div class="sec-home__link sec-home__link_4 sec-home__link_right">Контакти</div>
 			<div class="sec-home__center"><img :src="this.pageInfo.logo" alt="" class="sec-home__logo"></div>

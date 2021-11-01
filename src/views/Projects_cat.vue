@@ -48,7 +48,7 @@
 						<div class="block-links">
 							<a href="#" class="block-links__el iconLink">
 								<svg class="iconLink__icon iconLink__margin" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.78184 0.5L5.72729 1.43333L2.6208 4.5L5.72729 7.56667L4.78184 8.5L0.729893 4.5L4.78184 0.5Z" fill="white"/></svg>
-								<span class="iconLink__text">Партнери</span>
+								<span class="iconLink__text">{{ this.pageInfo.goPartners }}</span>
 							</a>
 							<a href="#" class="block-links__el iconLink">
 								<span class="iconLink__text iconLink__margin">Про компанію</span>
