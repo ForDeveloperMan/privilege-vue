@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from '@/views/Home.vue'
 import Projects from '@/views/Projects.vue'
+import Contacts from '@/views/Contacts.vue'
 import Projects_cat from '@/views/Projects_cat.vue'
 import Project from '@/views/Project.vue'
 import Partners from '@/views/Partners.vue'
@@ -14,6 +15,7 @@ let language_def = 'uk';
 let components = [
 	['home', '/', Home, '/'], 
 	['projects', 'projects', Projects, '/projects'],
+	['contacts', 'contacts', Contacts, '/contacts'],
 	['implemented', 'projects/implemented', Projects_cat, '/projects/implemented'],
 	['investment', 'projects/investment', Projects_cat, '/projects/investment'],
 	['in-progress', 'projects/in-progress', Projects_cat, '/projects/in-progress'],

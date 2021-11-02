@@ -276,6 +276,7 @@
 .block-socials{
 	display: flex;
 	flex-wrap: wrap;
+	font-size: 0;
 	&__el{
 		margin-right: 8px;
 		&:last-child{
@@ -431,4 +432,104 @@
 	font-size: 18px;
 	color: #FFFFFF;
 	opacity: 0.4;
+}
+
+.title-contact{
+	font-family: 'Gilroy';
+	font-weight: 600;
+	font-size: 14px;
+	color: #FFFFFF;
+	opacity: 0.5;
+}
+
+.link-contact{
+	font-family: 'Gilroy';
+	font-weight: 600;
+	font-size: 18px;
+	color: #FFFFFF;
+}
+
+.contact-el{
+	&__title{
+		margin-bottom: 20px;
+	}
+}
+
+.locate-el{
+	&__title{
+		margin-bottom: 15px;
+	}
+	font-family: 'Gilroy';
+	color: #FFFFFF;
+	line-height: 1.2;
+	&__text{
+		font-weight: 600;
+		font-size: 18px;
+	}
+	&__info{
+		margin-top: 10px;
+		font-weight: 500;
+		font-size: 16px;
+	}
+}
+
+.form-el{
+	&__inp{
+		display: block;
+		width: 100%;
+		border: 0;
+		height: 50px;
+		background: transparent;
+		font-family: 'Raleway';
+		font-weight: 500;
+		font-size: 16px;
+		color: #222222;
+		border-bottom: 1px solid #F1F1F1;
+		&::placeholder{
+			font-family: 'Raleway';
+			font-weight: 500;
+			font-size: 16px;
+			color: #BBBBBB;
+		}
+		&.focus{
+			color: #113366;
+			border-color: #113366;
+		}
+		&.error{
+			&::placeholder{
+				color: #EB5757;
+			}
+			border-color: #EB5757;
+		}
+	}
+}
+
+.block-form{
+	&__inps{
+		display: flex;
+		justify-content: space-between;
+		&-el{
+			width: 49%;
+		}
+	}
+	&__el{
+		margin-bottom: 27px;
+	}
+	&__btnWrap{
+		text-align: center;
+		margin-top: 81px;
+	}
+	&__btn{
+		font-family: 'Raleway';
+		font-weight: 600;
+		font-size: 23px;
+		color: #222222;
+		cursor: pointer;
+		padding-bottom: 7px;
+		transition: .2s;
+		&:hover{
+			border-bottom: 1px solid #3A5899;
+			color: #3A5899;
+		}
+	}
 }
