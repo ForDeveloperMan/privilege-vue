@@ -22,16 +22,16 @@
 
 
 
-<Header></Header>
 
 <div class="sec-page__wrap sec-project__wrap">
 <div class="sec-page__content sec-project__content" v-if="showAnimMain">
+<Header></Header>
 
-<div class="sec-project__text" v-bind:class="{anim: showAnim}">
+<div class="sec-project__text" v-bind:class="{anim: showAnim, open: openFullContent}">
 	<div class="project-info">
 		<transition name="fade">
 			<div class="project-info__top" v-show="showAnim" style="animation-delay: 1s">
-				<svg class="project-info__arr" width="9" height="22" viewBox="0 0 9 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 -1.96701e-07L-7.59198e-07 4.63158L3.375 4.63158L3.375 22L5.625 22L5.625 4.63158L9 4.63158L4.5 -1.96701e-07Z" fill="#3A5899"/></svg>
+				<svg @click="openContent" v-if="showArr" class="project-info__arr" width="9" height="22" viewBox="0 0 9 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 -1.96701e-07L-7.59198e-07 4.63158L3.375 4.63158L3.375 22L5.625 22L5.625 4.63158L9 4.63158L4.5 -1.96701e-07Z" fill="#3A5899"/></svg>
 				<div class="project-info__info">{{ pageInfo.textType }}</div>
 				<div class="project-info__title">{{ description.title }}</div>
 			</div>
@@ -118,6 +118,8 @@ export default{
 			pageInfo: Object,
 			languagesProject: Object,
 			goFrom: false,
+			showArr: false,
+			openFullContent: false,
 			images: {
 				count: 1,
 				loaded: 0,
@@ -129,32 +131,30 @@ export default{
 	},
 	mounted() {
 		this.getProject();
+		console.log(this.$route);
 	},
 	beforeRouteUpdate(to, from, next) {
 		this.showAnim = false;
 		this.showAnimMain = false;
-		this.goFrom = true;
 		this.$store.commit('setProjectLanguages', false);
 		function n() {
 			next();
 		}
 		setTimeout(n, 1500);
 	},
-	// watch:{
-	// 	$route(to, from) {
-	// 		if ( to.matched[0].components.default.name === "Project" ) {
-	// 			this.showAnimMain = false;
-	// 			this.showAnim = false;
-	// 			this.images.loaded = 0;
-	// 			this.getProject();
-	// 		}
-	// 		if ( to.matched[0].components.default.name === "Project" && from.matched[0].components.default.name === "Project" ) {
-	// 			this.goFrom = false;
-	// 			this.loadImg();
-	// 		}
-	// 	}
-	// },
+	beforeRouteLeave(to, from, next) {
+		this.showAnim = false;
+		this.showAnimMain = false;
+		this.$store.commit('setProjectLanguages', false);
+		function n() {
+			next();
+		}
+		setTimeout(n, 1500);
+	},
 	methods: {
+		openContent() {
+			this.openFullContent = !this.openFullContent;
+		},
 		loadImg() {
 			this.images.loaded = this.images.loaded + 1;
 			if ( this.images.loaded === this.images.count ) {
@@ -162,7 +162,11 @@ export default{
 			}
 		},
 		openGallery() {
-			Fancybox.show(this.gallery);
+			Fancybox.show(this.gallery, {
+				trapFocus: false,
+				dragToClose : false,
+				Carousel: false,
+			});
 		},
 		getProject() {
 			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/project', {
@@ -175,6 +179,12 @@ export default{
 				this.description = response.data.project.description;
 				this.pageInfo = response.data.pageInfo;
 				this.languagesProject = response.data.project.languages_post;
+
+				
+				if ( this.description.text.length >= 450 ) {
+					this.showArr = true;
+				}
+
 				let gallery = [];
 				response.data.project.gallery.forEach(function(item, i) {
 					gallery.push({

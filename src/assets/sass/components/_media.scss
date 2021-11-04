@@ -1,14 +1,40 @@
 @media screen and (max-height: 1150px) and (min-width: 1200px){
-	.sec-project__text{
-		top: 25vh;
-		height: 75vh;
-	}
 	.sec-partner__text{
 		top: 25vh;
 		height: 75vh;
 		background-color: #3A5899;
 	}
+	.block-menu__dropdown-block{
+		margin-bottom: 3vh;
+	}
+	.block-menu__dropdown-links li{
+		margin-bottom: 1.5vh;
+	}
+	.block-menu__dropdown-bottom{
+		margin-top: 4vh;
+	}
+	.sec-project__text.open{
+		top: 0;
+		height: 100vh;
+		z-index: 100;
+		overflow-y: auto;
+	}
+	.sec-project__wrap{
+		// z-index: 100;
+	}
+	.sec-project__text .project-info{
+		height: auto;
+		min-height: 100%;
+	}
 }
+
+@media screen and (max-height: 1000px) and (min-width: 1200px){
+	.sec-project__text{
+		top: 25vh;
+		height: 75vh;
+	}
+}
+
 @media screen and (max-height: 900px) and (min-width: 1200px){
 	.sec-partner__img_3{
 		display: none;
@@ -20,6 +46,9 @@
 @media screen and (max-height: 760px) and (min-width: 1200px){
 	.sec-project__text{
 		top: 0;
+		height: 100vh;
+	}
+	.block-menu__dropdown{
 		height: 100vh;
 	}
 }
@@ -395,15 +424,37 @@
 		}
 	}
 	.project-info__arr{
-		display: none;
+		right: 10px;
 	}
 	.project-info{
 		display: block;
 	}
 	.project-info__text{
 		overflow: hidden;
-		max-height: 82px;
 		margin-bottom: 0;
+	}
+	.sec-project__text .project-info__text{
+		-webkit-line-clamp: 5;
+	}
+	.sec-project__text.open .project-info__text{
+		-webkit-line-clamp: unset;
+	}
+	.sec-project__text .project-info{
+		height: auto;
+	}
+	.sec-project__wrap{
+
+	}
+	.sec-project__text.open{
+		background-color: #fff;
+		.project-info{
+			padding-top: 83px;
+		}
+		position: fixed;
+		top: 0;
+		height: 100vh;
+		overflow-y: auto;
+		z-index: 999;
 	}
 	.sec-project__info{
 		left: 0;
@@ -532,7 +583,7 @@
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
-		height: auto;
+		height: 100vh;
 		&__wrap{
 			height: 1349px;
 			min-height: 100vh;
@@ -542,18 +593,27 @@
 			display: none;
 			&_1{
 				display: block;
-				width: 50%;
 				height: 166px;
 				left: 0;
 				top: 798px;
+				object-position: top;
+				width: 50%;
+				&.anim{
+					width: 50%;
+				}
 			}
 			&_2{
 				display: block;
 				width: 50%;
 				height: 224px;
 				left: auto;
-				right: 0;
 				top: 962px;
+				height: 224px;
+				right: 0;
+				&.anim{
+					height: 224px;
+					right: 0;
+				}
 			}
 		}
 		&__line{
@@ -701,6 +761,10 @@
 		line-height: 1.2;
 		height: 28px;
 		max-width: 	161px;
+	}
+	.btnLanguageFixed{
+		top: 11px;
+		right: 14px;
 	}
 	.btn-language.fixed{
 		top: 11px;

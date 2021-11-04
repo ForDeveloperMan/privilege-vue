@@ -19,12 +19,14 @@
 
 	<div class="sec-page__wrap sec-partners__wrap" v-if="showAnimMain">
 		<div class="sec-partners__content">
-			<transition name="fadeLeft" v-show="showAnim">
-				<div class="sec-partners__content-body">
+			<div class="sec-partners__content-body">
+				<transition name="fadeLeft" v-show="showAnim">
 					<h1 class="title title_sec sec-partners__title">{{ this.pageInfo.title }}</h1>
-					<p class="text-info">{{ this.pageInfo.text }}</p>
-				</div>
-			</transition>
+				</transition>
+				<transition name="fadeLeft" v-show="showAnim">
+					<p style="animation-delay: 0.3s" class="text-info">{{ this.pageInfo.text }}</p>
+				</transition>
+			</div>
 		</div>
 		<div class="sec-partners__items">
 			<template v-for="(item, index) in this.partners" v-bind:key="index">
@@ -86,7 +88,7 @@ export default {
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;
 		this.$store.commit('setPartnersBg', this.pageInfo.bg);
-		setTimeout(next, 1500);
+		setTimeout(next, 1000);
 	},
 	watch:{
 		'$route.params.search': {

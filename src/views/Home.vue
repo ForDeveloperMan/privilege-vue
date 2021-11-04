@@ -1,6 +1,10 @@
 <template>
-<btnLanguage classEl="fixed"></btnLanguage>
 <div class="sec-home" v-if="showAnimMain">
+<transition name="fade">
+	<div class="btnLanguageFixed" v-show="showAnim" style="animation-delay: 1.5s">
+		<btnLanguage></btnLanguage>
+	</div>
+</transition>
 <transition name="fade">
 	<img v-if="!this.$store.state.home_bg" :src="pageInfo.bg" v-show="showAnim" v-on:load="this.loadImg" alt="" class="sec-home__bg">
 </transition>
@@ -8,7 +12,7 @@
 	<img v-if="this.$store.state.home_bg" :src="this.$store.state.home_bg" v-show="showAnim" alt="" class="sec-home__bg">
 </transition>
 <transition name="fade">
-	<div class="sec-home__wrap" v-show="showAnim">
+	<div class="sec-home__wrap">
 		<div class="sec-home__content">
 			<div class="sec-home__line sec-home__line_1"></div>
 			<div class="sec-home__line sec-home__line_2"></div>
@@ -17,12 +21,21 @@
 			<div class="sec-home__line sec-home__line_5"></div>
 			<div class="sec-home__line sec-home__line_6"></div>
 
-			<router-link :to="this.$route.meta.linkHome+'projects'" class="sec-home__link sec-home__link_1 sec-home__link_left">{{ this.pageInfo.projects_title }}</router-link>
-			<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_2 sec-home__link_right">{{ this.pageInfo.partners_title }}</router-link>
-			<div class="sec-home__link sec-home__link_3 sec-home__link_left">Про компанію</div>
-			<router-link :to="this.$route.meta.linkHome+'contacts'" class="sec-home__link sec-home__link_4 sec-home__link_right">{{ this.pageInfo.contacts_title }}</router-link>
-			<div class="sec-home__center"><img :src="this.pageInfo.logo" alt="" class="sec-home__logo"></div>
-			<div class="sec-home__text">{{ this.pageInfo.text }}</div>
+			<transition name="fade" v-show="showAnim">
+				<div class="sec-home__links" :style="'animation-delay:'+ delay">
+					<router-link :to="this.$route.meta.linkHome+'projects'" class="sec-home__link sec-home__link_1 sec-home__link_left">{{ this.pageInfo.projects_title }}</router-link>
+					<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_2 sec-home__link_right">{{ this.pageInfo.partners_title }}</router-link>
+					<router-link :to="this.$route.meta.linkHome+'about'" class="sec-home__link sec-home__link_3 sec-home__link_left">Про компанію</router-link>
+					<router-link :to="this.$route.meta.linkHome+'contacts'" class="sec-home__link sec-home__link_4 sec-home__link_right">{{ this.pageInfo.contacts_title }}</router-link>
+				</div>
+			</transition>
+
+			<transition name="fade" v-show="showAnim">
+				<div class="sec-home__center"><img :src="this.pageInfo.logo" alt="" class="sec-home__logo"></div>
+			</transition>
+			<transition name="fade" v-show="showAnim">
+				<div :style="'animation-delay:'+ delayText" class="sec-home__text">{{ this.pageInfo.text }}</div>
+			</transition>
 		</div>
 	</div>
 </transition>
@@ -38,8 +51,9 @@ export default {
 		return{
 			showAnim: false,
 			showAnimMain: false,
-			fromPage: false,
 			pageInfo: Object,
+			delay: '1s',
+			delayText: '0.5s',
 			images: {
 				count: 1,
 				loaded: 0,
@@ -50,12 +64,8 @@ export default {
 		btnLanguage,
 	},
 	watch:{
-		'$route.params.search': {
-			deep: true,
-		},
 		$route() {
 			this.showAnim = false;
-			this.fromPage = false;
 			this.getInfo();
 			if ( this.$store.state.home_bg ) {
 				this.showPage();
@@ -64,17 +74,16 @@ export default {
 	},
 	created(){
 		this.getInfo();
+		console.log(this.$route);
 	},
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;
-		this.fromPage = true;
+		this.delay = '0s';
+		this.delayText = '0s';
 		this.$store.commit('setHomeBg', this.pageInfo.bg);
 		setTimeout(next, 1000);
 	},
 	mounted() {
-		if ( this.$store.state.home_bg ) {
-			this.showPage();
-		}
 	},
 	methods: {
 		loadImg(){
@@ -85,7 +94,7 @@ export default {
 			}
 		},
 		showPage() {
-			this.showAnim = true;
+			setTimeout(()=>this.showAnim = true, 100);
 		},
 		getInfo() {
 			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/home', {
@@ -95,6 +104,9 @@ export default {
 			}).then(response => {
 				this.pageInfo = response.data.pageInfo;
 				this.showAnimMain = true;
+				if ( this.$store.state.home_bg ) {
+					this.showPage();
+				}
 			});
 		},
 	},

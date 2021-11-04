@@ -11,9 +11,7 @@
 	<div class="sec-partner__line sec-partner__line_6"></div>
 	<div class="sec-partner__line sec-partner__line_7"></div>
 	<template v-for="(item, index) in partner.gallery" v-bind:key="index">
-		<transition :style="'animation-delay:'+ ( index * 0.3 ) +'s'" name="fade">
-			<img v-show="showAnim" @load="loadImg" :src="item" alt="" :class="'sec-partner__img sec-partner__img_'+(index+1)">
-		</transition>
+		<img @load="loadImg" :src="item" alt="" :class="['sec-partner__img sec-partner__img_'+(index+1), {anim: showAnimImg}]">
 	</template>
 	<div class="sec-partner__wrap" v-if="showAnimMain">
 		<div class="sec-partner__content">
@@ -24,17 +22,17 @@
 				</div>
 			</transition>
 		</div>
-		<transition name="fadeUp" v-show="showAnim">
-			<div class="sec-partner__text text-info" v-html="partner.description"></div>
+		<transition name="fade" v-show="showAnim">
+			<div style="animation-delay: 1s" class="sec-partner__text text-info" v-html="partner.description"></div>
 		</transition>
 		<transition name="fadeRight" v-show="showAnim">
-			<div class="sec-partner__info">
+			<div style="animation-delay: 1.2s" class="sec-partner__info">
 				<div class="sec-partner__info-title">{{ partner.opisanie_sprava.zagolovok }}</div>
 				<p class="sec-partner__info-text">{{ partner.opisanie_sprava.tekst }}</p>
 			</div>
 		</transition>
 		<transition name="fadeUp">
-			<div v-show="showAnim" style="animation-delay: 0s" class="sec-page__bottom">
+			<div v-show="showAnim" style="animation-delay: 1.3s" class="sec-page__bottom">
 				<router-link :to="this.$route.meta.linkHome + 'partners'" class="iconLink sec-page__bottom-prev">
 					<svg class="iconLink__icon iconLink__margin" width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="1" width="6" height="1" transform="rotate(90 4 1)" fill="white"/><rect x="9" y="8" width="6" height="1" transform="rotate(-180 9 8)" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 3.24324L6.18333 4L3.5 1.51351L0.816666 4L9.02423e-09 3.24324L3.5 -4.17371e-08L7 3.24324Z" fill="white"/></svg>
 					<span class="iconLink__text">{{ pageInfo.goPrev }}</span>
@@ -71,6 +69,7 @@ export default {
 			pageInfo: Object,
 			partner: Object,
 			languagesPartner: Object,
+			showAnimImg: false,
 			images: {
 				count: Number,
 				loaded: 0,
@@ -88,16 +87,12 @@ export default {
 	},
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;
+		this.showAnimImg = false;
 		this.$store.commit('setPartnerLanguages', false);
 		function n() {
 			next();
 		}
-		setTimeout(n, 1500);
-	},
-	watch:{
-		$route(to, from) {
-			// this.$forceUpdate();
-		}
+		setTimeout(n, 1000);
 	},
 	methods:{
 		loadImg(){
@@ -123,6 +118,7 @@ export default {
 		},
 		showPage(){
 			setTimeout(() => this.showAnim = true, 100);
+			setTimeout(() => this.showAnimImg = true, 500);
 		},
 	},
 }
