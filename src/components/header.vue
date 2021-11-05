@@ -1,9 +1,10 @@
 <template>
-<header class="block-header">
+<transition name="fade">	
+<header class="block-header" v-if="showMain">
 	<div class="block-header__wrap">
 		<div class="block-header__content">
 			<router-link :to="this.$route.meta.linkHome" class="block-header__left">
-				<img src="../assets/img/logo_small.png" alt="logo" class="block-header__logo">
+				<img :src="this.info.logo" alt="logo" class="block-header__logo">
 			</router-link>
 			<div class="block-header__right wrap-menu" v-click-away="hideMenu" v-bind:class="{active: isActive}">
 				<btnLanguage></btnLanguage>
@@ -12,21 +13,28 @@
 		</div>
 	</div>
 </header>
+</transition>
 </template>
 <script>
 import btnLanguage from '../components/btnLanguage.vue'
 import Menu from '../components/menu.vue'
+import axios from 'axios'
 
 export default {
 	name: 'Header',
 	data(){
 		return{
 			isActive: false,
+			info: Object,
+			showMain: false,
 		};
 	},
 	components: {
 		btnLanguage,
 		Menu
+	},
+	beforeMount() {
+		this.getInfo();
 	},
 	mounted(){
 	},
@@ -36,6 +44,16 @@ export default {
 		},
 		hideMenu(){
 			this.isActive = false;
+		},
+		getInfo() {
+			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/header', {
+				params:{
+					lang: this.$route.meta.language,
+				}
+			}).then(response => {
+				this.info = response.data;
+				this.showMain = true;
+			});
 		},
 	},
 }

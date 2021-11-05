@@ -10,6 +10,7 @@ export default {
 			project_bg_main: false,
 			project_page_bg: false,
 			partnersBg: false,
+			aboutLanguages: false,
 		}
 	},
 	mutations: {
@@ -36,6 +37,9 @@ export default {
 		},
 		setPartnersBg(state, val) {
 			state.partnersBg = val;
+		},
+		setAboutLanguages(state, val) {
+			state.aboutLanguages = val;
 		},
 	},
 	getters:{

@@ -9,12 +9,12 @@
   <div class="block-menu__dropdown" v-bind:class="{active: isActive}">
     <div class="block-menu__dropdown-content">
       <div class="block-menu__dropdown-block">
-        <a href="#" class="block-menu__dropdown-title margin">{{ info.goProjects }}</a>
+        <router-link :to="this.$route.meta.linkHome+'projects'" @click="click" class="block-menu__dropdown-title margin">{{ info.goProjects }}</router-link>
         <ul class="block-menu__dropdown-links">
-          <li v-for="(item, index) in info.projects" v-bind:key="index"><router-link :to="this.$route.meta.linkHome+'projects/' + item.slug" >{{ item.cat_name }}</router-link></li>
+          <li v-for="(item, index) in info.projects" v-bind:key="index"><router-link @click="click" :to="this.$route.meta.linkHome+'projects/' + item.slug" >{{ item.cat_name }}</router-link></li>
         </ul>
       </div>
-      <div class="block-menu__dropdown-block">
+      <!-- <div class="block-menu__dropdown-block">
         <a href="#" class="block-menu__dropdown-title margin">Про компанію</a>
         <ul class="block-menu__dropdown-links">
           <li><a href="#">Види діяльності</a></li>
@@ -22,13 +22,13 @@
           <li><a href="#">Місія та принципи</a></li>
           <li><a href="#">Засновники</a></li>
         </ul>
-      </div>
+      </div> -->
       <div class="block-menu__dropdown-block">
-        <router-link :to="this.$route.meta.linkHome+'partners'" class="block-menu__dropdown-title">{{ info.goPartners }}</router-link>
+        <router-link :to="this.$route.meta.linkHome+'partners'" @click="click" class="block-menu__dropdown-title">{{ info.goPartners }}</router-link>
       </div>
-      <div class="block-menu__dropdown-block">
+     <!--  <div class="block-menu__dropdown-block">
         <a href="#" class="block-menu__dropdown-title">Контакти</a>
-      </div>
+      </div> -->
       <div class="block-menu__dropdown-bottom">
         <div class="block-menu__dropdown-info">Ми в мережі:</div>
         <div class="block-socials">

@@ -48,7 +48,7 @@
 					</router-link>
 				</div>
 			</div>
-			</transition>
+		</transition>
 	</div>
 </div>
 

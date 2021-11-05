@@ -23,9 +23,9 @@
 
 			<transition name="fade" v-show="showAnim">
 				<div class="sec-home__links" :style="'animation-delay:'+ delay">
-					<router-link :to="this.$route.meta.linkHome+'projects'" class="sec-home__link sec-home__link_1 sec-home__link_left">{{ this.pageInfo.projects_title }}</router-link>
-					<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_2 sec-home__link_right">{{ this.pageInfo.partners_title }}</router-link>
-					<router-link :to="this.$route.meta.linkHome+'about'" class="sec-home__link sec-home__link_3 sec-home__link_left">Про компанію</router-link>
+					<router-link :to="this.$route.meta.linkHome+'about'" class="sec-home__link sec-home__link_1 sec-home__link_left">Про компанію</router-link>
+					<router-link :to="this.$route.meta.linkHome+'projects'" class="sec-home__link sec-home__link_2 sec-home__link_left">{{ this.pageInfo.projects_title }}</router-link>
+					<router-link :to="this.$route.meta.linkHome+'partners'" class="sec-home__link sec-home__link_3 sec-home__link_right">{{ this.pageInfo.partners_title }}</router-link>
 					<router-link :to="this.$route.meta.linkHome+'contacts'" class="sec-home__link sec-home__link_4 sec-home__link_right">{{ this.pageInfo.contacts_title }}</router-link>
 				</div>
 			</transition>

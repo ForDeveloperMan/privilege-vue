@@ -2,11 +2,11 @@
 
 <div v-if="!mobile" class="btn-language" :class="{fixed: classEl}" @mouseover="show = true" @mouseleave="show = false">
 
-<transition name="fadeRight" style="animation-duration: 0.3s">
-  <div v-show="show" class="btn-language__content" v-if="!this.$store.state.projectLanguages && !this.$store.state.partnerLanguages">
+<transition name="fadeLeft" style="animation-duration: 0.3s">
+  <div v-show="show" class="btn-language__content" v-if="!this.$store.state.projectLanguages && !this.$store.state.partnerLanguages && !this.$store.state.aboutLanguages">
     <router-link
         @click="routLinkClick" 
-        :to="{ path: language['path'] + this.$route.meta.path }" 
+        :to="{ path: language['path'] + this.$route.meta.path + this.params }" 
         v-for="language in languages" 
         :key="language['slug']" 
         class="btn-language__link">
@@ -14,7 +14,7 @@
     </router-link>
   </div>
 </transition>
-<transition name="fadeRight" style="animation-duration: 0.3s">
+<transition name="fadeLeft" style="animation-duration: 0.3s">
   <div v-show="show" class="btn-language__content" v-if="this.$store.state.projectLanguages">
     <router-link
         v-for="language in languages" 
@@ -26,12 +26,24 @@
     </router-link>
   </div>
 </transition>
-<transition name="fadeRight" style="animation-duration: 0.3s">
+<transition name="fadeLeft" style="animation-duration: 0.3s">
   <div v-show="show" class="btn-language__content" v-if="this.$store.state.partnerLanguages">
     <router-link
         v-for="language in languages" 
         @click="routLinkClick" 
         :to="{ path: language['path'] + this.$route.meta.path + this.$store.state.partnerLanguages[language['slug']] }" 
+        :key="language['slug']" 
+        class="btn-language__link">
+                {{ language['slug'] }}
+    </router-link>
+  </div>
+</transition>
+<transition name="fadeLeft" style="animation-duration: 0.3s">
+  <div v-show="show" class="btn-language__content" v-if="this.$store.state.aboutLanguages">
+    <router-link
+        v-for="language in languages" 
+        @click="routLinkClick" 
+        :to="{ path: language['path'] + this.$route.meta.path + this.$store.state.aboutLanguages[language['slug']] }" 
         :key="language['slug']" 
         class="btn-language__link">
                 {{ language['slug'] }}
@@ -94,6 +106,7 @@ export default {
       languages: Array,
       language: this.$route.meta.language,
       mobile: false,
+      params: '',
     }
   },
   created() {
@@ -101,6 +114,9 @@ export default {
   },
   mounted() {
     this.getLanguages();
+    if ( this.$route.params.page ) {
+      this.params = this.$route.params.page;
+    }
   },
   methods: {
     hide() {

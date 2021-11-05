@@ -682,6 +682,9 @@
 			width: 100%;
 		}
 	}
+	.block-menu__dropdown{
+		width: 100vw;
+	}
 }
 
 @media screen and (max-width: 768px){
@@ -802,6 +805,7 @@
 	}
 	.block-header__logo{
 		width: 109px;
+		height: 35.3px;
 		object-fit: contain;
 	}
 	.block-menu__icon{

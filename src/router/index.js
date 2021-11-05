@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import Projects from '@/views/Projects.vue'
 import Contacts from '@/views/Contacts.vue'
 import About from '@/views/About.vue'
+import About_page from '@/views/About_page.vue'
 import Projects_cat from '@/views/Projects_cat.vue'
 import Project from '@/views/Project.vue'
 import Partners from '@/views/Partners.vue'
@@ -18,6 +19,7 @@ let components = [
 	['projects', 'projects', Projects, '/projects'],
 	['contacts', 'contacts', Contacts, '/contacts'],
 	['about', 'about', About, '/about'],
+	['About_page', 'about/:page', About_page, '/about/'],
 	['implemented', 'projects/implemented', Projects_cat, '/projects/implemented'],
 	['investment', 'projects/investment', Projects_cat, '/projects/investment'],
 	['in-progress', 'projects/in-progress', Projects_cat, '/projects/in-progress'],
