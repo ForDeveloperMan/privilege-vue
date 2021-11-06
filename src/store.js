@@ -11,6 +11,7 @@ export default {
 			project_page_bg: false,
 			partnersBg: false,
 			aboutLanguages: false,
+			founderLanguages: false,
 		}
 	},
 	mutations: {
@@ -40,6 +41,9 @@ export default {
 		},
 		setAboutLanguages(state, val) {
 			state.aboutLanguages = val;
+		},
+		setFounderLanguages(state, val) {
+			state.founderLanguages = val;
 		},
 	},
 	getters:{

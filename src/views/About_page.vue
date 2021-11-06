@@ -1,12 +1,15 @@
 <template>
 	<TypesOfActivities :routeLeave="this.routeLeave" v-if="component === 64" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></TypesOfActivities>
 	<Founders :routeLeave="this.routeLeave" v-if="component === 66" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></Founders>
+	<AboutText v-if="component === 68" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></AboutText>
 </template>
 
 <script>
 import axios from 'axios'
 import TypesOfActivities from '@/components/TypesOfActivities.vue'
 import Founders from '@/components/Founders.vue'
+import AboutText from '@/components/AboutText.vue'
+
 
 export default {
 	name: 'About page',
@@ -21,7 +24,8 @@ export default {
 	},
 	components: {
 		TypesOfActivities,
-		Founders
+		Founders,
+		AboutText,
 	},
 	created() {
 	},

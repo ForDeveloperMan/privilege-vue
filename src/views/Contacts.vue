@@ -53,8 +53,7 @@ t<template>
 					<div class="sec-contacts__socials-content">
 						<div class="sec-contacts__socials-title title-contact">{{ pageInfo.socials.title }}</div>
 						<div class="block-socials">
-							<div class="block-socials__el" v-for="(social, ind) in pageInfo.socials.content" v-bind:key="ind" ><a :href="social.ssylka" target="_blank" class="socials-el"><img :src="social.ikonka_belaya" alt="" class="socials-el__icon"></a>
-							</div>
+							<div class="block-socials__el" v-for="(social, ind) in pageInfo.socials.content" v-bind:key="ind" ><a :href="social.ssylka" target="_blank" class="socials-el"><img :src="social.ikonka_belaya" alt="" class="socials-el__icon"></a></div>
 						</div>
 					</div>
 				</div>

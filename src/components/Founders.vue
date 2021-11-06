@@ -20,7 +20,7 @@
 		<div class="sec-founders__elements">
 			<template v-for="(item, index) in pageInfo.pages" v-bind:key="index">
 				<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight" v-show="showAnim">
-					<router-link :to="this.$route.fullPath + '/' + item.slug" :class="'sec-founders__elements-el '+'sec-founders__elements-el_'+(index+1)">
+					<router-link :to="this.$route.meta.linkHome + this.$route.meta.category + '/' + this.$route.params.page + '/' + item.slug" :class="'sec-founders__elements-el '+'sec-founders__elements-el_'+(index+1)">
 						<div class="sec-founders__elements-title">{{ item.name }}</div>
 						<p class="sec-founders__elements-text text-info">{{ item.text }}</p>
 					</router-link>

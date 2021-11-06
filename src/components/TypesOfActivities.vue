@@ -70,7 +70,6 @@ export default {
 	watch: {
 		routeLeave: {
 			handler(val){
-				console.log(val);
 				this.$store.commit('setAboutLanguages', false);
 			},
 			deep: true
@@ -83,7 +82,6 @@ export default {
 		this.pageInfo = this.data.pageInfo;
 		this.languagesPage = this.data.page.languages_post;
 		this.$store.commit('setAboutLanguages', this.languagesPage);
-		console.log(this.showAnim);
 	},
 	props: {
 		data: Object,
