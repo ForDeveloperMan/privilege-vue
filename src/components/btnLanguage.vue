@@ -151,7 +151,7 @@ export default {
   mounted() {
     this.getLanguages();
     if ( this.$route.params.page ) {
-      this.params = '/' + this.$route.params.page;
+      this.params = this.$route.params.page;
     }
   },
   methods: {

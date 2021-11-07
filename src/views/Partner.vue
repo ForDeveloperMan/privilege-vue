@@ -17,7 +17,7 @@
 		<div class="sec-partner__content">
 			<transition name="fadeLeft" v-show="showAnim">
 				<div class="sec-partner__content-body">
-					<a href="#" class="sec-partner__link text-link">{{ pageInfo.textBtn }}</a>
+					<router-link :to="this.$route.meta.linkHome + 'partners'" class="sec-partner__link text-link">{{ pageInfo.textBtn }}</router-link>
 					<h1 class="title title_sec sec-partner__title">{{ partner[0].post_title }}</h1>
 				</div>
 			</transition>

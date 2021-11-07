@@ -1,6 +1,6 @@
-t<template>
+<template>
 <div class="wrapper">
-	<div class="sec-page sec-contacts">
+	<div class="sec-page sec-contacts" v-bind:class="{openForm: showForm}">
 		<Header></Header>
 		<div class="sec-contacts__line sec-contacts__line_1"></div>
 		<div class="sec-contacts__line sec-contacts__line_2"></div>
@@ -152,7 +152,6 @@ export default {
 			if( inps_check !== inps.length ){
 				return false;
 			}
-			console.log('check');
 
 			let inp_name = wrap.querySelector('.form-el__inp[name="name"]').value;
 			let inp_tel = wrap.querySelector('.form-el__inp[name="tel"]').value;
@@ -164,7 +163,6 @@ export default {
 			formData.append('mail', inp_mail);
 			
 			axios.post('http://privilege.qazxswedc.site/wp-json/contact-form-7/v1/contact-forms/272/feedback', formData).then(response => {
-				console.log(response);
 				if ( response.data.status === 'mail_sent' ) {
 					this.thanksForm = true;
 				}

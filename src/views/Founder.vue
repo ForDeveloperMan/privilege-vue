@@ -29,6 +29,17 @@
 						<p class="sec-founder__info-bottom-text text-info">{{ pageInfo.text }}</p>
 					</div>
 				</transition>
+				<transition name="fade" v-show="showAnim" style="animation-delay: 0.9s">
+					<div class="sec-founder__info-socials">
+						<div class="sec-founder__socials-content">
+							<div class="title-contact sec-founder__socials-title">{{ pageInfo.socials.title }}</div>
+							<div class="block-socials">
+								<div class="block-socials__el" v-for="(social, ind) in pageInfo.socials.content" v-bind:key="ind" ><a :href="social.ssylka" target="_blank" class="socials-el"><img :src="social.ikonka" alt="" class="socials-el__icon"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</transition>
 			</div>
 			<transition name="fadeUp" v-show="showAnim" style="animation-delay: 1s">
 				<div class="sec-founder__socials">

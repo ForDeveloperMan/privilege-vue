@@ -129,7 +129,6 @@ export default {
 				this.loadImg();
 			}
 		});
-		console.log(this.$route);
 	},
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;

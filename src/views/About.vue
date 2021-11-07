@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
 
-<div class="sec-page sec-about">
+<div class="sec-page sec-about" v-bind:class="{noscroll: readMoreMob}">
 	<div class="sec-about__line sec-about__line_1"></div>
 	<div class="sec-about__line sec-about__line_2"></div>
 	<div class="sec-about__line sec-about__line_3"></div>
@@ -16,19 +16,25 @@
 	</transition>
 	<div class="sec-page__wrap sec-about__wrap" v-if="showAnimMain">
 		<Header></Header>
-		<div class="sec-about__content">
+		<div class="sec-about__content" v-bind:class="{readMore: readMoreMob}">
+			<svg class="sec-about__content-close" v-if="readMoreMob" @click="readMoreMob = !readMoreMob" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#222222"/></svg>
 			<transition name="fadeLeft" v-show="showAnim">
 				<h1 class="title title_sec sec-about__title">{{ pageInfo.title }}</h1>
 			</transition>
 			<transition name="fadeLeft" v-show="showAnim" style="animation-delay: 0.3s">
 				<div class="sec-about__content-text text-info" v-html="pageInfo.content"></div>
 			</transition>
-		</div>
-		<template v-for="(page, index) in pages" v-bind:key="index">
-			<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight" v-show="showAnim">
-				<router-link :to="this.$route.meta.linkHome+this.$route.meta.slug + '/' + page.post_name" :class="'sec-about__page '+'sec-about__page_'+(index+1)"><div class="about-el"><img :src="page.acf_icon" :alt="page.post_title" class="about-el__icon"><p class="about-el__text">{{ page.post_title }}</p></div></router-link>
+			<transition name="fadeLeft" v-show="showAnim" style="animation-delay: 0.3s">
+				<div class="sec-about__content-btn" @click="readMoreMob = !readMoreMob">{{ pageInfo.readMore }}</div>
 			</transition>
-		</template>
+		</div>
+		<div class="sec-about__pages">
+			<template v-for="(page, index) in pages" v-bind:key="index">
+				<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight" v-show="showAnim">
+					<router-link :to="this.$route.meta.linkHome+this.$route.meta.slug + '/' + page.post_name" :class="'sec-about__page '+'sec-about__page_'+(index+1)"><div class="about-el"><img :src="page.acf_icon" :alt="page.post_title" class="about-el__icon"><p class="about-el__text">{{ page.post_title }}</p></div></router-link>
+				</transition>
+			</template>
+		</div>
 		<transition name="fadeUp">
 			<div v-show="showAnim" style="animation-delay: 1s" class="sec-page__bottom">
 				<router-link :to="this.$route.meta.linkHome" class="iconLink sec-page__bottom-prev">
@@ -65,6 +71,7 @@ export default {
 			pages: Object,
 			showAnimMain: false,
 			showAnim: false,
+			readMoreMob: false,
 			images: {
 				count: 1,
 				loaded: 0,
@@ -73,6 +80,13 @@ export default {
 	},
 	components: {
 		Header
+	},
+	watch: {
+		readMoreMob(e) {
+			if ( e ) {
+				document.getElementsByClassName('sec-about')[0].scrollTo(0, 0);
+			}
+		}
 	},
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;

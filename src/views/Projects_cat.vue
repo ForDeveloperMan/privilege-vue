@@ -35,7 +35,7 @@
 				<div class="sec-projects-cat__projects">
 					<template v-for="(item, index) in this.projects" v-bind:key="index">
 						<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight">
-							<router-link :to="this.$route.path + '/' + item.post_name" v-show="showAnim" @mouseenter="showBg" @mouseleave="hideBg" :data-bg="index" class="sec-projects-cat__el"><div class="project-el-cat"><div class="project-el-cat__title">{{ item.post_title }}</div></div></router-link>
+							<router-link :to="this.$route.meta.linkHome + 'projects/' + this.$route.meta.slug + '/' + item.post_name" v-show="showAnim" @mouseenter="showBg" @mouseleave="hideBg" :data-bg="index" class="sec-projects-cat__el"><div class="project-el-cat"><div class="project-el-cat__title">{{ item.post_title }}</div></div></router-link>
 						</transition>
 					</template>
 				</div>

@@ -131,7 +131,6 @@ export default{
 	},
 	mounted() {
 		this.getProject();
-		console.log(this.$route);
 	},
 	beforeRouteUpdate(to, from, next) {
 		this.showAnim = false;
@@ -181,9 +180,9 @@ export default{
 				this.languagesProject = response.data.project.languages_post;
 
 				
-				if ( this.description.text.length >= 450 ) {
-					this.showArr = true;
-				}
+				this.showArr = true;
+				// if ( this.description.text.length >= 450 ) {
+				// }
 
 				let gallery = [];
 				response.data.project.gallery.forEach(function(item, i) {

@@ -71,8 +71,6 @@ export default {
 	mounted() {
 		this.page = this.data.page;
 		this.pageInfo = this.data.pageInfo;
-		console.log(this.data);
-		console.log(this.$route);
 	},
 	methods: {},
 }
