@@ -11,7 +11,9 @@
 	<div class="sec-partner__line sec-partner__line_6"></div>
 	<div class="sec-partner__line sec-partner__line_7"></div>
 	<template v-for="(item, index) in partner.gallery" v-bind:key="index">
-		<img @load="loadImg" :src="item" alt="" :class="['sec-partner__img sec-partner__img_'+(index+1), {anim: showAnimImg}]">
+		<div :class="['sec-partner__img sec-partner__img_'+(index+1), {anim: showAnimImg}]">
+			<img @load="loadImg" :src="item" alt="" class="sec-partner__img-img">
+		</div>
 	</template>
 	<div class="sec-partner__wrap" v-if="showAnimMain">
 		<div class="sec-partner__content">
@@ -110,6 +112,9 @@ export default {
 			}).then(response => {
 				this.pageInfo = response.data.pageInfo;
 				this.partner = response.data.partner;
+				if ( this.partner.description === null ) {
+					window.location.href = this.$route.meta.linkHome+'404';
+				}
 				this.images.count = response.data.partner.gallery.length;
 				this.languagesPartner = response.data.partner.languages_post;
 				this.$store.commit('setPartnerLanguages', this.languagesPartner);

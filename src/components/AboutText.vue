@@ -11,9 +11,11 @@
 		<div class="sec-page__wrap sec-text__wrap" v-if="showMain">
 			<Header></Header>
 			<transition name="fade" v-show="showAnim" style="animation-delay: 0.7s">
-				<div class="sec-text__content"><img class="sec-text__content-icon" :src="pageInfo.icon" alt=""><svg v-if="showArr" class="sec-text__content-arr" width="9" height="22" viewBox="0 0 9 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 -1.96701e-07L-7.59198e-07 4.63158L3.375 4.63158L3.375 22L5.625 22L5.625 4.63158L9 4.63158L4.5 -1.96701e-07Z" fill="white" fill-opacity="0.3"/></svg><div class="sec-text__content-body" v-html="pageInfo.content"></div></div>
+				<div class="sec-text__content"><img class="sec-text__content-icon" :src="pageInfo.icon" alt=""><svg v-if="showArr" @click.self="clickArr" class="sec-text__content-arr" width="9" height="22" viewBox="0 0 9 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 -1.96701e-07L-7.59198e-07 4.63158L3.375 4.63158L3.375 22L5.625 22L5.625 4.63158L9 4.63158L4.5 -1.96701e-07Z" fill="white" fill-opacity="0.3"/></svg><div class="sec-text__content-body" v-html="pageInfo.content"></div></div>
 			</transition>
-			<img :src="pageInfo.img" alt="" class="sec-text__img" v-bind:class="{anim: animImg}">
+			<div class="sec-text__img" v-bind:class="{anim: animImg}">
+				<img :src="pageInfo.img" alt="" class="sec-text__img-img">
+			</div>
 			<transition name="fadeUp">
 				<div v-show="showAnim" style="animation-delay: 1s" class="sec-page__bottom">
 					<router-link :to="this.$route.meta.linkHome + 'about'" class="iconLink sec-page__bottom-prev">
@@ -50,6 +52,7 @@ export default {
 			pageInfo: Object,
 			showArr: false,
 			animImg: false,
+			countScroll: 0,
 		}
 	},
 	props: {
@@ -63,27 +66,46 @@ export default {
 		this.pageInfo = this.data.pageInfo;
 		setTimeout(() => this.animImg = true, 200);
 		this.$nextTick(function () {
-			setTimeout(f, 800, this);
-			function f(t) {
-				let wrap = document.getElementsByClassName('sec-text__content')[0];
-				let body = document.getElementsByClassName('sec-text__content-body')[0];
-				if ( body.offsetHeight >= wrap.offsetHeight ) {
-					t.scrollContent();
-					t.showArr = true;
-				}
-			}
-		})
+			setTimeout(this.setScroll, 800);
+		});
+		window.addEventListener("resize", this.setScroll);
 	},
 	methods: {
+		setScroll() {
+			let wrap = document.getElementsByClassName('sec-text__content')[0];
+			let body = document.getElementsByClassName('sec-text__content-body')[0];
+			if ( body.offsetHeight >= wrap.offsetHeight ) {
+				this.scrollContent();
+				this.showArr = true;
+			}
+		},
+		clickArr(e) {
+			let wrap = document.getElementsByClassName('sec-text__content')[0];
+			let body = document.getElementsByClassName('sec-text__content-body')[0];
+			console.log(e);
+			if ( e.target.classList.contains('active') ) {
+				body.style.transition = '1s';
+				body.style.transform = 'translateY('+0+'px)';
+				e.target.classList.remove('active');
+				this.countScroll = ( (body.offsetHeight - wrap.offsetHeight) * -1 );
+				this.scrollContent();
+			}else{
+				body.style.transition = '1s';
+				body.style.transform = 'translateY('+( (body.offsetHeight - wrap.offsetHeight) * -1 )+'px)';
+				e.target.classList.add('active');
+				this.countScroll = ( (body.offsetHeight - wrap.offsetHeight) * -1 );
+				this.scrollContent();
+			}
+		},
 		scrollContent() {
 			let wrap = document.getElementsByClassName('sec-text__content')[0];
 			let body = document.getElementsByClassName('sec-text__content-body')[0];
 			wrap.addEventListener('mousewheel', scroll);
 			let stepScroll = 40;
-			let countScroll = 0;
+			let countScroll = this.countScroll;
 			function scroll(e) {
 				let direction;
-				if ( ( countScroll * -1 ) >= body.offsetHeight ) {
+				if ( ( countScroll * -1 ) >= ( body.offsetHeight - wrap.offsetHeight ) ) {
 					console.log();
 				}else{
 					if( e.wheelDeltaY < 0 ) {
@@ -99,6 +121,7 @@ export default {
 						countScroll += stepScroll;
 					}
 				}
+				body.style.transition = '.2s';
 				body.style.transform = 'translateY('+countScroll+'px)';
 			}
 		},

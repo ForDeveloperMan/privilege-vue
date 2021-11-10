@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fancyapps/ui": "^4.0.7",
+    "@fawmi/vue-google-maps": "^0.9.4",
     "axios": "^0.23.0",
     "core-js": "^3.6.5",
     "lightgallery": "^2.2.1",

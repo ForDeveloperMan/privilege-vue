@@ -16,7 +16,9 @@
 					<p class="text-info">{{ pageInfo['subtitle'] }}</p>
 				</transition>
 			</div>
-			<img :src="pageInfo['img']" alt="" class="sec-founder__img" v-bind:class="{anim: animImg}">
+			<div class="sec-founder__img" v-bind:class="{anim: animImg}">
+				<img :src="pageInfo['img']" alt="" class="sec-founder__img-img">
+			</div>
 			<div class="sec-founder__info">
 				<transition name="fade" v-show="showAnim" style="animation-delay: 0.6s">
 					<div class="sec-founder__info-top">
@@ -114,6 +116,11 @@ export default {
 			}).then(response => {
 				this.page = response.data.page;
 				this.pageInfo = response.data.pageInfo;
+
+				if ( this.pageInfo.info === null ) {
+					window.location.href = this.$route.meta.linkHome+'404';
+				}
+
 				this.showMain = true;
 				this.languagesFounder = this.page.languages_post;
 				this.$store.commit('setFounderLanguages', this.languagesFounder);

@@ -53,6 +53,9 @@ export default {
 				this.data = response.data;
 				this.component = this.data.page['category'];
 				this.showMain = true;
+				if ( this.data.pageInfo === null ) {
+					window.location.href = this.$route.meta.linkHome+'404';
+				}
 				setTimeout(() => this.showAnim = true, 100);
 			});
 		},

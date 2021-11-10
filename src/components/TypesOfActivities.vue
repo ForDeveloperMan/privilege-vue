@@ -20,8 +20,11 @@
 		<div class="sec-types__elements">
 			<template v-for="(item, index) in pageInfo.content" v-bind:key="index">
 				<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight" v-show="showAnim">
-					<div :class="'sec-types__elements-el '+'sec-types__elements-el_'+(index+1)" @mouseenter="mouseenter" @mouseleave="mouseleave">
-						<div class="sec-types__elements-hover text-info">{{ item.tekst }}</div>
+					<div :class="'sec-types__elements-el '+'sec-types__elements-el_'+(index+1)" @mouseenter="mouseenter" @mouseleave="mouseleave" @click="click">
+						<div class="sec-types__elements-hover text-info">
+							<svg class="sec-types__elements-hover-close" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#222222"/></svg>
+							{{ item.tekst }}
+						</div>
 						<div class="sec-types__elements-content">
 							<img :src="item.ikonka" :alt="item.zagolovok" class="sec-types__elements-icon">
 							<div class="sec-types__elements-title">{{ item.zagolovok }}</div>
@@ -90,36 +93,53 @@ export default {
 		routeLeave: Boolean,
 	},
 	methods: {
+		click(e) {
+			if ( window.innerWidth <= 1200 ) {
+				if ( e.target.closest('.sec-types__elements-el').classList.contains('active') ) {
+					e.target.closest('.sec-types__elements-el').classList.remove('active');
+				}else{
+					e.target.closest('.sec-types__elements-el').classList.add('active');
+				}
+			}
+		},
 		mouseenter(e) {
-			var edge = this.closestEdge(e, e.target);
-			e.target.classList.remove('out-left');
-			e.target.classList.remove('out-right');
-			e.target.classList.remove('out-top');
-			e.target.classList.remove('out-bottom');
-			if ( edge === 'left' ) {
-				e.target.classList.add('in-left');
-			}else if ( edge === 'right' ) {
-				e.target.classList.add('in-right');
-			}else if ( edge === 'top' ) {
-				e.target.classList.add('in-top');
-			}else if ( edge === 'bottom' ) {
-				e.target.classList.add('in-bottom');
+			if ( window.innerWidth <= 1200 ) {
+				console.log();
+			}else{
+				var edge = this.closestEdge(e, e.target);
+				e.target.classList.remove('out-left');
+				e.target.classList.remove('out-right');
+				e.target.classList.remove('out-top');
+				e.target.classList.remove('out-bottom');
+				if ( edge === 'left' ) {
+					e.target.classList.add('in-left');
+				}else if ( edge === 'right' ) {
+					e.target.classList.add('in-right');
+				}else if ( edge === 'top' ) {
+					e.target.classList.add('in-top');
+				}else if ( edge === 'bottom' ) {
+					e.target.classList.add('in-bottom');
+				}
 			}
 		},
 		mouseleave(e) {
-			var edge = this.closestEdge(e, e.target);
-			e.target.classList.remove('in-left');
-			e.target.classList.remove('in-right');
-			e.target.classList.remove('in-top');
-			e.target.classList.remove('in-bottom');
-			if ( edge === 'left' ) {
-				e.target.classList.add('out-left');
-			}else if ( edge === 'right' ) {
-				e.target.classList.add('out-right');
-			}else if ( edge === 'top' ) {
-				e.target.classList.add('out-top');
-			}else if ( edge === 'bottom' ) {
-				e.target.classList.add('out-bottom');
+			if ( window.innerWidth <= 1200 ) {
+				console.log();
+			}else{
+				var edge = this.closestEdge(e, e.target);
+				e.target.classList.remove('in-left');
+				e.target.classList.remove('in-right');
+				e.target.classList.remove('in-top');
+				e.target.classList.remove('in-bottom');
+				if ( edge === 'left' ) {
+					e.target.classList.add('out-left');
+				}else if ( edge === 'right' ) {
+					e.target.classList.add('out-right');
+				}else if ( edge === 'top' ) {
+					e.target.classList.add('out-top');
+				}else if ( edge === 'bottom' ) {
+					e.target.classList.add('out-bottom');
+				}
 			}
 		},
 		closestEdge(mouse, elem) {

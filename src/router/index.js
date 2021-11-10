@@ -9,6 +9,7 @@ import Projects_cat from '@/views/Projects_cat.vue'
 import Project from '@/views/Project.vue'
 import Partners from '@/views/Partners.vue'
 import Partner from '@/views/Partner.vue'
+import _404 from '@/views/404.vue'
 
 let languages = ['ru', 'uk', 'en', 'et'];
 let language_def = 'uk';
@@ -32,6 +33,7 @@ let components = [
 	['project_in-progress', 'projects/in-progress/:project', Project, '/projects/in-progress/', 'in-progress'],
 	['partners', 'partners', Partners, '/partners'],
 	['partners_partner', 'partners/:partner', Partner, '/partners/'],
+	['404', '/404', _404, '/404/'],
 ];
 
 let routes = []
@@ -75,6 +77,19 @@ for(var l=0; l<components.length; l++){
 	}
 }
 
+routes.push({
+	path: "/:catchAll(.*)",
+	name: "NotFound",
+	component: _404,
+	redirect: '/404',
+	meta:{
+		'path':  '/404',
+		'language':  language_def,
+		'languages':  languages,
+		'linkHome': '/',
+		'slug': '404',
+	},
+});
 
 const router = createRouter({
     routes,

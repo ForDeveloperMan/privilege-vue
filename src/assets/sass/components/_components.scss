@@ -40,7 +40,7 @@
 		top: 0;
 		right: -130vw;
 		width: 100%;
-		min-width: 375px;
+		// min-width: 375px;
 		z-index: 1;
 		background: #FFFFFF;
 		height: 75vh;
@@ -341,23 +341,10 @@
 }
 
 .wrap-menu{
-	.btn-language__icon{
-		path{
-			transition: .2s;
-		}
+	.block-menu__btn{
+		position: relative;
 	}
 	&.active{
-		.block-menu__btn{
-			display: none;
-		}
-		.block-menu__close{
-			display: block;
-		}
-		.btn-language__icon{
-			path{
-				fill: #3A3A3A;
-			}
-		}
 		.btn-language__link{
 		    color: #3A3A3A;
 		    transition: .2s;
@@ -365,6 +352,22 @@
 		.btn-language__content{
 			right: auto;
 			left: 100%;
+		}
+	}
+	&.showElms{
+		.block-menu__btn{
+			display: none;
+		}
+		.block-menu__close{
+			display: block;
+			path{
+				fill: #3A3A3A;
+			}
+		}
+		.btn-language__icon{
+			path{
+				fill: #3A3A3A;
+			}
 		}
 	}
 }
@@ -528,6 +531,9 @@
 	font-family: 'Gilroy';
 	color: #FFFFFF;
 	line-height: 1.2;
+	span{
+		display: inline-block;
+	}
 	&__text{
 		font-weight: 600;
 		font-size: 18px;
@@ -540,6 +546,7 @@
 }
 
 .form-el{
+	position: relative;
 	&__inp{
 		display: block;
 		width: 100%;
@@ -562,10 +569,36 @@
 			border-color: #113366;
 		}
 		&.error{
-			&::placeholder{
-				color: #EB5757;
-			}
 			border-color: #EB5757;
+		}
+	}
+	&__placeholder{
+		font-family: 'Raleway';
+		font-weight: 500;
+		font-size: 16px;
+		color: #BBBBBB;
+		position: absolute;
+		pointer-events: none;
+		top: 16px;
+		left: 0;
+		transition: .2s;
+	}
+	&.focus{
+		.form-el__inp{
+			color: #113366;
+			border-color: #113366;
+		}
+		.form-el__placeholder{
+			top: 0;
+			font-size: 12px;
+			align-items: flex-start;
+		}
+	}
+	&.error{
+		.form-el__placeholder{
+			color: #EB5757;
+		}
+		.form-el__inp{
 		}
 	}
 }
@@ -605,24 +638,37 @@
 		display: none !important;
 	}
 	.fancybox__button--close{
-		display: block !important;
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
 	}
 }
 .carousel__button{
 	border: 0 !important;
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 768px){
 	.fancybox__image, .fancybox__content{
 		width: 100vw !important;
 		height: 100vh !important;
 		object-fit: cover !important;
+		transform: scale(1) !important;
 	}
 	.fancybox__slide{
 		padding: 0 !important;
 	}
 }
 
+.fancybox__toolbar{
+	padding: 10px !important;
+}
+
+.fancybox__slide.can-zoom_in{
+	cursor: default !important;
+}
+.fancybox__content{
+	cursor: default !important;
+}
 
 .fancybox__toolbar__items--left{
 	position: fixed;

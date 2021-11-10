@@ -17,43 +17,20 @@
 				</div>
 			</transition>
 			<transition name="fade" v-show="!showForm && showAnim">
-				<iframe class="sec-contacts__map" :src="pageInfo.map" loading="lazy"></iframe>
+				<GMapMap class="sec-contacts__map" v-if="showMain"
+					:center="center"
+					:zoom="7"
+					:options="options"
+				>
+				</GMapMap>
 			</transition>
-			<transition name="fade" v-show="showForm && showAnim">
-				<div class="sec-contacts__form">
-					<div class="sec-contacts__form-close" @click="closeForm"><svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.60531L12.59 0.195312L7 5.78531L1.41 0.195312L0 1.60531L5.59 7.19531L0 12.7853L1.41 14.1953L7 8.60531L12.59 14.1953L14 12.7853L8.41 7.19531L14 1.60531Z" fill="#222222"/></svg></div>
-					<transition name="fade">
-						<div class="sec-contacts__form-thanks" v-if="thanksForm">
-							<div class="title title_sec sec-contacts__form-title">{{ pageInfo.form_thanks.zagolovok }}</div>
-							<div class="sec-contacts__form-text">{{ pageInfo.form_thanks.tekst }}</div>
-						</div>
-					</transition>
-					<div class="sec-contacts__form-content" v-if="!thanksForm">
-						<div class="block-form">
-							<div class="block-form__inps">
-								<div class="block-form__el block-form__inps-el form-el">
-									<input type="text" name="name" class="form-el__inp" :placeholder="pageInfo.form.name" required @input="inputForm">
-								</div>
-								<div class="block-form__el block-form__inps-el form-el">
-									<input type="text" name="tel" class="form-el__inp" :placeholder="pageInfo.form.tel" required @input="inputForm">
-								</div>
-							</div>
-							<div class="block-form__el form-el">
-								<input type="text" name="mail" class="form-el__inp" :placeholder="pageInfo.form.mail" required @input="inputForm">
-							</div>
-							<div class="block-form__btnWrap">
-								<a href="#" class="block-form__btn" @click.prevent="sendForm">{{ pageInfo.form.btn }}</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</transition>
-			<transition name="fadeUp" v-show="!showForm && showAnim">
-				<div class="sec-contacts__socials">
-					<div class="sec-contacts__socials-content">
-						<div class="sec-contacts__socials-title title-contact">{{ pageInfo.socials.title }}</div>
-						<div class="block-socials">
-							<div class="block-socials__el" v-for="(social, ind) in pageInfo.socials.content" v-bind:key="ind" ><a :href="social.ssylka" target="_blank" class="socials-el"><img :src="social.ikonka_belaya" alt="" class="socials-el__icon"></a></div>
+			<transition name="fadeRight" v-show="!showForm && showAnim">
+				<div class="sec-contacts__locate">
+					<div class="sec-contacts__locate-content">
+						<div class="locate-el sec-contacts__locate-el" v-for="(locate, ind) in pageInfo.adresa" v-bind:key="ind">
+							<div class="locate-el__title title-contact">{{ pageInfo.adresa_title }}</div>
+							<p class="locate-el__text" v-html="locate.adres"></p>
+							<p class="locate-el__info">{{ locate.informaciya }}</p>
 						</div>
 					</div>
 				</div>
@@ -72,13 +49,44 @@
 					</div>
 				</div>
 			</transition>
-			<transition name="fadeRight" v-show="!showForm && showAnim">
-				<div class="sec-contacts__locate">
-					<div class="sec-contacts__locate-content">
-						<div class="locate-el sec-contacts__locate-el" v-for="(locate, ind) in pageInfo.adresa" v-bind:key="ind">
-							<div class="locate-el__title title-contact">{{ pageInfo.adresa_title }}</div>
-							<p class="locate-el__text">{{ locate.adres }}</p>
-							<p class="locate-el__info">{{ locate.informaciya }}</p>
+			<transition name="fadeUp" v-show="!showForm && showAnim">
+				<div class="sec-contacts__socials">
+					<div class="sec-contacts__socials-content">
+						<div class="sec-contacts__socials-title title-contact">{{ pageInfo.socials.title }}</div>
+						<div class="block-socials">
+							<div class="block-socials__el" v-for="(social, ind) in pageInfo.socials.content" v-bind:key="ind" ><a :href="social.ssylka" target="_blank" class="socials-el"><img :src="social.ikonka_belaya" alt="" class="socials-el__icon"></a></div>
+						</div>
+					</div>
+				</div>
+			</transition>
+			<transition name="fade" v-show="showForm && showAnim">
+				<div class="sec-contacts__form">
+					<div class="sec-contacts__form-close" @click="closeForm"><svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.60531L12.59 0.195312L7 5.78531L1.41 0.195312L0 1.60531L5.59 7.19531L0 12.7853L1.41 14.1953L7 8.60531L12.59 14.1953L14 12.7853L8.41 7.19531L14 1.60531Z" fill="#222222"/></svg></div>
+					<transition name="fade">
+						<div class="sec-contacts__form-thanks" v-if="thanksForm">
+							<div class="title title_sec sec-contacts__form-title">{{ pageInfo.form_thanks.zagolovok }}</div>
+							<div class="sec-contacts__form-text">{{ pageInfo.form_thanks.tekst }}</div>
+						</div>
+					</transition>
+					<div class="sec-contacts__form-content" v-if="!thanksForm">
+						<div class="block-form">
+							<div class="block-form__inps">
+								<div class="block-form__el block-form__inps-el form-el">
+									<input type="text" name="name" class="form-el__inp" required @blur="blur" @focus="focus" @input="inputForm">
+									<div class="form-el__placeholder">{{pageInfo.form.name}}</div>
+								</div>
+								<div class="block-form__el block-form__inps-el form-el">
+									<input type="text" name="tel" class="form-el__inp" required @blur="blur" @focus="focus" @input="inputForm">
+									<div class="form-el__placeholder">{{pageInfo.form.tel}}</div>
+								</div>
+							</div>
+							<div class="block-form__el form-el">
+								<input type="text" name="mail" class="form-el__inp" required @blur="blur" @focus="focus" @input="inputForm">
+								<div class="form-el__placeholder">{{pageInfo.form.mail}}</div>
+							</div>
+							<div class="block-form__btnWrap">
+								<a href="#" class="block-form__btn" @click.prevent="sendForm">{{ pageInfo.form.btn }}</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -91,7 +99,7 @@
 </div>
 </template>
 <script>
-import Header from '../components/header.vue'
+import Header from '@/components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -101,15 +109,178 @@ export default {
 			thanksForm: false,
 			showForm: false,
 			formError: false,
-			pageInfo: Object,
 			showMain: false,
 			showAnim: false,
+			pageInfo: Object,
+			center: {lat: 51.093048, lng: 6.842120},
+			options: {
+				styles: [
+					{
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#f5f5f5"
+					}
+					]
+					},
+					{
+					"elementType": "labels.icon",
+					"stylers": [
+					{
+					"visibility": "off"
+					}
+					]
+					},
+					{
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#616161"
+					}
+					]
+					},
+					{
+					"elementType": "labels.text.stroke",
+					"stylers": [
+					{
+					"color": "#f5f5f5"
+					}
+					]
+					},
+					{
+					"featureType": "administrative.land_parcel",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#bdbdbd"
+					}
+					]
+					},
+					{
+					"featureType": "poi",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#eeeeee"
+					}
+					]
+					},
+					{
+					"featureType": "poi",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#757575"
+					}
+					]
+					},
+					{
+					"featureType": "poi.park",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#e5e5e5"
+					}
+					]
+					},
+					{
+					"featureType": "poi.park",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#9e9e9e"
+					}
+					]
+					},
+					{
+					"featureType": "road",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#ffffff"
+					}
+					]
+					},
+					{
+					"featureType": "road.arterial",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#757575"
+					}
+					]
+					},
+					{
+					"featureType": "road.highway",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#dadada"
+					}
+					]
+					},
+					{
+					"featureType": "road.highway",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#616161"
+					}
+					]
+					},
+					{
+					"featureType": "road.local",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#9e9e9e"
+					}
+					]
+					},
+					{
+					"featureType": "transit.line",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#e5e5e5"
+					}
+					]
+					},
+					{
+					"featureType": "transit.station",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#eeeeee"
+					}
+					]
+					},
+					{
+					"featureType": "water",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"color": "#c9c9c9"
+					}
+					]
+					},
+					{
+					"featureType": "water",
+					"elementType": "labels.text.fill",
+					"stylers": [
+					{
+					"color": "#9e9e9e"
+					}
+					]
+					}
+					]
+			},
 		};
 	},
 	components: {
 		Header
 	},
-	beforeMount() {
+	mounted() {
 		this.getInfo();
 	},
 	beforeRouteLeave(to, from, next) {
@@ -121,13 +292,21 @@ export default {
 		setTimeout(n, 1000);
 	},
 	methods: {
+		blur(e) {
+			if ( e.target.value === '' || e.target.value === null || e.target.value === false || e.target.value === undefined  ) {
+				e.target.closest('.form-el').classList.remove('focus');
+				e.target.closest('.form-el').classList.add('error');
+			}
+		},
+		focus(e) {
+			e.target.closest('.form-el').classList.add('focus');
+		},
 		inputForm(e) {
 			if ( e.target.value === '' || e.target.value === null || e.target.value === false || e.target.value === undefined  ) {
-				e.target.classList.add('error');
 				e.target.classList.remove('focus');
 			}else{
-				e.target.classList.remove('error');
 				e.target.classList.add('focus');
+				e.target.closest('.form-el').classList.remove('error');
 			}
 		},
 		openForm() {

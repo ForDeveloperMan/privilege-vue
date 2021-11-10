@@ -182,6 +182,12 @@ body{
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-start;
+		&-prev{
+			transition: .2s;
+			&:hover{
+				transform: translateY(-5px);
+			}
+		}
 	}
 }
 
@@ -415,6 +421,8 @@ body{
 		font-size: 18px;
 		color: #FFFFFF;
 		opacity: 0.4;
+		margin-bottom: 20px;
+		display: inline-block;
 	}
 	&__info{
 		position: absolute;
@@ -743,10 +751,15 @@ body{
 	&__img{
 		position: absolute;
 		z-index: 5;
-		object-fit: cover;
-		object-position: center;
 		opacity: 0;
 		transition: 1s;
+		overflow: hidden;
+		&-img{
+			object-fit: cover;
+			object-position: center;
+			height: 100%;
+			max-width: none;
+		}
 		&.anim{
 			opacity: 1;
 		}
@@ -755,6 +768,9 @@ body{
 			left: 24.4vw;
 			height: 50vh;
 			width: 0vw;
+			.sec-partner__img-img{
+				width: 25.6vw;
+			}
 			&.anim{
 				width: 25.6vw;
 			}
@@ -764,6 +780,10 @@ body{
 			left: 50vw;
 			width: 25.6vw;
 			height: 0vh;
+			.sec-partner__img-img{
+				width: 25.6vw;
+				height: 25vh;
+			}
 			&.anim{
 				height: 25vh;
 			}
@@ -803,6 +823,18 @@ body{
 		padding: 39px 41px;
 		padding-right: 76px;
 		overflow: hidden;
+		overflow-y: auto;
+		&::-webkit-scrollbar {
+			width: 3px;
+		}
+		&::-webkit-scrollbar-track {
+			background: #c2c5cb;
+			border-radius: 20px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #3A5899;
+			border-radius: 20px;
+		}
 		p{
 			margin-bottom: 25px;
 			&:last-child{
@@ -1031,6 +1063,10 @@ body{
 		justify-content: center;
 		color: #FFFFFF;
 		cursor: pointer;
+		transition: .2s;
+		&:hover{
+			background-color: transparent;
+		}
 	}
 }
 
@@ -1153,7 +1189,8 @@ body{
 		}
 		&-text{
 			p{
-				margin-bottom: 24px;
+				margin-bottom: 20px;
+				line-height: 1.4;
 				&:last-child{
 					margin-bottom: 0;
 				}
@@ -1170,7 +1207,7 @@ body{
 		}
 	}
 	&__title{
-		margin-bottom: 40px;
+		margin-bottom: 30px;
 	}
 	&__page{
 		position: absolute;
@@ -1206,33 +1243,34 @@ body{
 	}
 }
 
-$duration: 600ms;
+$duration: 300ms;
 $timing-fn: ease;
+
 @keyframes in-top {
-  from {transform: rotate3d(-1,0,0, 90deg)}
+  from {transform: rotate3d(-1,0,0, 140deg)}
   to   {transform: rotate3d(0,0,0, 0deg)}}
 @keyframes in-right {
-  from {transform: rotate3d(0,-1,0, 90deg)}
+  from {transform: rotate3d(0,-1,0, 140deg)}
   to   {transform: rotate3d(0,0,0, 0deg)}}
 @keyframes in-bottom {
-  from {transform: rotate3d(1,0,0, 90deg)}
+  from {transform: rotate3d(1,0,0, 140deg)}
   to   {transform: rotate3d(0,0,0, 0deg)}}
 @keyframes in-left {
-  from {transform: rotate3d(0,1,0, 90deg)}
+  from {transform: rotate3d(0,1,0, 140deg)}
   to   {transform: rotate3d(0,0,0, 0deg)}}
 
 @keyframes out-top {
   from {transform: rotate3d(0,0,0, 0deg)}
-  to   {transform: rotate3d(-1,0,0, 104deg)}}
+  to   {transform: rotate3d(-1,0,0, 140deg)}}
 @keyframes out-right {
   from {transform: rotate3d(0,0,0, 0deg)}
-  to   {transform: rotate3d(0,-1,0, 104deg)}}
+  to   {transform: rotate3d(0,-1,0, 140deg)}}
 @keyframes out-bottom {
   from {transform: rotate3d(0,0,0, 0deg)}
-  to   {transform: rotate3d(1,0,0, 104deg)}}
+  to   {transform: rotate3d(1,0,0, 140deg)}}
 @keyframes out-left {
   from {transform: rotate3d(0,0,0, 0deg)}
-  to   {transform: rotate3d(0,1,0, 104deg)}}
+  to   {transform: rotate3d(0,1,0, 140deg)}}
 
 .sec-types{
 	background: #3A5899;
@@ -1317,6 +1355,7 @@ $timing-fn: ease;
 			cursor: pointer;
 			position: relative;
 			overflow: hidden;
+			perspective: 400px;
 			&_3{
 				grid-column: 1;
 			}
@@ -1362,8 +1401,15 @@ $timing-fn: ease;
 			background: #6D83B3;
 			z-index: 100;
 			padding: 39px;
-			transform: rotate3d(1,0,0, 90deg);
+			transform: rotate3d(1,0,0, 90.02deg);
 		    font-size: .87vw;
+		    &-close{
+		    	display: none;
+		    	position: absolute;
+		    	top: 20px;
+		    	right: 20px;
+		    	cursor: pointer;
+		    }
 		}
 		&-content{
 			position: relative;
@@ -1549,10 +1595,17 @@ $timing-fn: ease;
 		left: 24.4vw;
 		top: 25vh;
 		height: 50vh;
-		object-fit: cover;
 		width: 0vw;
 		opacity: 0;
 		transition: 1s;
+		overflow: hidden;
+		&-img{
+			object-fit: cover;
+			object-position: top;
+			height: 100%;
+			width: 25.6vw;
+			max-width: none;
+		}
 		&.anim{
 			width: 25.6vw;
 			opacity: 1;
@@ -1568,6 +1621,18 @@ $timing-fn: ease;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		&::-webkit-scrollbar {
+			width: 3px;
+		}
+		&::-webkit-scrollbar-track {
+			background: #c2c5cb;
+			border-radius: 20px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #3A5899;
+			border-radius: 20px;
+		}
+		overflow-y: auto;
 		&-top{
 			max-width: 338px;
 		}
@@ -1658,10 +1723,16 @@ $timing-fn: ease;
 		top: 25vh;
 		left: 50vw;
 		height: 50vh;
-		object-fit: cover;
 		width: 0vw;
 		transition: 1s;
 		opacity: 0;
+		overflow: hidden;
+		&-img{
+			width: 25.6vw;
+			height: 100%;
+			object-fit: cover;
+			max-width: none;
+		}
 		&.anim{
 			width: 25.6vw;
 			opacity: 1;
@@ -1686,9 +1757,23 @@ $timing-fn: ease;
 			top: 40px;
 			right: 41px;
 			z-index: 10;
+			cursor: pointer;
+			transition: .2s;
+			&.active{
+				transform: rotate(180deg);
+			}
+			path{
+				transition: .2s;
+			}
+			&:hover{
+				path{
+					fill-opacity: 1;
+				}
+			}
 		}
 		&-body{
 			padding: 63px 41px;
+			padding-bottom: 20px;
 			padding-right: 70px;
 			background: #3A5899;
 			transition: .2s;
@@ -1729,6 +1814,64 @@ $timing-fn: ease;
 					display: block;
 				}
 			}
+		}
+		*:last-child{
+			margin-bottom: 0;
+		}
+	}
+}
+
+.sec-404{
+	background: #3A5899;
+	&__line{
+		background-color: #fff;
+		position: absolute;
+		opacity: 0.4;
+		&_1{
+			width: 100vw;
+			height: 1px;
+			top: 140px;
+			left: 0;
+		}
+		&_2{
+			height: 140px;
+			left: 50vw;
+			margin-left: -0.5px;
+			width: 1px;
+		}
+	}
+	&__wrap{
+		height: 100vh;
+		width: 100vw;
+		position: relative;
+	}
+	&__content{
+		position: absolute;
+		top: 140px;
+		height: calc(100vh - 140px);
+		left: 0;
+		width: 100vw;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	&__title{
+		font-size: 15vw;
+		text-transform: uppercase;
+		margin-bottom: 40px;
+	}
+	&__text{
+		font-size: 30px;
+		margin-bottom: 30px;
+	}
+	.link-contact{
+		display: flex;
+		align-items: center;
+		svg{
+			margin-left: 5px;
+			width: 10px;
+			height: auto;
 		}
 	}
 }

@@ -36,7 +36,7 @@
 			</template>
 		</div>
 		<transition name="fadeUp">
-			<div v-show="showAnim" style="animation-delay: 1s" class="sec-page__bottom">
+			<div v-show="showAnim" style="animation-delay: 1s" class="sec-page__bottom sec-about__bottom">
 				<router-link :to="this.$route.meta.linkHome" class="iconLink sec-page__bottom-prev">
 					<svg class="iconLink__icon iconLink__margin" width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="1" width="6" height="1" transform="rotate(90 4 1)" fill="white"/><rect x="9" y="8" width="6" height="1" transform="rotate(-180 9 8)" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 3.24324L6.18333 4L3.5 1.51351L0.816666 4L9.02423e-09 3.24324L3.5 -4.17371e-08L7 3.24324Z" fill="white"/></svg>
 					<span class="iconLink__text">{{ pageInfo.goHome }}</span>

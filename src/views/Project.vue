@@ -27,27 +27,6 @@
 <div class="sec-page__content sec-project__content" v-if="showAnimMain">
 <Header></Header>
 
-<div class="sec-project__text" v-bind:class="{anim: showAnim, open: openFullContent}">
-	<div class="project-info">
-		<transition name="fade">
-			<div class="project-info__top" v-show="showAnim" style="animation-delay: 1s">
-				<svg @click="openContent" v-if="showArr" class="project-info__arr" width="9" height="22" viewBox="0 0 9 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 -1.96701e-07L-7.59198e-07 4.63158L3.375 4.63158L3.375 22L5.625 22L5.625 4.63158L9 4.63158L4.5 -1.96701e-07Z" fill="#3A5899"/></svg>
-				<div class="project-info__info">{{ pageInfo.textType }}</div>
-				<div class="project-info__title">{{ description.title }}</div>
-			</div>
-		</transition>
-		<transition name="fade">
-			<p class="project-info__text text-info" v-show="showAnim" style="animation-delay: 1s">{{ description.text }}</p>
-		</transition>
-		<transition name="fade">
-			<div @click="openGallery" v-show="showAnim" style="animation-delay: 1s" class="project-info__btn gallery-btn" id="open-gallery">
-				<img src="@/assets/img/gallery.png" alt="" class="gallery-btn__icon">
-				<div class="gallery-btn__text">{{ pageInfo.textBtn }}</div>
-			</div>
-		</transition>
-	</div>
-</div>
-
 <div class="sec-project__info">
 	<transition name="fade" style="animation-delay: 0s">
 		<div class="sec-project__info-top" v-show="showAnim">
@@ -70,6 +49,26 @@
 					</div>
 					<div class="block-project-info__title">{{ description.kol_vo_domov.zagolovok }}</div>
 				</div>
+			</div>
+		</transition>
+	</div>
+</div>
+<div class="sec-project__text" v-bind:class="{anim: showAnim, open: openFullContent}">
+	<div class="project-info">
+		<transition name="fade">
+			<div class="project-info__top" v-show="showAnim" style="animation-delay: 1s">
+				<svg @click="openContent" v-if="showArr" class="project-info__arr" width="9" height="22" viewBox="0 0 9 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 -1.96701e-07L-7.59198e-07 4.63158L3.375 4.63158L3.375 22L5.625 22L5.625 4.63158L9 4.63158L4.5 -1.96701e-07Z" fill="#3A5899"/></svg>
+				<div class="project-info__info">{{ pageInfo.textType }}</div>
+				<div class="project-info__title">{{ description.title }}</div>
+			</div>
+		</transition>
+		<transition name="fade">
+			<p class="project-info__text text-info" v-show="showAnim" style="animation-delay: 1s">{{ description.text }}</p>
+		</transition>
+		<transition name="fade">
+			<div @click="openGallery" v-show="showAnim" style="animation-delay: 1s" class="project-info__btn gallery-btn" id="open-gallery">
+				<img src="@/assets/img/gallery.png" alt="" class="gallery-btn__icon">
+				<div class="gallery-btn__text">{{ pageInfo.textBtn }}</div>
 			</div>
 		</transition>
 	</div>
@@ -165,6 +164,9 @@ export default{
 				trapFocus: false,
 				dragToClose : false,
 				Carousel: false,
+				placeFocusBack : false,
+				// touch: false,
+				animated: false,
 			});
 		},
 		getProject() {
@@ -179,10 +181,11 @@ export default{
 				this.pageInfo = response.data.pageInfo;
 				this.languagesProject = response.data.project.languages_post;
 
+				if ( this.description === null ) {
+					window.location.href = this.$route.meta.linkHome+'404';
+				}
 				
 				this.showArr = true;
-				// if ( this.description.text.length >= 450 ) {
-				// }
 
 				let gallery = [];
 				response.data.project.gallery.forEach(function(item, i) {

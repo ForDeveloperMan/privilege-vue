@@ -53,7 +53,7 @@
 import Header from '../components/header.vue'
 
 export default {
-	name: 'About page',
+	name: 'Founders',
 	data() {
 		return {
 			page: Object,
