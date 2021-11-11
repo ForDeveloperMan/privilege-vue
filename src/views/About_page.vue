@@ -37,6 +37,8 @@ export default {
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;
 		this.routeLeave = true;
+		console.log('leave');
+		this.$store.commit('setAboutLanguages', false);
 		function n() {
 			next();
 		}
@@ -56,6 +58,7 @@ export default {
 				if ( this.data.pageInfo === null ) {
 					window.location.href = this.$route.meta.linkHome+'404';
 				}
+				this.$store.commit('setAboutLanguages', this.data.page.languages_post);
 				setTimeout(() => this.showAnim = true, 100);
 			});
 		},

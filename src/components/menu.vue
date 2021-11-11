@@ -9,22 +9,24 @@
   <div class="block-menu__dropdown" v-bind:class="{active: isActive}" v-if="showMain">
     <div class="block-menu__dropdown-content">
       <div class="block-menu__dropdown-block">
-        <router-link :to="this.$route.meta.linkHome+'about'" @click="click" class="block-menu__dropdown-title margin">{{ info.goAbout }}</router-link>
+        <router-link :to="{name: 'about-'+this.$route.meta.language}" @click="click" class="block-menu__dropdown-title margin">{{ info.goAbout }}</router-link>
         <ul class="block-menu__dropdown-links">
-          <li v-for="(item, index) in info.about" v-bind:key="index"><router-link @click="click" :to="this.$route.meta.linkHome+'about/' + item.post_name" >{{ item.post_title }}</router-link></li>
+          <li v-for="(item, index) in info.about" v-bind:key="index"><router-link @click="click" :to="{name: 'About_page-'+this.$route.meta.language, params: {page: item.post_name}}" >{{ item.post_title }}</router-link></li>
         </ul>
       </div>
       <div class="block-menu__dropdown-block">
-        <router-link :to="this.$route.meta.linkHome+'projects'" @click="click" class="block-menu__dropdown-title margin">{{ info.goProjects }}</router-link>
+        <router-link :to="{name: 'projects-'+this.$route.meta.language}" @click="click" class="block-menu__dropdown-title margin">{{ info.goProjects }}</router-link>
         <ul class="block-menu__dropdown-links">
-          <li v-for="(item, index) in info.projects" v-bind:key="index"><router-link @click="click" :to="this.$route.meta.linkHome+'projects/' + item.slug" >{{ item.cat_name }}</router-link></li>
+          <li><router-link :to="{name: 'investment'+'-'+this.$route.meta.language}" @click="click">{{ info.projects[0].cat_name }}</router-link></li>
+          <li><router-link :to="{name: 'in-progress'+'-'+this.$route.meta.language}" @click="click">{{ info.projects[1].cat_name }}</router-link></li>
+          <li><router-link :to="{name: 'implemented'+'-'+this.$route.meta.language}" @click="click">{{ info.projects[2].cat_name }}</router-link></li>
         </ul>
       </div>
       <div class="block-menu__dropdown-block">
-        <router-link :to="this.$route.meta.linkHome+'partners'" @click="click" class="block-menu__dropdown-title">{{ info.goPartners }}</router-link>
+        <router-link :to="{name: 'partners-'+this.$route.meta.language}" @click="click" class="block-menu__dropdown-title">{{ info.goPartners }}</router-link>
       </div>
       <div class="block-menu__dropdown-block">
-        <router-link :to="this.$route.meta.linkHome+'contacts'" @click="click" class="block-menu__dropdown-title">{{ info.goContacts }}</router-link>
+        <router-link :to="{name: 'contacts-'+this.$route.meta.language}" @click="click" class="block-menu__dropdown-title">{{ info.goContacts }}</router-link>
       </div>
       <div class="block-menu__dropdown-bottom">
         <div class="block-menu__dropdown-info">{{ info.socials['title'] }}</div>
