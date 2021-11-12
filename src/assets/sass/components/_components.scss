@@ -426,6 +426,7 @@
 		right: -10px;
 		width: 20px;
 		transition: .2s;
+		user-select: none;
 		&:hover{
 			transform: translateY(-5px);
 		}

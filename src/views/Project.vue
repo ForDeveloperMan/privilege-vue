@@ -12,7 +12,7 @@
 
 
 
-<transition name="fade" v-if="!this.$store.state.project_page_bg && showAnimMain">
+<transition name="fade" v-if="!this.$store.state.project_page_bg && showAnimMain && gallery[0]">
 	<img :src="gallery[0].src" alt="" v-on:load="this.loadImg" class="sec-project__bg" v-bind:class="{anim: showAnim}">
 </transition>
 
@@ -177,7 +177,7 @@ export default{
 					category: this.$route.meta.category,
 				}
 			}).then(response => {
-				this.project = response.data.project[0];
+				this.project = response.data.project;
 				this.description = response.data.project.description;
 				this.pageInfo = response.data.pageInfo;
 				this.languagesProject = response.data.project.languages_post;
@@ -189,15 +189,21 @@ export default{
 				this.showArr = true;
 
 				let gallery = [];
-				response.data.project.gallery.forEach(function(item, i) {
-					gallery.push({
-						'src': item['sizes']['large']
+				if ( response.data.project.gallery ) {
+					response.data.project.gallery.forEach(function(item, i) {
+						gallery.push({
+							'src': item['sizes']['large']
+						});
 					});
-				});
-				this.gallery = gallery;
-				this.showAnimMain = true;
-				this.$store.commit('changePageProjectBg', this.gallery[0].src);
-				this.$store.commit('setProjectLanguages', this.languagesProject);
+					this.$store.commit('changePageProjectBg', this.gallery[0].src);
+					this.gallery = gallery;
+					this.$store.commit('setProjectLanguages', this.languagesProject);
+					this.showAnimMain = true;
+				}else{
+					this.showPage();
+					this.$store.commit('setProjectLanguages', this.languagesProject);
+					this.showAnimMain = true;
+				}
 			});
 		},
 		showPage() {

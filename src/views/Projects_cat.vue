@@ -15,7 +15,7 @@
 			<div class="sec-projects-cat__line sec-projects-cat__line_6"></div>
 			<template v-for="(item, index) in this.projects" v-bind:key="index">
 				<transition name="fade">
-					<img v-show="parseInt(this.bg) === index" v-on:load="this.loadImg" :src="item.acf_bg[0]['sizes']['large']" alt="" class="sec-projects-cat__img">
+					<img v-show="parseInt(this.bg) === index" v-if="item.acf_bg" v-on:load="this.loadImg" :src="item.acf_bg[0]['sizes']['large']" alt="" class="sec-projects-cat__img">
 				</transition>
 			</template>
 			<div class="sec-page__content sec-projects-cat__content">
@@ -113,7 +113,9 @@ export default {
 		showBg(e){
 			if ( this.activeHover ) {
 				this.bg = e.target.getAttribute('data-bg');
-				this.$store.commit('changePageProjectBg', this.projects[this.bg].acf_bg[0]['sizes']['large']);
+				if ( this.projects[0].acf_bg !== false ) {
+					this.$store.commit('changePageProjectBg', this.projects[this.bg].acf_bg[0]['sizes']['large']);
+				}
 			}
 		},
 		hideBg(e){
@@ -139,6 +141,9 @@ export default {
 				// +1 bg
 				this.images.count = response.data.projects.length + 1;
 				this.showAnimMain = true;
+				if ( !response.data.projects[0].acf_bg ) {
+					this.showPage();
+				}
 			});
 		},
 		showPage() {

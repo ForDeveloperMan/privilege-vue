@@ -212,6 +212,18 @@
 }
 
 @media screen and (max-width: 1200px){
+	// .block-header__left{
+	// 	&::after{
+	// 		content: '';
+	// 		position: absolute;
+	// 		top: 41%;
+	// 		left: 0;
+	// 		width: 100vw;
+	// 		height: 10px;
+	// 		background-color: red;
+	// 		transform: translateY(-50%);
+	// 	}
+	// }
 	.sec-home__link{
 		padding: 30px 20px;
 	}
@@ -1896,6 +1908,13 @@
 	}
 	.block-menu__dropdown-bottom{
 		margin-top: 7vh;
+	}
+
+	.block-header__right{
+		padding-bottom: 25px;
+	}
+	.block-header__right .block-menu{
+		margin-top: 7px;
 	}
 }
 

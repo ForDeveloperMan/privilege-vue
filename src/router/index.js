@@ -37,62 +37,62 @@ let components = {
 		},
 	about: {
 			name: 'about',
-			path: ['about', 'o-kompanii', 'about-company', 'ettevõttest'],
+			path: ['about', 'o-kompanii', 'about-company', 'ettevottest'],
 			component: About,
 			path_meta: '/about/',
 		},
 	About_page: {
 			name: 'About_page',
-			path: ['about/:page/', 'o-kompanii/:page/', 'about-company/:page/', 'ettevõttest/:page/'],
+			path: ['about/:page/', 'o-kompanii/:page/', 'about-company/:page/', 'ettevottest/:page/'],
 			component: About_page,
 			path_meta: '/about/',
 			category: 'about',
 		},
 	About_page_founder: {
 			name: 'About_page_founder',
-			path: ['about/:page/:founder', 'o-kompanii/:page/:founder', 'about-company/:page/:founder', 'ettevõttest/:page/:founder'],
+			path: ['about/:page/:founder', 'o-kompanii/:page/:founder', 'about-company/:page/:founder', 'ettevottest/:page/:founder'],
 			component: Founder,
 			path_meta: '/about/founders',
 			category: 'about/',
 		},
-	implemented: {
-			name: 'implemented',
-			path: ['projects/implemented', 'projects/implemented', 'projects/implemented', 'projects/implemented'],
-			component: Projects_cat,
-			path_meta: '/projects/implemented',
-		},
 	investment: {
 			name: 'investment',
-			path: ['projects/investment', 'projects/investment', 'projects/investment', 'projects/invest-portfellide'],
+			path: ['projects/invest-proekty', 'projects/invest-proekti', 'projects/investment-projects', 'projects/invest-portfellide'],
 			component: Projects_cat,
 			path_meta: '/projects/investment',
 		},
 	in_progress: {
 			name: 'in-progress',
-			path: ['projects/in-progress', 'projects/in-progress', 'projects/in-progress', 'projects/in-progress'],
+			path: ['projects/v-roboti', 'projects/v-roboti', 'projects/at-work', 'projects/toos'],
 			component: Projects_cat,
 			path_meta: '/projects/in-progress',
 		},
-	project_implemented: {
-			name: 'project_implemented',
-			path: ['projects/implemented/:project', 'projects/implemented/:project', 'projects/implemented/:project', 'projects/implemented/:project'],
-			component: Project,
-			path_meta: '/projects/implemented/',
-			category: 'implemented',
+	implemented: {
+			name: 'implemented',
+			path: ['projects/realizovannye', 'projects/realizovani', 'projects/implemented', 'projects/teostatud-projektid'],
+			component: Projects_cat,
+			path_meta: '/projects/implemented',
 		},
 	project_investment: {
 			name: 'project_investment',
-			path: ['projects/investment/:project', 'projects/investment/:project', 'projects/investment/:project', 'projects/invest-portfellide/:project'],
+			path: ['projects/invest-proekty/:project', 'projects/invest-proekti/:project', 'projects/investment-projects/:project', 'projects/invest-portfellide/:project'],
 			component: Project,
 			path_meta: '/projects/investment/',
 			category: ['investment'],
 		},
 	project_in_progress: {
 			name: 'project_in-progress',
-			path: ['projects/in-progress/:project', 'projects/in-progress/:project', 'projects/in-progress/:project', 'projects/in-progress/:project'],
+			path: ['projects/v-roboti/:project', 'projects/v-roboti/:project', 'projects/at-work/:project', 'projects/toos/:project'],
 			component: Project,
 			path_meta: '/projects/in-progress/',
 			category: 'in-progress',
+		},
+	project_implemented: {
+			name: 'project_implemented',
+			path: ['projects/realizovannye/:project', 'projects/realizovani/:project', 'projects/implemented/:project', 'projects/teostatud-projektid/:project'],
+			component: Project,
+			path_meta: '/projects/implemented/',
+			category: 'implemented',
 		},
 	partners: {
 			name: 'partners',
@@ -165,19 +165,19 @@ for (var route_el in components) {
 	}
 }
 
-// routes.push({
-// 	path: "/:catchAll(.*)",
-// 	name: "NotFound",
-// 	component: _404,
-// 	redirect: '/404',
-// 	meta:{
-// 		'path':  '/404',
-// 		'language':  language_def,
-// 		'languages':  languages,
-// 		'linkHome': '/',
-// 		'slug': '404',
-// 	},
-// });
+routes.push({
+	path: "/:catchAll(.*)",
+	name: "NotFound",
+	component: _404,
+	redirect: '/404',
+	meta:{
+		'path':  '/404',
+		'language':  language_def,
+		'languages':  languages,
+		'linkHome': '/',
+		'slug': '404',
+	},
+});
 
 const router = createRouter({
     routes,

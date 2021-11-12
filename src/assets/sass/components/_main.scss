@@ -1403,6 +1403,8 @@ $timing-fn: ease;
 			padding: 39px;
 			transform: rotate3d(1,0,0, 90.02deg);
 		    font-size: .87vw;
+		    transition: .3s opacity;
+		    opacity: 0;
 		    &-close{
 		    	display: none;
 		    	position: absolute;
@@ -1410,6 +1412,11 @@ $timing-fn: ease;
 		    	right: 20px;
 		    	cursor: pointer;
 		    }
+		}
+		&:hover{
+			.sec-types__elements-hover{
+				opacity: 1;
+			}
 		}
 		&-content{
 			position: relative;
@@ -1495,13 +1502,13 @@ $timing-fn: ease;
 		position: absolute;
 		top: 0;
 		left: 24.4vw;
-		height: 100vh;
 		width: 75.6vw;
 		display: grid;
 		grid-template-columns: 34% 33.8% 33.2%;
-		grid-template-rows: 25vh;
-		align-items: flex-start;
-		justify-content: flex-start;
+		grid-template-rows: auto;
+		align-content: center;
+		column-gap: 0;
+		row-gap: 0;
 		&-el{
 			height: 25vh;
 			display: flex;
