@@ -135,6 +135,7 @@ export default{
 		this.showAnim = false;
 		this.showAnimMain = false;
 		this.$store.commit('setProjectLanguages', false);
+		// this.$store.commit('changePageProjectBg', false);
 		function n() {
 			next();
 		}
@@ -144,6 +145,7 @@ export default{
 		this.showAnim = false;
 		this.showAnimMain = false;
 		this.$store.commit('setProjectLanguages', false);
+		// this.$store.commit('changePageProjectBg', false);
 		function n() {
 			next();
 		}
@@ -195,11 +197,15 @@ export default{
 							'src': item['sizes']['large']
 						});
 					});
-					this.$store.commit('changePageProjectBg', this.gallery[0].src);
 					this.gallery = gallery;
+					console.log(this.gallery);
+					if ( this.gallery[0].src ) {
+						this.$store.commit('changePageProjectBg', this.gallery[0].src);
+					}
 					this.$store.commit('setProjectLanguages', this.languagesProject);
 					this.showAnimMain = true;
 				}else{
+					this.$store.commit('changePageProjectBg', false);
 					this.showPage();
 					this.$store.commit('setProjectLanguages', this.languagesProject);
 					this.showAnimMain = true;

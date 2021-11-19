@@ -2,7 +2,7 @@
 <div class="wrapper">
 	<div class="sec-page sec-projects-cat">
 		<transition name="fade">
-			<img v-if="!this.$store.state.project_bg && showAnimMain" v-show="showAnim" v-on:load="this.loadImg" :src="this.pageInfo.bg" alt="" class="sec-projects-cat__bg">
+			<img v-if="!this.$store.state.project_bg && showAnimMain" v-show="showAnim" @load="this.loadImg" :src="this.pageInfo.bg" alt="" class="sec-projects-cat__bg">
 		</transition>
 		<img v-if="this.$store.state.project_bg" v-show="mounted" :src="this.$store.state.project_bg" alt="" class="sec-projects-cat__bg">
 		<Header></Header>
@@ -125,6 +125,7 @@ export default {
 		},
 		loadImg() {
 			this.images.loaded = this.images.loaded + 1;
+			console.log(this.images.loaded);
 			if ( this.images.loaded === this.images.count ) {
 				this.showPage();
 			}
@@ -139,10 +140,17 @@ export default {
 				this.projects = response.data.projects;
 				this.pageInfo = response.data.pageInfo;
 				// +1 bg
-				this.images.count = response.data.projects.length + 1;
+				this.images.count = 1;
+				for( var i=0; i<response.data.projects.length; i++ ){
+					if ( response.data.projects[i].acf_bg ) {
+						this.images.count = this.images.count+1;
+					}
+				}
 				this.showAnimMain = true;
-				if ( !response.data.projects[0].acf_bg ) {
-					this.showPage();
+				if ( response.data.projects ) {
+					if ( !response.data.projects[0].acf_bg ) {
+						this.showPage();
+					}
 				}
 			});
 		},

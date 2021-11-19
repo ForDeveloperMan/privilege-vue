@@ -36,7 +36,6 @@ export default {
     this.mobile = this.$isMobile();
   },
   mounted() {
-    console.log(this.$route);
     this.getLanguages();
   },
   methods: {
