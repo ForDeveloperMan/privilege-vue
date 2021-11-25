@@ -41,7 +41,7 @@ export default {
 	},
 	methods: {
 		getInfo() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/notfound', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/notfound', {
 				params:{
 					lang: this.$route.meta.language,
 				}

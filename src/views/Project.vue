@@ -172,7 +172,7 @@ export default{
 			});
 		},
 		getProject() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/project', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/project', {
 				params:{
 					lang: this.$route.meta.language,
 					project: this.$route.params.project,

@@ -96,7 +96,7 @@ export default {
 			setTimeout(()=>this.showAnim = true, 100);
 		},
 		getInfo() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/home', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/home', {
 				params:{
 					lang: this.$route.meta.language,
 				}

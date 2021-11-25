@@ -341,7 +341,7 @@ export default {
 			formData.append('tel', inp_tel);
 			formData.append('mail', inp_mail);
 			
-			axios.post('http://privilege.qazxswedc.site/wp-json/contact-form-7/v1/contact-forms/272/feedback', formData).then(response => {
+			axios.post('https://privilege.qazxswedc.site/wp-json/contact-form-7/v1/contact-forms/272/feedback', formData).then(response => {
 				if ( response.data.status === 'mail_sent' ) {
 					this.thanksForm = true;
 				}
@@ -352,7 +352,7 @@ export default {
 			});
 		},
 		getInfo() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/contacts', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/contacts', {
 				params:{
 					lang: this.$route.meta.language,
 				}

@@ -57,7 +57,7 @@ export default {
 			setTimeout(()=>this.isShowElms = false, 2000);
 		},
 		getInfo() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/header', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/header', {
 				params:{
 					lang: this.$route.meta.language,
 				}

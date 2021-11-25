@@ -46,7 +46,7 @@ export default {
 	},
 	methods: {
 		getInfo() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/about_page', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/about_page', {
 				params:{
 					lang: this.$route.meta.language,
 					page: this.$route.params.page,

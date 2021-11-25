@@ -108,7 +108,7 @@ export default {
 	},
 	methods: {
 		getInfo() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/founder', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/founder', {
 				params:{
 					lang: this.$route.meta.language,
 					founder: this.$route.params.founder,

@@ -131,7 +131,7 @@ export default {
 			}
 		},
 		getProjects() {
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/projects', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/projects', {
 				params:{
 					lang: this.$route.meta.language,
 					cat: this.$route.meta.name,
@@ -148,7 +148,11 @@ export default {
 				}
 				this.showAnimMain = true;
 				if ( response.data.projects ) {
-					if ( !response.data.projects[0].acf_bg ) {
+					if ( response.data.projects[0] ) {
+						if ( !response.data.projects[0].acf_bg ) {
+							this.showPage();
+						}
+					}else{
 						this.showPage();
 					}
 				}

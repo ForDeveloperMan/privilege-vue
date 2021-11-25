@@ -29,7 +29,7 @@
 		</transition>
 		<transition name="fadeRight" v-show="showAnim">
 			<div style="animation-delay: 1.2s" class="sec-partner__info">
-				<div class="sec-partner__info-title">{{ partner.opisanie_sprava.zagolovok }}</div>
+				<div class="sec-partner__info-title" v-if="partner.opisanie_sprava.zagolovok">{{ partner.opisanie_sprava.zagolovok }}</div>
 				<p class="sec-partner__info-text">{{ partner.opisanie_sprava.tekst }}</p>
 			</div>
 		</transition>
@@ -104,7 +104,7 @@ export default {
 			}
 		},
 		getInfo(){
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/partner', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/partner', {
 				params:{
 					lang: this.$route.meta.language,
 					partner: this.$route.params.partner,
@@ -115,7 +115,12 @@ export default {
 				if ( this.partner.description === null ) {
 					window.location.href = this.$route.meta.linkHome+'404';
 				}
-				this.images.count = response.data.partner.gallery.length;
+				if ( response.data.partner.gallery.length ) {
+					this.images.count = response.data.partner.gallery.length;
+				}else{
+					this.images.count = 0;
+					this.loadImg();
+				}
 				this.languagesPartner = response.data.partner.languages_post;
 				this.$store.commit('setPartnerLanguages', this.languagesPartner);
 				this.showAnimMain = true;

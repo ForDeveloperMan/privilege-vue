@@ -105,7 +105,7 @@ export default {
 			}
 		},
 		getInfo(){
-			axios.get('http://privilege.qazxswedc.site/wp-json/vue/v1/partners', {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/partners', {
 				params:{
 					lang: this.$route.meta.language,
 				}
