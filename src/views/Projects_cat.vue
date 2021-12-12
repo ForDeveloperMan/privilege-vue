@@ -1,11 +1,10 @@
 <template>
 <div class="wrapper">
-	<div class="sec-page sec-projects-cat">
+	<div class="sec-page sec-projects-cat" v-bind:class="{showLines: showLines}">
 		<transition name="fade">
-			<img v-if="!this.$store.state.project_bg && showAnimMain" v-show="showAnim" @load="this.loadImg" :src="this.pageInfo.bg" alt="" class="sec-projects-cat__bg">
+			<img v-if="!this.$store.state.project_bg && showAnimMain" v-show="showBgMain" @load="this.loadImg" :src="this.pageInfo.bg" alt="" class="sec-projects-cat__bg">
 		</transition>
 		<img v-if="this.$store.state.project_bg" v-show="mounted" :src="this.$store.state.project_bg" alt="" class="sec-projects-cat__bg">
-		<Header></Header>
 		<div class="sec-page__wrap sec-projects-cat__wrap" v-if="showAnimMain">
 			<div class="sec-projects-cat__line sec-projects-cat__line_1"></div>
 			<div class="sec-projects-cat__line sec-projects-cat__line_2"></div>
@@ -15,7 +14,7 @@
 			<div class="sec-projects-cat__line sec-projects-cat__line_6"></div>
 			<template v-for="(item, index) in this.projects" v-bind:key="index">
 				<transition name="fade">
-					<img v-show="parseInt(this.bg) === index" v-if="item.acf_bg" v-on:load="this.loadImg" :src="item.acf_bg[0]['sizes']['large']" alt="" class="sec-projects-cat__img">
+					<img v-bind:class="{ anim : (parseInt(this.bg) === index )}" v-if="item.acf_bg" v-on:load="this.loadImg" :src="item.acf_bg[0]['sizes']['large']" alt="" class="sec-projects-cat__img">
 				</transition>
 			</template>
 			<div class="sec-page__content sec-projects-cat__content">
@@ -63,7 +62,6 @@
 </div>
 </template>
 <script>
-import Header from '../components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -77,6 +75,8 @@ export default {
 			pageInfo: Object,
 			activeHover: false,
 			mounted: false,
+			showLines: false,
+			showBgMain: false,
 			images: {
 				count: Number,
 				loaded: 0,
@@ -84,13 +84,16 @@ export default {
 		};
 	},
 	components: {
-		Header
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 1500);
 		this.showAnim = false;
 		this.activeHover = false;
+		this.showLines = false;
 		this.$store.commit('changeProjectBg', this.pageInfo.bg);
-		setTimeout(next, 1500);
+		if ( this.pageInfo.bg ) {
+			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'projectsReal'});
+		}
 	},
 	mounted() {
 		this.getProjects();
@@ -147,6 +150,7 @@ export default {
 					}
 				}
 				this.showAnimMain = true;
+				this.showLines = true;
 				if ( response.data.projects ) {
 					if ( response.data.projects[0] ) {
 						if ( !response.data.projects[0].acf_bg ) {
@@ -160,6 +164,7 @@ export default {
 		},
 		showPage() {
 			this.showAnim = true;
+			this.showBgMain = true;
 			setTimeout(() => this.activeHover = true, 1000);
 		},
 	},

@@ -1,5 +1,5 @@
 <template>
-<div class="sec-home" v-if="showAnimMain" v-bind:class="{showLines: showLines}">
+<div class="sec-home sec-home-two" v-if="showAnimMain" v-bind:class="{showLines: showLines}">
 <transition name="fade">
 	<div class="btnLanguageFixed" v-show="showAnim" style="animation-delay: 1.5s">
 		<btnLanguage></btnLanguage>

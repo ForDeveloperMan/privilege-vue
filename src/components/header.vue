@@ -39,6 +39,11 @@ export default {
 	},
 	mounted(){
 	},
+	watch:{
+		$route() {
+			this.getInfo();
+		},
+	},
 	methods: {
 		openMenu(e){
 			this.isActive = e;

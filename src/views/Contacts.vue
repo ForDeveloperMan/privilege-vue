@@ -1,7 +1,6 @@
 <template>
 <div class="wrapper">
-	<div class="sec-page sec-contacts" v-bind:class="{openForm: showForm}">
-		<Header></Header>
+	<div class="sec-page sec-contacts" v-bind:class="[{openForm: showForm}, {showLines: showLines}]">
 		<div class="sec-contacts__line sec-contacts__line_1"></div>
 		<div class="sec-contacts__line sec-contacts__line_2"></div>
 		<div class="sec-contacts__line sec-contacts__line_3"></div>
@@ -99,7 +98,6 @@
 </div>
 </template>
 <script>
-import Header from '@/components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -111,6 +109,7 @@ export default {
 			formError: false,
 			showMain: false,
 			showAnim: false,
+			showLines: false,
 			pageInfo: Object,
 			center: {lat: 51.093048, lng: 6.842120},
 			options: {
@@ -278,18 +277,14 @@ export default {
 		};
 	},
 	components: {
-		Header
 	},
 	mounted() {
 		this.getInfo();
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 1000);
 		this.showAnim = false;
-		
-		function n() {
-			next();
-		}
-		setTimeout(n, 1000);
+		this.showLines = false;
 	},
 	methods: {
 		blur(e) {
@@ -359,6 +354,7 @@ export default {
 			}).then(response => {
 				this.pageInfo = response.data;
 				this.showMain = true;
+				this.showLines = true;
 				setTimeout(()=>this.showAnim = true, 100);
 			});
 		},

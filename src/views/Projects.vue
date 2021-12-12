@@ -3,14 +3,14 @@
 <div class="wrapper">
 
 
-<div class="sec-projects sec-page">
+<div class="sec-projects sec-page" v-bind:class="{showLines: showLines}">
 
 
 <transition name="fade">
-	<img v-if="!this.$store.state.project_bg_main" v-show="showAnim" v-on:load="this.loadImg" class="sec-projects__content-bg" :src="this.projects_info.bg">
+	<img v-if="!this.$store.state.project_bg_main" v-show="showBgMain" v-on:load="this.loadImg" class="sec-projects__content-bg" :src="this.projects_info.bg">
 </transition>
 <transition name="fade">
-	<img v-if="this.$store.state.project_bg_main" v-show="mounted" :src="this.$store.state.project_bg_main" alt="" class="sec-projects-cat__bg">
+	<img v-if="this.$store.state.project_bg_main" v-show="mounted" :src="this.$store.state.project_bg_main" alt="" class="sec-projects__content-bg">
 </transition>
 
 <div class="sec-projects__line sec-projects__line_1"></div>
@@ -22,17 +22,11 @@
 <div class="sec-projects__line sec-projects__line_7"></div>
 <div class="sec-projects__line sec-projects__line_8"></div>
 
-<transition name="fade" v-if="showAnimMain">
-	<img class="sec-projects__bg" v-on:load="this.loadImg" style="animation-duration: 0.5s" :src="this.projects_cats[0]['acf_bg']" v-show="parseInt(this.bg) === 0">
-</transition>
-<transition name="fade" v-if="showAnimMain">
-	<img class="sec-projects__bg" v-on:load="this.loadImg" style="animation-duration: 0.5s" :src="this.projects_cats[1]['acf_bg']" v-show="parseInt(this.bg) === 1">
-</transition>
-<transition name="fade" v-if="showAnimMain">
-	<img class="sec-projects__bg" v-on:load="this.loadImg" style="animation-duration: 0.5s" :src="this.projects_cats[2]['acf_bg']" v-show="parseInt(this.bg) === 2">
-</transition>
 
-<Header></Header>
+<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 0 )}" v-on:load="this.loadImg" :src="this.projects_cats[0]['acf_bg']">
+<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 1 )}" v-on:load="this.loadImg" :src="this.projects_cats[1]['acf_bg']">
+<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 2 )}" v-on:load="this.loadImg" :src="this.projects_cats[2]['acf_bg']">
+
 
 <transition name="fade">
 	<div class="sec-page__wrap sec-projects__wrap" v-if="showAnimMain">
@@ -95,7 +89,6 @@
 </template>
 
 <script>
-import Header from '../components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -110,6 +103,8 @@ export default {
 			projects_info: Object,
 			activeHover: false,
 			mounted: false,
+			showLines: false,
+			showBgMain: false,
 			images: {
 				count: 3,
 				loaded: 0,
@@ -117,7 +112,6 @@ export default {
 		}
 	},
 	components: {
-		Header
 	},
 	beforeMount() {
 		this.getProjects();
@@ -131,12 +125,13 @@ export default {
 		});
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 2000);
 		this.showAnim = false;
 		this.activeHover = false;
-		function n() {
-			next();
+		this.showLines = false;
+		if ( this.projects_info.bg ) {
+			this.$store.commit('setBgPage', {src: this.projects_info.bg, class: 'projects'});
 		}
-		setTimeout(n, 1000);
 	},
 	watch:{
 		'$route.params.search': {
@@ -178,12 +173,14 @@ export default {
 				this.projects_cats = response.data.cats;
 				this.projects_info = response.data.pageInfo;
 				this.showAnimMain = true;
+				this.showLines = true;
 				this.$store.commit('changeProjectBgMain', this.projects_info.bg);
 			});
 		},
 		showPage(){
 			// this.showAnim = true;
 			setTimeout(() => this.showAnim = true, 100);
+			setTimeout(() => this.showBgMain = true, 100);
 			setTimeout(() => this.activeHover = true, 1000);
 		},
 	},

@@ -1,13 +1,12 @@
 <template>
 <div class="wrapper">
-	<div class="sec-page sec-founder">
+	<div class="sec-page sec-founder" v-bind:class="[{showLines: showLines}]">
 		<div class="sec-founder__line sec-founder__line_1"></div>
 		<div class="sec-founder__line sec-founder__line_2"></div>
 		<div class="sec-founder__line sec-founder__line_3"></div>
 		<div class="sec-founder__line sec-founder__line_4"></div>
 		<div class="sec-founder__line sec-founder__line_5"></div>
 		<div class="sec-page__wrap sec-founder__wrap" v-if="showMain">
-			<Header></Header>
 			<div class="sec-founder__content">
 				<transition name="fadeLeft" v-show="showAnim">
 					<h1 class="title title_sec sec-founder__title">{{ pageInfo['title'] }}</h1>
@@ -78,11 +77,9 @@
 </template>
 <script>
 import axios from 'axios'
-import Header from '../components/header.vue'
 export default {
 	name: 'Founder page',
 	components: {
-		Header
 	},
 	data() {
 		return {
@@ -91,17 +88,23 @@ export default {
 			showMain: false,
 			showAnim: false,
 			animImg: false,
+			showLines: false,
 			languagesFounder: Object,
 		}
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 2000);
 		this.showAnim = false;
 		this.animImg = false;
+		this.showLines = false;
 		this.$store.commit('setFounderLanguages', false);
-		function n() {
-			next();
-		}
-		setTimeout(n, 1000);
+	},
+	beforeRouteUpdate(to, from, next) {
+		setTimeout(next, 2000);
+		this.showAnim = false;
+		this.animImg = false;
+		this.showLines = false;
+		this.$store.commit('setFounderLanguages', false);
 	},
 	beforeMount() {
 		this.getInfo();
@@ -122,6 +125,7 @@ export default {
 				}
 
 				this.showMain = true;
+				this.showLines = true;
 				this.languagesFounder = this.page.languages_post;
 				this.$store.commit('setFounderLanguages', this.languagesFounder);
 				setTimeout(() => this.showAnim = true, 100);

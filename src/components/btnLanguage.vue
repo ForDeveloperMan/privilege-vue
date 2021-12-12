@@ -1,6 +1,6 @@
 <template>
 
-<div v-if="!mobile" class="btn-language" :class="{fixed: classEl}" @mouseover="show = true" @mouseleave="show = false">
+<div class="btn-language" :class="{fixed: classEl}" @mouseover="show = true" @mouseleave="show = false">
 
 <transition name="fadeLeft" style="animation-duration: 0.3s">
   <div v-show="show" class="btn-language__content">
@@ -37,6 +37,23 @@ export default {
   },
   mounted() {
     this.getLanguages();
+  },
+  watch:{
+    $route() {
+      this.getLanguages();
+    },
+    '$store.state.aboutLanguages': function() {
+      this.getLanguages();
+    },
+    '$store.state.projectLanguages': function() {
+      this.getLanguages();
+    },
+    '$store.state.partnerLanguages': function() {
+      this.getLanguages();
+    },
+    '$store.state.founderLanguages': function() {
+      this.getLanguages();
+    },
   },
   methods: {
     hide() {

@@ -10,10 +10,140 @@ body{
 	font-weight: 400;
 	overflow: hidden;
 	max-width: 100vw;
-	background: #303030;
+	min-height: 100vh;
+	// background: #303030;
+	background: rgb(9, 20, 36);
+}
+
+.wrapper{
+	position: relative;
+	z-index: 10;
+}
+
+.bg-page{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	&__img{
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+	}
+	&::after{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+	}
+	&.about{
+		&::after{
+			background: rgba(9, 20, 36, 0.3);
+		}
+	}
+	&.projects{
+		&::after{
+			background: rgba(9, 20, 36, 0.4);
+		}
+	}
+	&.projectsReal{
+		.bg-page__img{
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			height: 130vh;
+			width: 120vw;
+			max-width: none;
+		}
+		&::after{
+			background: rgba(9, 20, 36, 0.4);
+		}
+	}
+	&.aboutPage{
+		background: #3A5899;
+		.bg-page__img{
+			display: none;
+		}
+		&::after{
+			display: none;
+		}
+	}
+	.sec-about__line_4{
+		top: 25vh;
+	}
+	.sec-about__line_2{
+	}
+	.sec-about__line_3{
+		width: 100vw;
+		left: 0;
+	}
+	.sec-about__line_6{
+		top: 50vh;
+	}
+	&.hideLines{
+		.sec-about__line{
+			display: none;
+		}
+	}
 }
 
 .sec-home{
+	// background: rgba(9, 20, 36, 0.6);
+	position: relative;
+	z-index: 10;
+	&:not(.showLines){
+		.sec-home__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
+	&-two{
+		@media screen and (min-width: 769px){
+			.sec-home__line{
+				&_2{
+					top: 75vh;
+				}
+				&_3{
+					bottom: 0;
+					height: 25vh;
+				}
+				&_4{
+					top: 25vh;
+					height: 25vh;
+				}
+				// &_5{
+				// 	top: 25vh;
+				// 	left: 50%;
+				// 	transform: translateX(-50%);
+				// 	width: 51vw;
+				// 	width: calc(51vw - 2px);
+				// 	height: 1px;
+				// }
+				// &_6{
+				// 	bottom: 25vh;
+				// 	left: 50%;
+				// 	transform: translateX(-50%);
+				// 	width: 51vw;
+				// 	width: calc(51vw - 2px);
+				// 	height: 1px;
+				// }
+			}
+			.sec-home__link{
+				&_4{
+					height: 25vh;
+				}
+			}
+		}
+	}
 	&.animFrom{
 		.sec-home__bg{
 			width: 0;
@@ -51,63 +181,65 @@ body{
 		background: rgba(255, 255, 255, 0.48);
 		pointer-events: none;
 		z-index: 1;
+		transition: 2s;
 		&_1{
 			height: 1px;
-			top: 50%;
-			margin-top: 0.5px;
 			width: 24.5vw;
 			left: 0;
+			bottom: 25vh;
 		}
 		&_2{
 			height: 1px;
-			top: 50%;
-			margin-top: -0.5px;
+			top: 25vh;
 			width: 24.5vw;
 			right: 0;
 		}
 		&_3{
-			height: 100vh;
+			height: 25vh;
 			width: 1px;
+			top: 0;
 			left: 24.5vw;
 		}
 		&_4{
-			height: 100vh;
+			height: 25vh;
 			width: 1px;
 			right: 24.5vw;
+			bottom: 0;
 		}
-		&_5{
-			top: 25vh;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 51vw;
-			width: calc(51vw - 2px);
-			height: 1px;
-		}
-		&_6{
-			bottom: 25vh;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 51vw;
-			width: calc(51vw - 2px);
-			height: 1px;
-		}
+		// &_5{
+		// 	top: 25vh;
+		// 	left: 50%;
+		// 	transform: translateX(-50%);
+		// 	width: 51vw;
+		// 	width: calc(51vw - 2px);
+		// 	height: 1px;
+		// }
+		// &_6{
+		// 	bottom: 25vh;
+		// 	left: 50%;
+		// 	transform: translateX(-50%);
+		// 	width: 51vw;
+		// 	width: calc(51vw - 2px);
+		// 	height: 1px;
+		// }
 	}
 	&__link{
 		cursor: pointer;
-		height: 50vh;
+		height: 25vh;
 		width: 24.5vw;
 		position: absolute;
 		transition: .2s;
 		display: flex;
 		font-family: 'Gilroy';
-		font-weight: bold;
+		font-weight: 400;
 		font-size: 18px;
 		color: #FFFFFF;
 		padding: 50px 43px;
 		z-index: 10;
-		align-items: flex-end;
+		align-items: center;
+		justify-content: center;
 		&_left{
-			justify-content: flex-end;
+			// justify-content: flex-end;
 		}
 		&:hover{
 			background: rgba(255, 255, 255, 0.26);
@@ -143,7 +275,7 @@ body{
 	}
 	&__text{
 		font-family: 'Raleway';
-		font-weight: bold;
+		font-weight: 400;
 		font-size: 24px;
 		text-transform: uppercase;
 		color: #FFFFFF;
@@ -194,14 +326,29 @@ body{
 .sec-projects{
 	// background: url('./assets/img/bg/projects.jpg') no-repeat top / cover;
 	position: relative;
+	&:not(.showLines){
+		.sec-projects__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__bg{
 		position: absolute;
-		top: 0;
-		left: 0;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
 		width: 100%;
 		object-fit: cover;
 		z-index: 1;
 		height: 100vh;
+		transition: width .4s, height .4s, opacity 0.4s;
+		opacity: 0;
+		max-width: none;
+		&.anim{
+			opacity: 1;
+			height: 130vh;
+			width: 120vw;
+		}
 	}
 	&::after{
 		content: '';
@@ -240,6 +387,7 @@ body{
 		pointer-events: none;
 		background: #FFFFFF;
 		display: block;
+		transition: 2s;
 		&_1{
 			height: 100vh;
 			width: 1px;
@@ -332,6 +480,12 @@ body{
 
 .sec-projects-cat{
 	position: relative;
+	&:not(.showLines){
+		.sec-projects-cat__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__line{
 		position: absolute;
 		z-index: 1;
@@ -339,6 +493,7 @@ body{
 		display: block;
 		z-index: 10;
 		pointer-events: none;
+		transition: 2s;
 		&_1{
 			height: 100vh;
 			width: 1px;
@@ -384,26 +539,34 @@ body{
 	}
 	&__bg{
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
 		object-fit: cover;
 		z-index: 1;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		height: 130vh;
+		width: 120vw;
+		max-width: none;
 	}
 	&__img{
 		position: absolute;
 		top: 0;
-		left: 0;
+		left: 50%;
+		transform: translateX(-50%);
 		width: 100%;
-		height: 110vh;
+		height: 100vh;
 		z-index: 5;
 		pointer-events: none;
-		&.fade-leave-active{
-			transition: 0 !important;
-		}
 		object-fit: cover;
 		object-position: top;
+		opacity: 0;
+		transition: width .4s, height .4s, opacity 0.4s;
+		max-width: none;
+		&.anim{
+			opacity: 1;
+			width: 110%;
+			height: 110vh;
+		}
 	}
 	&::after{
 		content: '';
@@ -464,12 +627,19 @@ body{
 
 .sec-project{
 	position: relative;
+	&:not(.showLines){
+		.sec-project__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__line{
 		position: absolute;
 		pointer-events: none;
 		z-index: 10;
 		background-color: #fff;
 		opacity: 0.4;
+		transition: 2s;
 		&_1{
 			left: 0;
 			width: 100vw;
@@ -590,6 +760,12 @@ body{
 
 .sec-partners{
 	position: relative;
+	&:not(.showLines){
+		.sec-partners__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__bg{
 		position: absolute;
 		top: 0;
@@ -615,6 +791,7 @@ body{
 		pointer-events: none;
 		background-color: #FFFFFF;
 		opacity: 0.4;
+		transition: 2s;
 		&_1{
 			top: 25vh;
 			width: 100vw;
@@ -691,6 +868,8 @@ body{
 		cursor: pointer;
 		&-img{
 			max-height: 100%;
+			width: 200px;
+			height: 200px;
 			object-fit: contain;
 		}
 		transition: .2s;
@@ -703,12 +882,22 @@ body{
 .sec-partner{
 	position: relative;
 	background: #3A5899;
+	&:not(.showLines){
+		.sec-partner__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
+	&__img-mob{
+		display: none;
+	}
 	&__line{
 		position: absolute;
 		z-index: 3;
 		pointer-events: none;
 		background-color: #FFFFFF;
 		opacity: 0.4;
+		transition: 2s;
 		&_1{
 			width: 100vw;
 			height: 1px;
@@ -876,12 +1065,19 @@ body{
 
 .sec-contacts{
 	background: #3A5899;
+	&:not(.showLines){
+		.sec-contacts__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__line{
 		position: absolute;
 		z-index: 1;
 		pointer-events: none;
 		background-color: #fff;
 		opacity: 0.6;
+		transition: 2s;
 		&_1{
 			left: 0;
 			height: 1px;
@@ -1076,6 +1272,27 @@ body{
 	}
 }
 
+.square-effect{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	pointer-events: none;
+	div{
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		transform-origin: 0 50%;
+		transform: scaleX(0);
+		background-color: #e8e8e8;
+	}
+}
+
 .sec-about{
 	position: relative;
 	&__bg{
@@ -1095,7 +1312,30 @@ body{
 		width: 100%;
 		height: 100%;
 		z-index: 2;
-		background: rgba(9, 20, 36, 0.8);
+		background: rgba(9, 20, 36, 0.3);
+	}
+	&:not(.showLines){
+		.sec-about__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
+	&.toTextPage{
+		@media screen and (min-width: 1201px){
+			.sec-about__line_4{
+				top: 25vh;
+			}
+			.sec-about__line_2{
+				
+			}
+			.sec-about__line_3{
+				width: 100vw;
+				left: 0;
+			}
+			.sec-about__line_6{
+				top: 50vh;
+			}
+		}
 	}
 	&__line{
 		position: absolute;
@@ -1103,6 +1343,7 @@ body{
 		pointer-events: none;
 		background-color: #fff;
 		opacity: 0.4;
+		transition: 2s;
 		&_1{
 			width: 24.4vw;
 			height: 1px;
@@ -1224,6 +1465,16 @@ body{
 	    align-items: flex-end;
 	    padding: 37px 39px;
 	    transition: .2s;
+	    overflow: hidden;
+	    
+    	&.animAbout-enter-to{
+	    	.square-effect{
+	    		div{
+					transform: scaleX(0.2);
+					left: 100%;
+	    		}
+	    	}
+    	}
 	    &:hover{
 	    	background: rgba(255, 255, 255, 0.26);
 	    }
@@ -1278,14 +1529,33 @@ $timing-fn: ease;
   from {transform: rotate3d(0,0,0, 0deg)}
   to   {transform: rotate3d(0,1,0, 140deg)}}
 
+.wrapper-about{
+	background: #3A5899;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	z-index: 10;
+	&.zInd{
+		position: relative;
+		z-index: 9999;
+	}
+}
+
 .sec-types{
 	background: #3A5899;
+	&:not(.showLines){
+		.sec-types__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__line{
 		position: absolute;
 		z-index: 3;
 		pointer-events: none;
 		background-color: #fff;
 		opacity: 0.3;
+		transition: 1.5s;
 		&_1{
 			top: 25vh;
 			left: 0;
@@ -1406,9 +1676,12 @@ $timing-fn: ease;
 			height: 100%;
 			background: #6D83B3;
 			z-index: 100;
-			padding: 39px;
+			padding: 3vh;
 			transform: rotate3d(1,0,0, 90.02deg);
-		    font-size: .87vw;
+	    	font-size: 16px;
+		    @media screen and (max-width: 1920px){
+		    	font-size: .8vw;
+		    }
 		    transition: .3s opacity;
 		    opacity: 0;
 		    &-close{
@@ -1419,9 +1692,11 @@ $timing-fn: ease;
 		    	cursor: pointer;
 		    }
 		}
-		&:hover{
-			.sec-types__elements-hover{
-				opacity: 1;
+		@media screen and (min-width: 1201px){
+			.sec-types__elements-el:hover{
+				.sec-types__elements-hover{
+					opacity: 1;
+				}
 			}
 		}
 		&-content{
@@ -1433,8 +1708,8 @@ $timing-fn: ease;
 		}
 		&-title{
 			font-family: 'Gilroy';
-			font-weight: bold;
-			font-size: 20px;
+			font-weight: 400;
+			font-size: 18px;
 			color: #FFFFFF;
 		}
 	}
@@ -1442,10 +1717,17 @@ $timing-fn: ease;
 
 .sec-founders{
 	background: #3A5899;
+	&:not(.showLines){
+		.sec-founders__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__line{
 		background-color: #fff;
 		opacity: 0.3;
 		position: absolute;
+		transition: 2s;
 		&_1{
 			top: calc(25vh - 1px);
 			left: 0;
@@ -1534,7 +1816,7 @@ $timing-fn: ease;
 		}
 		&-title{
 			font-family: 'Gilroy';
-			font-weight: bold;
+			font-weight: 400;
 			font-size: 20px;
 			color: #FFFFFF;
 			margin-bottom: 18px;
@@ -1547,10 +1829,17 @@ $timing-fn: ease;
 
 .sec-founder{
 	background: #3A5899;
+	&:not(.showLines){
+		.sec-founder__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
 	&__line{
 		background-color: #fff;
 		opacity: 0.3;
 		position: absolute;
+		transition: 2s;
 		&_1{
 			top: calc(25vh - 1px);
 			left: 0;
@@ -1679,10 +1968,20 @@ $timing-fn: ease;
 
 .sec-text{
 	background: #3A5899;
+	&:not(.showLines){
+		.sec-text__line{
+			width: 0vw !important;
+			height: 0vh !important;
+		}
+	}
+	.square-effect{
+		position: absolute;
+	}
 	&__line{
 		background-color: #fff;
 		opacity: 0.3;
 		position: absolute;
+		transition: 2s;
 		&_1{
 			top: calc(25vh - 1px);
 			left: 0;
@@ -1733,13 +2032,21 @@ $timing-fn: ease;
 	}
 	&__img{
 		position: absolute;
-		top: 25vh;
-		left: 50vw;
+		top: 0;
+		left: 0;
 		height: 50vh;
 		width: 0vw;
 		transition: 1s;
 		opacity: 0;
 		overflow: hidden;
+		&-wrap{
+			overflow: hidden;
+			position: absolute;
+			top: 25vh;
+			left: 50vw;
+			height: 50vh;
+			width: 25.6vw;
+		}
 		&-img{
 			width: 25.6vw;
 			height: 100%;
@@ -1759,7 +2066,7 @@ $timing-fn: ease;
 		height: 75vh;
 		font-family: 'Gilroy';
 		font-weight: 500;
-		font-size: 16px;
+		font-size: 14px;
 		color: #FFFFFF;
 		line-height: 1.5;
 		&-icon{
@@ -1795,7 +2102,7 @@ $timing-fn: ease;
 		h1, h2{
 			font-family: 'Raleway';
 			font-weight: 600;
-			font-size: 32px;
+			font-size: 28px;
 			color: #FFFFFF;
 			line-height: 1.2;
 		}

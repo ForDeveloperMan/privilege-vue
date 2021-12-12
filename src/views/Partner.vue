@@ -1,8 +1,7 @@
 <template>
 <div class="wrapper">
 
-<div class="sec-page sec-partner">
-	<Header></Header>
+<div class="sec-page sec-partner" v-bind:class="{showLines: showLines}">
 	<div class="sec-partner__line sec-partner__line_1"></div>
 	<div class="sec-partner__line sec-partner__line_2"></div>
 	<div class="sec-partner__line sec-partner__line_3"></div>
@@ -27,12 +26,14 @@
 		<transition name="fade" v-show="showAnim">
 			<div style="animation-delay: 1s" class="sec-partner__text text-info" v-html="partner.description"></div>
 		</transition>
+		<img :src="partner.gallery[0]" v-if="partner.gallery[0]" alt="" class="sec-partner__img-mob sec-partner__img-mob_1">
 		<transition name="fadeRight" v-show="showAnim">
 			<div style="animation-delay: 1.2s" class="sec-partner__info">
 				<div class="sec-partner__info-title" v-if="partner.opisanie_sprava.zagolovok">{{ partner.opisanie_sprava.zagolovok }}</div>
 				<p class="sec-partner__info-text">{{ partner.opisanie_sprava.tekst }}</p>
 			</div>
 		</transition>
+		<img :src="partner.gallery[1]" v-if="partner.gallery[1]" alt="" class="sec-partner__img-mob sec-partner__img-mob_1">
 		<transition name="fadeUp">
 			<div v-show="showAnim" style="animation-delay: 1.3s" class="sec-page__bottom">
 				<router-link :to="{name: 'partners-'+this.$route.meta.language}" class="iconLink sec-page__bottom-prev">
@@ -58,7 +59,6 @@
 </template>
 
 <script>
-import Header from '../components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -72,6 +72,7 @@ export default {
 			partner: Object,
 			languagesPartner: Object,
 			showAnimImg: false,
+			showLines: false,
 			images: {
 				count: Number,
 				loaded: 0,
@@ -79,7 +80,6 @@ export default {
 		}
 	},
 	components: {
-		Header
 	},
 	beforeMount() {
 		this.getInfo();
@@ -88,13 +88,18 @@ export default {
 		this.mounted = true;
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 1500);
 		this.showAnim = false;
+		this.showLines = false;
 		this.showAnimImg = false;
 		this.$store.commit('setPartnerLanguages', false);
-		function n() {
-			next();
-		}
-		setTimeout(n, 1000);
+	},
+	beforeRouteUpdate(to, from, next) {
+		setTimeout(next, 1000);
+		this.showAnim = false;
+		this.showLines = false;
+		this.showAnimImg = false;
+		this.$store.commit('setPartnerLanguages', false);
 	},
 	methods:{
 		loadImg(){
@@ -124,6 +129,7 @@ export default {
 				this.languagesPartner = response.data.partner.languages_post;
 				this.$store.commit('setPartnerLanguages', this.languagesPartner);
 				this.showAnimMain = true;
+				this.showLines = true;
 			});
 		},
 		showPage(){

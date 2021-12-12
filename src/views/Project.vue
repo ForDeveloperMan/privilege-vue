@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
 
-<div class="sec-page sec-project">
+<div class="sec-page sec-project" v-bind:class="{showLines: showLines}">
 
 <div class="sec-project__line sec-project__line_1"></div>
 <div class="sec-project__line sec-project__line_2"></div>
@@ -25,7 +25,6 @@
 
 <div class="sec-page__wrap sec-project__wrap">
 <div class="sec-page__content sec-project__content" v-if="showAnimMain">
-<Header></Header>
 
 <div class="sec-project__info">
 	<transition name="fade" style="animation-delay: 0s">
@@ -101,7 +100,6 @@
 </template>
 <script>
 import axios from 'axios'
-import Header from '../components/header.vue'
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox.css";
 
@@ -118,6 +116,7 @@ export default{
 			languagesProject: Object,
 			goFrom: false,
 			showArr: false,
+			showLines: false,
 			openFullContent: false,
 			images: {
 				count: 1,
@@ -126,30 +125,24 @@ export default{
 		};
 	},
 	components: {
-		Header,
 	},
 	mounted() {
 		this.getProject();
 	},
 	beforeRouteUpdate(to, from, next) {
+		setTimeout(next, 1500);
 		this.showAnim = false;
-		this.showAnimMain = false;
+		this.showLines = false;
 		this.$store.commit('setProjectLanguages', false);
-		// this.$store.commit('changePageProjectBg', false);
-		function n() {
-			next();
-		}
-		setTimeout(n, 1500);
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 1500);
 		this.showAnim = false;
-		this.showAnimMain = false;
+		this.showLines = false;
 		this.$store.commit('setProjectLanguages', false);
-		// this.$store.commit('changePageProjectBg', false);
-		function n() {
-			next();
+		if ( this.gallery ) {
+			this.$store.commit('setBgPage', {src: this.gallery[0].src, class: ''});
 		}
-		setTimeout(n, 1500);
 	},
 	methods: {
 		openContent() {
@@ -204,11 +197,14 @@ export default{
 					}
 					this.$store.commit('setProjectLanguages', this.languagesProject);
 					this.showAnimMain = true;
+					this.showLines = true;
 				}else{
 					this.$store.commit('changePageProjectBg', false);
 					this.showPage();
+					this.gallery = false;
 					this.$store.commit('setProjectLanguages', this.languagesProject);
 					this.showAnimMain = true;
+					this.showLines = true;
 				}
 			});
 		},

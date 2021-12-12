@@ -1,7 +1,9 @@
 <template>
-	<TypesOfActivities :routeLeave="this.routeLeave" v-if="component === 64" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></TypesOfActivities>
-	<Founders :routeLeave="this.routeLeave" v-if="component === 66" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></Founders>
-	<AboutText v-if="component === 68" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></AboutText>
+	<div class="wrapper-about" v-if="component === 64 || component === 66 ">
+		<TypesOfActivities :routeLeave="this.routeLeave" v-if="component === 64" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></TypesOfActivities>
+		<Founders :routeLeave="this.routeLeave" v-if="component === 66" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></Founders>
+	</div>
+	<AboutText :routeLeave="this.routeLeave" v-if="component === 68" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></AboutText>
 </template>
 
 <script>
@@ -35,14 +37,18 @@ export default {
 	mounted() {	
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 1500);
 		this.showAnim = false;
 		this.routeLeave = true;
-		console.log('leave');
 		this.$store.commit('setAboutLanguages', false);
-		function n() {
-			next();
-		}
-		setTimeout(n, 1000);
+		this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
+	},
+	beforeRouteUpdate(to, from, next) {
+		setTimeout(next, 1500);
+		this.showAnim = false;
+		this.routeLeave = true;
+		this.$store.commit('setAboutLanguages', false);
+		this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
 	},
 	methods: {
 		getInfo() {

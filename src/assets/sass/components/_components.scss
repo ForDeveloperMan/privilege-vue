@@ -63,7 +63,7 @@
 		}
 		&-title{
 			font-family: 'Gilroy';
-			font-weight: 600;
+			font-weight: 400;
 			font-size: 24px;
 			color: #3A3A3A;
 			display: inline-block;
@@ -86,7 +86,7 @@
 			}
 			a{
 				font-family: 'Gilroy';
-				font-weight: 500;
+				font-weight: 400;
 				font-size: 18px;
 				color: #3A3A3A;
 				display: inline-block;
@@ -174,7 +174,9 @@
 	&__icon{
 		cursor: pointer;
 		flex: none;
-		transition: 10s;
+		transition: 1s;
+		width: 27px;
+		height: 27px;
 	}
 	&__content{
 		display: flex;
@@ -249,19 +251,20 @@
 	font-weight: 600;
 	color: #FFFFFF;
 	&_sec{
-		font-size: 32px;
+		font-size: 28px;
 		line-height: 1.2;
+		font-weight: 400;
 	}
 	&_main{
 		font-weight: bold;
-		font-size: 56px;
+		font-size: 50px;
 	}
 }
 
 .text-info{
 	font-family: 'Gilroy';
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 14px;
 	color: #FFFFFF;
 	line-height: 1.5;
 }
@@ -272,7 +275,7 @@
 	}
 	&__text{
 		font-family: 'Gilroy';
-		font-weight: bold;
+		font-weight: 400;
 		font-size: 18px;
 		color: #FFFFFF;
 	}
@@ -385,7 +388,7 @@
 	}
 	&__title{
 		font-family: 'Gilroy';
-		font-weight: bold;
+		font-weight: 400;
 		font-size: 18px;
 		color: #FFFFFF;
 	}
@@ -746,7 +749,7 @@
 	}
 	&__text{
 		font-family: 'Gilroy';
-		font-weight: bold;
+		font-weight: 400;
 		font-size: 22px;
 		color: #FFFFFF;
 	}

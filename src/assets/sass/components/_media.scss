@@ -9,8 +9,8 @@
 		margin-top: 4vh;
 	}
 	.sec-project__text.open{
-		top: 0;
-		height: 100vh;
+		top: 142px;
+		height: calc(100vh-142px);
 		z-index: 100;
 		overflow-y: auto;
 	}
@@ -53,8 +53,8 @@
 }
 @media screen and (max-height: 760px) and (min-width: 1200px){
 	.sec-project__text{
-		top: 0;
-		height: 100vh;
+		top: 142px;
+		height: calc(100vh-142px);
 	}
 	.block-menu__dropdown{
 		height: 100vh;
@@ -89,43 +89,17 @@
 	}
 }
 
-@media screen and (max-width: 1600px){
-	.block-project-info__val-count{
-		font-size: 70px;
-	}
-	.sec-text__content{
-		z-index: 120;
-		left: 0;
-		width: 50vw;
-	    background: #3A5899;
-	}
-	.sec-founder__info{
-		width: 50vw;
-		background: #3A5899;
-		.sec-founder__info-bottom{
-			max-width: 100%;
-		}
+@media screen and (max-width: 1900px){
+
+	.sec-home__logo{
+		width: 400px;
 	}
 }
 
-@media screen and (max-width: 1400px){
-	.block-project-info__val-count{
-		font-size: 50px;
-	}
-	.sec-contacts__content, .sec-about__content, .sec-types__content, .sec-founders__content, .sec-founder__content{
-		padding: 40px 35px;
-	}
-	.sec-partner__text{
-		padding: 40px 35px;
-	}
-	.sec-projects-cat__info{
-		padding: 40px 35px;
-	}
-	.sec-founder__info{
-		width: 50vw;
-	    background: #3A5899;
-	}
+@media screen and (max-width: 1600px){
 	.sec-about__content{
+		padding: 30px 30px;
+	}.sec-about__content{
 		width: 40vw;
 	}
 	.sec-about__page_1{
@@ -185,6 +159,51 @@
 			width: 20vw;
 		}
 	}
+	.sec-about__line_2{
+		width: 0;
+	}
+	.about-el__text{
+		font-size: 18px;
+	}
+	.sec-about__content-text{
+		font-size: 14px;
+	}
+	.block-project-info__val-count{
+		font-size: 70px;
+	}
+	.sec-text__content{
+		z-index: 120;
+		left: 0;
+		width: 50vw;
+	    background: #3A5899;
+	}
+	.sec-founder__info{
+		width: 50vw;
+		background: #3A5899;
+		.sec-founder__info-bottom{
+			max-width: 100%;
+		}
+	}
+}
+
+@media screen and (max-width: 1400px){
+	.block-project-info__val-count{
+		font-size: 50px;
+	}
+	.sec-contacts__content, .sec-about__content, .sec-types__content, .sec-founders__content, .sec-founder__content{
+		padding: 40px 35px;
+	}
+	.sec-partner__text{
+		padding: 40px 35px;
+	}
+	.sec-projects-cat__info{
+		padding: 40px 35px;
+	}
+	.sec-founder__info{
+		width: 50vw;
+	    background: #3A5899;
+	}
+	
 
 	.block-menu__dropdown-block{
 		margin-left: 0;
@@ -338,7 +357,7 @@
 			left: 0;
 		}
 	}
-	.wrapper{
+	body{
 		height: 100vh;
 		overflow-y: auto;
 	}
@@ -363,7 +382,6 @@
 		border-bottom: 1px solid rgba(255, 255, 255, 0.48);
 	}
 	.sec-projects{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
@@ -426,7 +444,6 @@
 	}
 
 	.sec-projects-cat{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		height: auto;
@@ -510,7 +527,6 @@
 	}
 
 	.sec-project{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
@@ -665,7 +681,6 @@
 	}
 
 	.sec-partners{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
@@ -741,15 +756,15 @@
 	}
 
 	.sec-partner{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
-		height: 100vh;
+		height: auto;
 		&__wrap{
-			height: 1349px;
+			height: auto;
 			min-height: 100vh;
 			padding-bottom: 162px;
+			padding-top: 83px;
 		}
 		&__line{
 			display: none;
@@ -773,50 +788,21 @@
 				left: 0;
 				height: 1px;
 				top: 797px;
+				display: none;
 			}
 		}
 		&__img{
 			display: none;
-			&-img{
-				object-position: center left;
-			}
-			&_1{
+			&-mob{
 				display: block;
-				height: 166px;
-				left: 0;
-				top: 798px;
-				object-position: top;
-				width: 50%;
-				.sec-partner__img-img{
-					width: 50vw;
-					height: 166px;
-				}
-				&.anim{
-					width: 50%;
-				}
-			}
-			&_2{
-				display: block;
-				width: 50%;
-				height: 224px;
-				left: auto;
-				top: 962px;
-				height: 224px;
-				right: 0;
-				.sec-partner__img-img{
-					width: 50vw;
-					height: 224px;
-				}
-				&.anim{
-					right: 0;
-				}
 			}
 		}
 		&__content{
+			position: static;
 			top: 84px;
 			left: 0;
 			width: 100vw;
-			height: 714px;
+			height: auto;
 			&-body{
 				padding: 40px 16px;
 				justify-content: flex-start;
@@ -826,6 +812,7 @@
 			margin-bottom: 81px;
 		}
 		&__text{
+			position: static;
 			left: 0;
 			width: 100vw;
 			font-size: 16px !important;
@@ -833,12 +820,15 @@
 			padding-right: 20px;
 			top: 335px;
 			line-height: 1.5 !important;
-			height: 462px;
+			height: auto;
+			border-bottom: 1px solid #fff;
+			padding-bottom: 20px;
 		}
 		&__info{
-			height: 224px;
+			position: static;
+			height: auto;
 			left: 0;
-			width: 50%;
+			width: 100%;
 			padding: 28px 14px;
 			top: 964px;
 		}
@@ -862,16 +852,18 @@
 			}
 		}
 	}
+	.sec-partner__content-body{
+		height: auto;
+	}
 	.block-menu__dropdown{
 		width: 100vw;
 	}
 
 	.sec-contacts{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
-		height: 100vh;
+		height: auto;
 		&.openForm{
 			.sec-contacts__content, .sec-contacts__map, .sec-contacts__socials, .sec-contacts__locate, .sec-contacts__btn, .sec-contacts__info{
 				display: none !important;
@@ -1062,7 +1054,6 @@
 	}
 
 	.sec-about{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
@@ -1166,7 +1157,6 @@
 	}
 
 	.sec-types{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
@@ -1244,7 +1234,7 @@
 			top: 0;
 			left: 0;
 			width: 100vw;
-			height: 100vh;
+			height: calc(100vh-0px);
 			font-size: 18px;
 			opacity: 0;
 			display: block;
@@ -1277,11 +1267,10 @@
 	}
 
 	.sec-founders{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
-		height: 100vh;
+		height: auto;
 		&__wrap{
 			min-height: 100vh;
 			height: auto;
@@ -1356,12 +1345,12 @@
 	}
 
 	.sec-founder{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
-		height: 100vh;
+		height: auto;
 		&__wrap{
+			position: relative;
 			min-height: 100vh;
 			height: auto;
 			padding-bottom: 162px;
@@ -1429,11 +1418,10 @@
 	}
 
 	.sec-text{
-		overflow-y: auto;
 		overflow-x: hidden;
 		width: 100vw;
 		min-height: 100vh;
-		height: 100vh;
+		height: auto;
 		&__wrap{
 			min-height: 100vh;
 			height: auto;
@@ -1498,10 +1486,14 @@
 	}
 	.sec-text__img{
 		position: absolute;
-		top: 84px;
-		left: 0;
 		height: 400px;
 		display: block;
+		&-wrap{
+			top: 84px;
+			left: 0;
+			width: 50vw;
+			height: 400px;
+		}
 		.sec-text__img-img{
 			width: 50vw;
 		}
@@ -1566,11 +1558,15 @@
 			height: 100vh;
 		}
 	}
-
+	.sec-types__elements:hover .sec-types__elements-hover{
+	}
 }
 // to 1200
 
 @media screen and (max-width: 768px){
+	.sec-project{
+		background-color: transparent;
+	}
 	.sec-home__link{
 		width: 50vw;
 		height: 25vh;
@@ -1664,10 +1660,18 @@
 }
 
 @media screen and (max-width: 600px){
+	.sec-projects-cat__bg{
+		height: 100%;
+	}
 	.sec-text__content{
 		width: 100vw;
 	}
 	.sec-text__img{
+		&-wrap{
+			top: 0;
+			position: relative;
+			width: 100vw;
+		}
 		position: relative;
 		top: 0;
 		&-img{

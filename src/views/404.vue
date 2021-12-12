@@ -4,7 +4,6 @@
 			<div class="sec-404__line sec-404__line_1"></div>
 			<div class="sec-404__line sec-404__line_2"></div>
 			<div class="sec-page__wrap sec-404__wrap" v-if="showMain">
-				<Header></Header>
 				<div class="sec-404__content">
 					<h1 class="title title_main sec-404__title">404</h1>
 					<p class="text-info sec-404__text">{{ pageInfo.title }}</p>
@@ -15,7 +14,6 @@
 	</div>
 </template>
 <script>
-import Header from '@/components/header.vue'
 import axios from 'axios'
 export default {
 	name: 'NotFound',
@@ -27,7 +25,6 @@ export default {
 		}
 	},
 	components: {
-		Header
 	},
 	beforeRouteLeave(to, from, next) {
 		this.showAnim = false;

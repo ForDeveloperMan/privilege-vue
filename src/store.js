@@ -12,9 +12,22 @@ export default {
 			partnersBg: false,
 			aboutLanguages: false,
 			founderLanguages: false,
+			toAboutTextPage: false,
+			bgPage: {
+				src: false,
+				class: false,
+			},
+			header: {
+				header: false,
+				menu: false,
+			},
 		}
 	},
 	mutations: {
+		setBgPage(state, val_language) {
+			state.bgPage.src = val_language.src;
+			state.bgPage.class = val_language.class;
+		},
 		changeLanguage(state, val_language) {
 			state.language = val_language;
 		},
@@ -44,6 +57,15 @@ export default {
 		},
 		setFounderLanguages(state, val) {
 			state.founderLanguages = val;
+		},
+		setHeader(state, val) {
+			state.header.header = val;
+		},
+		setHeaderMenu(state, val) {
+			state.header.menu = val;
+		},
+		setToAboutTextPage(state, val) {
+			state.toAboutTextPage = val;
 		},
 	},
 	getters:{

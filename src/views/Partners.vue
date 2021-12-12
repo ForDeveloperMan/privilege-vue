@@ -1,17 +1,16 @@
 <template>
 <div class="wrapper">
 
-<div class="sec-page sec-partners">
+<div class="sec-page sec-partners" v-bind:class="{showLines: showLines}">
 	<div class="sec-partners__line sec-partners__line_1"></div>
 	<div class="sec-partners__line sec-partners__line_2"></div>
 	<div class="sec-partners__line sec-partners__line_3"></div>
 	<div class="sec-partners__line sec-partners__line_4"></div>
 	<div class="sec-partners__line sec-partners__line_5"></div>
 	<div class="sec-partners__line sec-partners__line_6"></div>
-	<Header></Header>
 
 	<transition name="fade">
-		<img v-if="!this.$store.state.partnersBg" v-show="showAnim" v-on:load="this.loadImg" class="sec-partners__bg" :src="this.pageInfo.bg">
+		<img v-if="!this.$store.state.partnersBg" v-show="showAnimBg" v-on:load="this.loadImg" class="sec-partners__bg" :src="this.pageInfo.bg">
 	</transition>
 	<transition name="fade">
 		<img v-if="this.$store.state.partnersBg" v-show="mounted" :src="this.$store.state.partnersBg" alt="" class="sec-partners__bg">
@@ -60,7 +59,6 @@
 </template>
 
 <script>
-import Header from '../components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -68,10 +66,12 @@ export default {
 	data() {
 		return {
 			showAnim: false,
+			showAnimBg: false,
 			showAnimMain: false,
 			pageInfo: Object,
 			partners: Object,
 			mounted: false,
+			showLines: false,
 			images: {
 				count: 1,
 				loaded: 0,
@@ -79,22 +79,18 @@ export default {
 		}
 	},
 	components: {
-		Header
 	},
 	mounted() {
 		this.mounted = true;
 		this.getInfo();
 	},
 	beforeRouteLeave(to, from, next) {
+		setTimeout(next, 1500);
 		this.showAnim = false;
+		this.showLines = false;
 		this.$store.commit('setPartnersBg', this.pageInfo.bg);
-		setTimeout(next, 1000);
-	},
-	watch:{
-		'$route.params.search': {
-			deep: true,
-		},
-		$route() {
+		if ( this.pageInfo.bg ) {
+			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'projects'});
 		}
 	},
 	methods:{
@@ -113,6 +109,7 @@ export default {
 				this.pageInfo = response.data.pageInfo;
 				this.partners = response.data.partners;
 				this.showAnimMain = true;
+				this.showLines = true;
 				if ( this.$store.state.partnersBg ) {
 					this.loadImg();
 				}
@@ -121,6 +118,7 @@ export default {
 		showPage(){
 			// this.showAnim = true;
 			setTimeout(() => this.showAnim = true, 100);
+			setTimeout(() => this.showAnimBg = true, 100);
 		},
 	},
 }

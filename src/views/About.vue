@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
 
-<div class="sec-page sec-about" v-bind:class="{noscroll: readMoreMob}">
+<div class="sec-page sec-about" v-bind:class="[{noscroll: readMoreMob}, {showLines: showLines}, {toTextPage: toTextPage}]">
 	<div class="sec-about__line sec-about__line_1"></div>
 	<div class="sec-about__line sec-about__line_2"></div>
 	<div class="sec-about__line sec-about__line_3"></div>
@@ -11,11 +11,10 @@
 	<div class="sec-about__line sec-about__line_7"></div>
 	<div class="sec-about__line sec-about__line_8"></div>
 	<div class="sec-about__line sec-about__line_9"></div>
-	<transition name="fade" v-show="showAnim">
+	<transition name="fade" v-show="showBg">
 		<img :src="pageInfo.bg" v-on:load="this.loadImg" alt="about" class="sec-about__bg">
 	</transition>
 	<div class="sec-page__wrap sec-about__wrap" v-if="showAnimMain">
-		<Header></Header>
 		<div class="sec-about__content" v-bind:class="{readMore: readMoreMob}">
 			<svg class="sec-about__content-close" v-if="readMoreMob" @click="readMoreMob = !readMoreMob" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#222222"/></svg>
 			<transition name="fadeLeft" v-show="showAnim">
@@ -30,9 +29,16 @@
 		</div>
 		<div class="sec-about__pages">
 			<template v-for="(page, index) in pages" v-bind:key="index">
-				<transition :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="fadeRight" v-show="showAnim">
-					<router-link :to="{name: 'About_page-'+this.$route.meta.language, params: {page: page.post_name}}" :class="'sec-about__page '+'sec-about__page_'+(index+1)"><div class="about-el"><img :src="page.acf_icon" :alt="page.post_title" class="about-el__icon"><p class="about-el__text">{{ page.post_title }}</p></div></router-link>
-				</transition>
+				<router-link :to="{name: 'About_page-'+this.$route.meta.language, params: {page: page.post_name}}" :class="'sec-about__page '+'sec-about__page_'+(index+1)">
+						<div class="square-effect">
+						<transition style="animation-duration: 1s" :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="squareEffect" v-show="showAnim">
+							<div></div>
+						</transition>
+						</div>
+					<transition style="animation-duration: 1s" :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="animAbout" v-show="showAnim">
+						<div class="about-el"><img :src="page.acf_icon" :alt="page.post_title" class="about-el__icon"><p class="about-el__text">{{ page.post_title }}</p></div>
+					</transition>
+				</router-link>
 			</template>
 		</div>
 		<transition name="fadeUp">
@@ -60,7 +66,6 @@
 </template>
 
 <script>
-import Header from '../components/header.vue'
 import axios from 'axios'
 
 export default {
@@ -71,7 +76,10 @@ export default {
 			pages: Object,
 			showAnimMain: false,
 			showAnim: false,
+			showBg: false,
 			readMoreMob: false,
+			showLines: false,
+			toTextPage: false,
 			images: {
 				count: 1,
 				loaded: 0,
@@ -79,7 +87,6 @@ export default {
 		}
 	},
 	components: {
-		Header
 	},
 	watch: {
 		readMoreMob(e) {
@@ -89,13 +96,36 @@ export default {
 		}
 	},
 	beforeRouteLeave(to, from, next) {
-		this.showAnim = false;
-		setTimeout(next, 1000);
+		if ( this.pageInfo.bg ) {
+			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'about'});
+		}
+		if ( ( to.params.page === "missiya-ta-principi" || to.params.page === "missiya-i-principy" || to.params.page === "mission-and-principles" || to.params.page === "missioon-ja-pohimotted" ) && window.screen.width >= 1201 ) {
+			console.log(window.screen.width);
+			console.log(window.screen.width >= 1201);
+			this.showAnim = false;
+			this.toTextPage = true;
+			this.$store.commit('setToAboutTextPage', true);
+			function set() {
+				let lines = document.getElementsByClassName('sec-about__line');
+				let wrapBg = document.querySelector('.bg-page');
+				for(var i=0; i<lines.length; i++){
+					wrapBg.appendChild(lines[i]);
+				}
+			}
+			setTimeout(set, 2000);
+			setTimeout(next, 2000);
+		}else{
+			this.showAnim = false;
+			this.showLines = false;
+			setTimeout(next, 2000);
+		}
 	},
 	created() {
 		this.getInfo();
 	},
 	mounted() {
+		this.$nextTick(() => {
+		});
 	},
 	methods: {
 		loadImg(){
@@ -106,6 +136,7 @@ export default {
 		},
 		showPage(){
 			setTimeout(() => this.showAnim = true, 100);
+			setTimeout(() => this.showBg = true, 100);
 		},
 		getInfo() {
 			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/about', {
@@ -115,6 +146,7 @@ export default {
 			}).then(response => {
 				this.pageInfo = response.data.pageInfo;
 				this.pages = response.data.pages;
+				this.showLines = true;
 				this.showAnimMain = true;
 			});
 		},
