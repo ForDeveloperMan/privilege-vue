@@ -83,6 +83,7 @@ export default {
         }
       }).then(response => {
         this.info = response.data;
+        console.log(this.info);
         this.showMain = true;
       });
     },

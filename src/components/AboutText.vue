@@ -88,15 +88,16 @@ export default {
 			deep: true,
 			handler(val) {
 				console.log('watch text уход: '+val);
-				if (val) {
-						let wrapBg = document.querySelector('.bg-page');
-						wrapBg.classList.add('hideLines');
-						let lines = wrapBg.getElementsByClassName('sec-about__line');
-						if ( lines.length ) {
-							for(var i=0; i<lines.length; i++){
-								lines[i].remove();
-							}
+				let wrapBg = document.querySelector('.bg-page');
+				if ( wrapBg ) {
+					let lines = wrapBg.querySelectorAll('.sec-about__line');
+					if ( lines.length ) {
+						for(var i=0; i<lines.length; i++){
+							lines[i].remove();
 						}
+					}
+				}
+				if (val) {
 					this.showLines = false;
 					this.showAnimHere = false;
 					this.animImg = false;

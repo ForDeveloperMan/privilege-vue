@@ -44,7 +44,7 @@ export default {
 		this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
 	},
 	beforeRouteUpdate(to, from, next) {
-		setTimeout(next, 1500);
+		setTimeout(next, 1500); 
 		this.showAnim = false;
 		this.routeLeave = true;
 		this.$store.commit('setAboutLanguages', false);
