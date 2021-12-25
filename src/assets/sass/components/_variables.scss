@@ -2941,6 +2941,7 @@
 .squareEffect-enter-active {
     animation-name: squareEffect-enter-active;
     animation-fill-mode: both;
+    animation-duration: 1s;
 }
 
 @keyframes squareEffect-leave-active{
@@ -2958,4 +2959,52 @@
 .squareEffect-leave-active {
     animation-name: squareEffect-leave-active;
     animation-fill-mode: both;
+}
+
+@keyframes pageFrom-enter-active{
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
+
+.pageFrom-enter-active {
+    animation-name: pageFrom-enter-active;
+    animation-fill-mode: both;
+}
+
+@keyframes bgLeftAnim-enter-active{
+    from {
+        opacity: 0;
+        transform: translate3d(-1000px,0,0);
+    }
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+.bgLeftAnim-enter-active {
+    animation-name: bgLeftAnim-enter-active;
+    animation-fill-mode: both;
+    animation-duration: 1s;
+}
+
+@keyframes bgLeftAnim-leave-active{
+    from {
+        opacity: 1;
+        transform: none
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(-1000px,0,0)
+    }
+}
+
+.bgLeftAnim-leave-active {
+    animation-name: bgLeftAnim-leave-active;
+    animation-fill-mode: both;
+    animation-duration: 1s;
 }

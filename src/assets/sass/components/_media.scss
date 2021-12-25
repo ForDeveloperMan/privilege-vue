@@ -154,9 +154,12 @@
 	.sec-about__bottom{
 		width: 20vw;
 	}
-	.sec-about{
+	.about-page{
 		.block-header__right{
 			width: 20vw;
+		}
+		.block-menu__dropdown-content{
+			padding-right: 20px;
 		}
 	}
 	.sec-about__line_2{
@@ -171,12 +174,12 @@
 	.block-project-info__val-count{
 		font-size: 70px;
 	}
-	.sec-text__content{
-		z-index: 120;
-		left: 0;
-		width: 50vw;
-	    background: #3A5899;
-	}
+	// .sec-text__content{
+	// 	z-index: 120;
+	// 	left: 0;
+	// 	width: 50vw;
+	//     background: #3A5899;
+	// }
 	.sec-founder__info{
 		width: 50vw;
 		background: #3A5899;
@@ -187,6 +190,10 @@
 }
 
 @media screen and (max-width: 1400px){
+	.sec-text__content-body{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 	.block-project-info__val-count{
 		font-size: 50px;
 	}
@@ -211,6 +218,13 @@
 
 	.sec-projects__text{
 		padding: 40px 35px;
+	}
+}
+
+@media screen and (max-width: 1300px){
+	.sec-page__bottom{
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 }
 
@@ -243,6 +257,24 @@
 	// 		transform: translateY(-50%);
 	// 	}
 	// }
+	.sec-about__bg.block-anim-bg{
+		display: none;
+	}
+	.sec-about__bg{
+		visibility: visible !important;
+	}
+	.sec-about{
+		&::after{
+		    content: '';
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: rgba(9, 20, 36, 0.3);
+		    z-index: 3;
+		}
+	}
 	.sec-home__link{
 		padding: 30px 20px;
 	}

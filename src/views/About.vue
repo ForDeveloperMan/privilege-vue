@@ -11,9 +11,18 @@
 	<div class="sec-about__line sec-about__line_7"></div>
 	<div class="sec-about__line sec-about__line_8"></div>
 	<div class="sec-about__line sec-about__line_9"></div>
-	<transition name="fade" v-show="showBg">
-		<img :src="pageInfo.bg" v-on:load="this.loadImg" alt="about" class="sec-about__bg">
-	</transition>
+	<img :src="pageInfo.bg" v-on:load="this.loadImg" alt="about" class="sec-about__bg" style="visibility: hidden;">
+	<!-- <div class="sec-about__bg block-anim-bg" v-bind:class="{anim: showAnim}"> -->
+	<div class="sec-about__bg block-anim-bg">
+		<div class="block-anim-bg__el" v-for="ind in 16" v-bind:key="ind">
+			<transition name="squareEffect" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.05  ) +'s'">
+				<div class="block-anim-bg__dec"></div>
+			</transition>
+			<transition name="bgLeftAnim" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.06  ) +'s'">
+				<div :style="'background-image: url('+pageInfo.bg+');'" class="block-anim-bg__el-bg"></div>
+			</transition>
+		</div>
+	</div>
 	<div class="sec-page__wrap sec-about__wrap" v-if="showAnimMain">
 		<div class="sec-about__content" v-bind:class="{readMore: readMoreMob}">
 			<svg class="sec-about__content-close" v-if="readMoreMob" @click="readMoreMob = !readMoreMob" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#222222"/></svg>
@@ -30,11 +39,14 @@
 		<div class="sec-about__pages">
 			<template v-for="(page, index) in pages" v-bind:key="index">
 				<router-link :to="{name: 'About_page-'+this.$route.meta.language, params: {page: page.post_name}}" :class="'sec-about__page '+'sec-about__page_'+(index+1)">
-						<div class="square-effect">
+					<!-- <transition style="animation-duration: 1s" name="pageFrom" :style="'animation-delay:'+ ( 0.7 + index * 0.1 + 0.1 ) +'s'" v-show="showFrom">
+						<div class="sec-about__page-from"></div>
+					</transition> -->
+						<!-- <div class="square-effect">
 						<transition style="animation-duration: 1s" :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="squareEffect" v-show="showAnim">
 							<div></div>
 						</transition>
-						</div>
+						</div> -->
 					<transition style="animation-duration: 1s" :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="animAbout" v-show="showAnim">
 						<div class="about-el"><img :src="page.acf_icon" :alt="page.post_title" class="about-el__icon"><p class="about-el__text">{{ page.post_title }}</p></div>
 					</transition>
@@ -80,6 +92,8 @@ export default {
 			readMoreMob: false,
 			showLines: false,
 			toTextPage: false,
+			showFrom: false,
+			sizeWindow: 0,
 			images: {
 				count: 1,
 				loaded: 0,
@@ -97,17 +111,19 @@ export default {
 	},
 	beforeRouteLeave(to, from, next) {
 		if ( this.pageInfo.bg ) {
-			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'about'});
+			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
 		}
 		if ( ( to.params.page === "missiya-ta-principi" || to.params.page === "missiya-i-principy" || to.params.page === "mission-and-principles" || to.params.page === "missioon-ja-pohimotted" ) && window.screen.width >= 1201 ) {
-			console.log(window.screen.width);
-			console.log(window.screen.width >= 1201);
 			this.showAnim = false;
 			this.toTextPage = true;
+			this.showFrom = true;
 			this.$store.commit('setToAboutTextPage', true);
+			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
+
 			function set() {
 				let lines = document.getElementsByClassName('sec-about__line');
 				let wrapBg = document.querySelector('.bg-page');
+				// wrapBg.appendChild( document.querySelector('.sec-about__pages') );
 				for(var i=0; i<lines.length; i++){
 					wrapBg.appendChild(lines[i]);
 				}
@@ -122,9 +138,11 @@ export default {
 	},
 	created() {
 		this.getInfo();
+		this.sizeWindow = window.clientWidth +' ' +window.clientHtight;
 	},
 	mounted() {
 		this.$nextTick(() => {
+			document.getElementsByTagName('body')[0].classList.add('about-page');
 		});
 	},
 	methods: {
