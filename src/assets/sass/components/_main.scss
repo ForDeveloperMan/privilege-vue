@@ -1785,6 +1785,9 @@ $timing-fn: ease;
 		}
 		&-icon{
 			margin-bottom: 27px;
+			width: 56px;
+			height: 56px;
+			object-fit: contain;
 		}
 		&-title{
 			font-family: 'Gilroy';

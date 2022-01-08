@@ -810,6 +810,9 @@
 .about-el{
 	&__icon{
 		margin-bottom: 27px;
+		width: 70px;
+		height: 70px;
+		object-fit: contain;
 	}
 	&__text{
 		font-family: 'Gilroy';
