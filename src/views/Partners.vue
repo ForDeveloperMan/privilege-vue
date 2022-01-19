@@ -8,13 +8,19 @@
 	<div class="sec-partners__line sec-partners__line_4"></div>
 	<div class="sec-partners__line sec-partners__line_5"></div>
 	<div class="sec-partners__line sec-partners__line_6"></div>
-
-	<transition name="fade">
-		<img v-if="!this.$store.state.partnersBg" v-show="showAnimBg" v-on:load="this.loadImg" class="sec-partners__bg" :src="this.pageInfo.bg">
+	<transition name="fade" v-if="this.pageInfo.bg">
+		<img v-if="this.pageInfo.bg" :src="this.pageInfo.bg" v-on:load="this.loadImg" class="sec-partners__bg" style="visibility: hidden;">
 	</transition>
-	<transition name="fade">
-		<img v-if="this.$store.state.partnersBg" v-show="mounted" :src="this.$store.state.partnersBg" alt="" class="sec-partners__bg">
-	</transition>
+	<div class="sec-page__bg sec-partners__bg block-anim-bg">
+		<div class="block-anim-bg__el" v-for="ind in 16" v-bind:key="ind">
+			<transition name="squareEffect" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.05  ) +'s'">
+				<div class="block-anim-bg__dec"></div>
+			</transition>
+			<transition name="bgLeftAnim" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.06  ) +'s'">
+				<div :style="'background-image: url('+this.pageInfo.bg+');'" class="block-anim-bg__el-bg"></div>
+			</transition>
+		</div>
+	</div>
 
 	<div class="sec-page__wrap sec-partners__wrap" v-if="showAnimMain">
 		<div class="sec-partners__content">
@@ -90,7 +96,7 @@ export default {
 		this.showLines = false;
 		this.$store.commit('setPartnersBg', this.pageInfo.bg);
 		if ( this.pageInfo.bg ) {
-			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'projects'});
+			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
 		}
 	},
 	methods:{

@@ -5,13 +5,19 @@
 
 <div class="sec-projects sec-page" v-bind:class="{showLines: showLines}">
 
-
-<transition name="fade">
-	<img v-if="!this.$store.state.project_bg_main" v-show="showBgMain" v-on:load="this.loadImg" class="sec-projects__content-bg" :src="this.projects_info.bg">
+<transition name="fade" v-if="this.projects_info.bg">
+	<img :src="this.projects_info.bg" v-on:load="this.loadImg" class="sec-projects__content-bg" style="visibility: hidden;">
 </transition>
-<transition name="fade">
-	<img v-if="this.$store.state.project_bg_main" v-show="mounted" :src="this.$store.state.project_bg_main" alt="" class="sec-projects__content-bg">
-</transition>
+<div class="sec-page__bg sec-projects__content-bg block-anim-bg">
+	<div class="block-anim-bg__el" v-for="ind in 16" v-bind:key="ind">
+		<transition name="squareEffect" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.05  ) +'s'">
+			<div class="block-anim-bg__dec"></div>
+		</transition>
+		<transition name="bgLeftAnim" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.06  ) +'s'">
+			<div :style="'background-image: url('+this.projects_info.bg+');'" class="block-anim-bg__el-bg"></div>
+		</transition>
+	</div>
+</div>
 
 <div class="sec-projects__line sec-projects__line_1"></div>
 <div class="sec-projects__line sec-projects__line_2"></div>
@@ -23,9 +29,16 @@
 <div class="sec-projects__line sec-projects__line_8"></div>
 
 
-<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 0 )}" v-on:load="this.loadImg" :src="this.projects_cats[0]['acf_bg']">
-<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 1 )}" v-on:load="this.loadImg" :src="this.projects_cats[1]['acf_bg']">
-<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 2 )}" v-on:load="this.loadImg" :src="this.projects_cats[2]['acf_bg']">
+<div class="sec-projects__bg-wrap" v-bind:class="{ anim : (parseInt(this.bg) === 0 )}">
+	<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 0 )}" v-on:load="this.loadImg" :src="this.projects_cats[0]['acf_bg']">
+</div>
+<div class="sec-projects__bg-wrap" v-bind:class="{ anim : (parseInt(this.bg) === 1 )}">
+	<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 1 )}" v-on:load="this.loadImg" :src="this.projects_cats[1]['acf_bg']">
+</div>
+<div class="sec-projects__bg-wrap" v-bind:class="{ anim : (parseInt(this.bg) === 2 )}">
+	<img v-if="showAnimMain" class="sec-projects__bg" v-bind:class="{ anim : (parseInt(this.bg) === 2 )}" v-on:load="this.loadImg" :src="this.projects_cats[2]['acf_bg']">
+</div>
+
 
 
 <transition name="fade">
@@ -130,7 +143,7 @@ export default {
 		this.activeHover = false;
 		this.showLines = false;
 		if ( this.projects_info.bg ) {
-			this.$store.commit('setBgPage', {src: this.projects_info.bg, class: 'projects'});
+			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
 		}
 	},
 	watch:{

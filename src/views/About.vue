@@ -11,7 +11,9 @@
 	<div class="sec-about__line sec-about__line_7"></div>
 	<div class="sec-about__line sec-about__line_8"></div>
 	<div class="sec-about__line sec-about__line_9"></div>
-	<img :src="pageInfo.bg" v-on:load="this.loadImg" alt="about" class="sec-about__bg" style="visibility: hidden;">
+	<transition name="fade" v-if="this.pageInfo.bg">
+		<img :src="pageInfo.bg" v-on:load="this.loadImg" alt="about" class="sec-about__bg" style="visibility: hidden;">
+	</transition>
 	<!-- <div class="sec-about__bg block-anim-bg" v-bind:class="{anim: showAnim}"> -->
 	<div class="sec-about__bg block-anim-bg">
 		<div class="block-anim-bg__el" v-for="ind in 16" v-bind:key="ind">
