@@ -2959,6 +2959,8 @@
 .squareEffect-leave-active {
     animation-name: squareEffect-leave-active;
     animation-fill-mode: both;
+    animation-duration: 1s;
+    // z-index: 10;
 }
 
 @keyframes pageFrom-enter-active{

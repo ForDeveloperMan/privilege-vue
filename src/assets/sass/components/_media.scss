@@ -260,6 +260,13 @@
 			pointer-events: none;
 		}
 	}
+
+	.sec-about-page-bg{
+		display: none;
+	}
+	.sec-text, .wrapper-about, .sec-founders, .sec-types{
+		background: #3A5899;
+	}
 }
 
 @media screen and (max-width: 1200px){

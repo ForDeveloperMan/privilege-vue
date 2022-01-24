@@ -3,7 +3,7 @@
 <header class="block-header" v-if="showMain">
 	<div class="block-header__wrap">
 		<div class="block-header__content">
-			<router-link :to="this.$route.meta.linkHome" class="block-header__left">
+			<router-link :to="this.$route.meta.linkHome" class="block-header__left" v-if="this.info.logo">
 				<img :src="this.info.logo" alt="logo" class="block-header__logo">
 			</router-link>
 			<div class="block-header__right wrap-menu" v-click-away="hideMenu" v-bind:class="[{active: isActive},{showElms: isShowElms}]">

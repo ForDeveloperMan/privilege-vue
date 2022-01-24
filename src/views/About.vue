@@ -40,15 +40,7 @@
 		</div>
 		<div class="sec-about__pages">
 			<template v-for="(page, index) in pages" v-bind:key="index">
-				<router-link :to="{name: 'About_page-'+this.$route.meta.language, params: {page: page.post_name}}" :class="'sec-about__page '+'sec-about__page_'+(index+1)">
-					<!-- <transition style="animation-duration: 1s" name="pageFrom" :style="'animation-delay:'+ ( 0.7 + index * 0.1 + 0.1 ) +'s'" v-show="showFrom">
-						<div class="sec-about__page-from"></div>
-					</transition> -->
-						<!-- <div class="square-effect">
-						<transition style="animation-duration: 1s" :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="squareEffect" v-show="showAnim">
-							<div></div>
-						</transition>
-						</div> -->
+				<router-link :to="{name: 'About_page-'+this.$route.meta.language, params: {page: page.post_name}}" v-bind:class="[{not: goFrom}, 'sec-about__page '+'sec-about__page_'+(index+1)]">
 					<transition style="animation-duration: 1s" :style="'animation-delay:'+ ( 0.6 + index * 0.1 + 0.1 ) +'s'" name="animAbout" v-show="showAnim">
 						<div class="about-el"><img :src="page.acf_icon" :alt="page.post_title" class="about-el__icon"><p class="about-el__text">{{ page.post_title }}</p></div>
 					</transition>
@@ -96,6 +88,7 @@ export default {
 			toTextPage: false,
 			showFrom: false,
 			sizeWindow: 0,
+			goFrom: false,
 			images: {
 				count: 1,
 				loaded: 0,
@@ -112,6 +105,7 @@ export default {
 		}
 	},
 	beforeRouteLeave(to, from, next) {
+		this.goFrom = true;
 		if ( this.pageInfo.bg ) {
 			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
 		}

@@ -1,4 +1,14 @@
 <template>
+	<div class="sec-about-page-bg block-anim-bg">
+		<div class="block-anim-bg__el" v-for="ind in 16" v-bind:key="ind">
+			<transition name="squareEffect" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.05  ) +'s'">
+				<div class="block-anim-bg__dec"></div>
+			</transition>
+			<transition name="bgLeftAnim" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.06  ) +'s'">
+				<div class="block-anim-bg__el-bg"></div>
+			</transition>
+		</div>
+	</div>
 	<div class="wrapper-about" v-if="component === 64 || component === 66 ">
 		<TypesOfActivities :routeLeave="this.routeLeave" v-if="component === 64" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></TypesOfActivities>
 		<Founders :routeLeave="this.routeLeave" v-if="component === 66" :data="this.data" :showMain="this.showMain" :showAnim="this.showAnim"></Founders>
@@ -41,14 +51,14 @@ export default {
 		this.showAnim = false;
 		this.routeLeave = true;
 		this.$store.commit('setAboutLanguages', false);
-		this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
+		// this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
 	},
 	beforeRouteUpdate(to, from, next) {
 		setTimeout(next, 1500); 
 		this.showAnim = false;
 		this.routeLeave = true;
 		this.$store.commit('setAboutLanguages', false);
-		this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
+		// this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
 	},
 	methods: {
 		getInfo() {
