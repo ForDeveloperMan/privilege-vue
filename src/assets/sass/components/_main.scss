@@ -363,6 +363,14 @@ body{
 				animation-delay: 0.36s !important;
 			}
 		}
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				    animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
 		&:nth-child(3), &:nth-child(7){
 			.block-anim-bg__dec{
 				    animation-delay: 0.15s !important;
@@ -379,11 +387,19 @@ body{
 				animation-delay: 0.48s !important;
 			}
 		}
+		&:nth-child(11), &:nth-child(15){
+			.block-anim-bg__dec{
+				    animation-delay: 0.55s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.66s !important;
+			}
+		}
 	}
 	&:not(.showLines){
 		.sec-projects__line{
-			width: 0vw !important;
-			height: 0vh !important;
+			// width: 0vw !important;
+			// height: 0vh !important;
 		}
 	}
 	&__bg{
@@ -1694,6 +1710,16 @@ $timing-fn: ease;
 
 .sec-types{
 	// background: #3A5899;
+	.block-anim-bg__el{
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-types__line{
 			width: 0vw !important;
@@ -1871,6 +1897,16 @@ $timing-fn: ease;
 
 .sec-founders{
 	// background: #3A5899;
+	.block-anim-bg__el{
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-founders__line{
 			width: 0vw !important;
@@ -1882,6 +1918,7 @@ $timing-fn: ease;
 		opacity: 0.3;
 		position: absolute;
 		transition: 2s;
+		z-index: 3;
 		&_1{
 			top: calc(25vh - 1px);
 			left: 0;
@@ -1982,7 +2019,40 @@ $timing-fn: ease;
 }
 
 .sec-founder{
-	background: #3A5899;
+	.block-anim-bg__el{
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+		&:nth-child(6), &:nth-child(10){
+			.block-anim-bg__dec{
+				animation-delay: 0.3s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.36s !important;
+			}
+		}
+		&:nth-child(7), &:nth-child(11){
+			.block-anim-bg__dec{
+				animation-delay: 0.35s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.42s !important;
+			}
+		}
+		&:nth-child(8), &:nth-child(12){
+			.block-anim-bg__dec{
+				animation-delay: 0.4s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.48s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-founder__line{
 			width: 0vw !important;
@@ -1994,6 +2064,7 @@ $timing-fn: ease;
 		opacity: 0.3;
 		position: absolute;
 		transition: 2s;
+		z-index: 3;
 		&_1{
 			top: calc(25vh - 1px);
 			left: 0;
@@ -2122,6 +2193,32 @@ $timing-fn: ease;
 
 .sec-text{
 	// background: #3A5899;
+	.block-anim-bg__el{
+		&:nth-child(7), &:nth-child(11){
+			.block-anim-bg__dec{
+				animation-delay: 0.35s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.42s !important;
+			}
+		}
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+		&:nth-child(6), &:nth-child(10), &:nth-child(14){
+			.block-anim-bg__dec{
+				animation-delay: 0.3s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.36s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-text__line{
 			width: 0vw !important;
@@ -2136,6 +2233,7 @@ $timing-fn: ease;
 		opacity: 0.3;
 		position: absolute;
 		transition: 2s;
+		z-index: 3;
 		&_1{
 			top: calc(25vh - 1px);
 			left: 0;
@@ -2183,6 +2281,7 @@ $timing-fn: ease;
 		width: 100vw;
 		height: 100vh;
 		z-index: 10;
+		position: relative;
 	}
 	&__img{
 		position: absolute;
