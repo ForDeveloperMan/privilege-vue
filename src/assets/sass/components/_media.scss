@@ -264,8 +264,11 @@
 	.sec-about-page-bg{
 		display: none;
 	}
-	.sec-text, .wrapper-about, .sec-founders, .sec-types{
+	.sec-text, .wrapper-about, .sec-founders, .sec-types, .sec-partner, .sec-contacts{
 		background: #3A5899;
+	}
+	.sec-partners__wrap{
+		min-height: 100vh !important;
 	}
 }
 
@@ -296,7 +299,7 @@
 		    left: 0;
 		    width: 100%;
 		    height: 100%;
-		    background: rgba(9, 20, 36, 0.3);
+		    background: rgba(#3A5899, 0.5);
 		    z-index: 3;
 		}
 	}
@@ -1116,7 +1119,7 @@
 		min-height: 100vh;
 		height: auto;
 		&::after{
-			background: rgba(9, 20, 36, 0.4);
+			background: rgba(#3A5899, 0.5);
 		}
 		&__wrap{
 			height: auto;

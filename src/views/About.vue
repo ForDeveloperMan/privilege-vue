@@ -99,22 +99,24 @@ export default {
 	},
 	watch: {
 		readMoreMob(e) {
+			document.getElementsByClassName('about-page')[0].classList.remove('readMore');
 			if ( e ) {
 				document.getElementsByClassName('sec-about')[0].scrollTo(0, 0);
+				document.getElementsByClassName('about-page')[0].classList.add('readMore');
 			}
 		}
 	},
 	beforeRouteLeave(to, from, next) {
 		this.goFrom = true;
 		if ( this.pageInfo.bg ) {
-			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
+			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'aboutPageText'});
 		}
 		if ( ( to.params.page === "missiya-ta-principi" || to.params.page === "missiya-i-principy" || to.params.page === "mission-and-principles" || to.params.page === "missioon-ja-pohimotted" ) && window.screen.width >= 1201 ) {
 			this.showAnim = false;
 			this.toTextPage = true;
 			this.showFrom = true;
 			this.$store.commit('setToAboutTextPage', true);
-			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
+			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'aboutPageText'});
 
 			function set() {
 				let lines = document.getElementsByClassName('sec-about__line');

@@ -96,7 +96,7 @@ export default {
 		this.showLines = false;
 		this.$store.commit('setPartnersBg', this.pageInfo.bg);
 		if ( this.pageInfo.bg ) {
-			this.$store.commit('setBgPage', {src: '123', class: 'aboutPageText'});
+			this.$store.commit('setBgPage', {src: this.pageInfo.bg, class: 'aboutPageText'});
 		}
 	},
 	methods:{

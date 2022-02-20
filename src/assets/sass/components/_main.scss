@@ -70,8 +70,11 @@ body{
 	}
 	&.aboutPageText{
 		// background: #3A5899;
+		&::after{
+			background: rgba(#3A5899, 0.5);
+		}
 		.bg-page__img{
-			display: none;
+			// display: none;
 		}
 
 	}
@@ -857,6 +860,16 @@ body{
 
 .sec-partners{
 	position: relative;
+	.block-anim-bg__el{
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				    animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-partners__line{
 			width: 0vw !important;
@@ -982,7 +995,32 @@ body{
 
 .sec-partner{
 	position: relative;
-	background: #3A5899;
+	.block-anim-bg__el{
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				    animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+		&:nth-child(6), &:nth-child(10){
+			.block-anim-bg__dec{
+			    animation-delay: 0.3s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.36s !important;
+			}
+		}
+		&:nth-child(11), &:nth-child(15){
+			.block-anim-bg__dec{
+			    animation-delay: 0.55s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.66s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-partner__line{
 			width: 0vw !important;
@@ -1165,7 +1203,24 @@ body{
 }
 
 .sec-contacts{
-	background: #3A5899;
+	.block-anim-bg__el{
+		&:nth-child(5), &:nth-child(9){
+			.block-anim-bg__dec{
+				    animation-delay: 0.25s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.3s !important;
+			}
+		}
+		&:nth-child(8), &:nth-child(12){
+			.block-anim-bg__dec{
+			    animation-delay: 0.4s !important;
+			}
+			.block-anim-bg__el-bg{
+				animation-delay: 0.48s !important;
+			}
+		}
+	}
 	&:not(.showLines){
 		.sec-contacts__line{
 			width: 0vw !important;
@@ -1438,6 +1493,9 @@ body{
 				}
 			}
 		}
+	}
+	.block-anim-bg__el-bg::after{
+		background: rgba(#3A5899, 0.5);
 	}
 	&__bgform{
 		position: absolute;
@@ -1882,8 +1940,8 @@ $timing-fn: ease;
 		}
 		&-icon{
 			margin-bottom: 27px;
-			width: 56px;
-			height: 56px;
+			width: 46px;
+			height: 46px;
 			object-fit: contain;
 		}
 		&-title{

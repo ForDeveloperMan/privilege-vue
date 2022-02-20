@@ -1,6 +1,16 @@
 <template>
 <div class="wrapper">
 	<div class="sec-page sec-contacts" v-bind:class="[{openForm: showForm}, {showLines: showLines}]">
+		<div class="sec-about-page-bg block-anim-bg">
+			<div class="block-anim-bg__el" v-for="ind in 16" v-bind:key="ind">
+				<transition name="squareEffect" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.05  ) +'s'">
+					<div class="block-anim-bg__dec"></div>
+				</transition>
+				<transition name="bgLeftAnim" v-show="showAnim" :style="'animation-delay:'+ ( ind * 0.06  ) +'s'">
+					<div class="block-anim-bg__el-bg"></div>
+				</transition>
+			</div>
+		</div>
 		<div class="sec-contacts__line sec-contacts__line_1"></div>
 		<div class="sec-contacts__line sec-contacts__line_2"></div>
 		<div class="sec-contacts__line sec-contacts__line_3"></div>

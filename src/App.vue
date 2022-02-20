@@ -6,6 +6,7 @@
 	<router-view :key="$route.name+$route.path" />
 </template>
 <script>
+import axios from 'axios'
 import Header from '@/components/header.vue'
 
 export default {
@@ -17,6 +18,7 @@ export default {
 		return {
 			showHeader: true,
 			classBg: false,
+			pageInfo: Object,
 		};
 	},
 	watch:{
@@ -26,12 +28,23 @@ export default {
 		},
 	},
 	created() {
+		this.getInfo();
 		this.$store.commit('changeLanguage', this.$route.meta.path);
 	},
 	mounted() {
 		this.checkHome();
 	},
 	methods: {
+		getInfo() {
+			axios.get('https://privilege.qazxswedc.site/wp-json/vue/v1/getMain', {
+				params:{
+					lang: 'en',
+				}
+			}).then(response => {
+				this.pageInfo = response.data.pageInfo;
+				this.$store.commit('setHome_bg_main',this.pageInfo.bgHome);
+			});
+		},
 		checkHome() {
 			if ( this.$store.state.bgPage.class ) {
 				this.classBg = this.$store.state.bgPage.class;

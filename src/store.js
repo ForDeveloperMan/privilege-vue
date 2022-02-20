@@ -5,6 +5,7 @@ export default {
 			language_def: 'uk',
 			projectLanguages: false,
 			partnerLanguages: false,
+			home_bg_main: false,
 			home_bg: false,
 			project_bg: false,
 			project_bg_main: false,
@@ -66,6 +67,9 @@ export default {
 		},
 		setToAboutTextPage(state, val) {
 			state.toAboutTextPage = val;
+		},
+		setHome_bg_main(state, val) {
+			state.home_bg_main = val;
 		},
 	},
 	getters:{

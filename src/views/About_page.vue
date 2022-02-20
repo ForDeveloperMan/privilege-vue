@@ -40,8 +40,8 @@ export default {
 		setTimeout(next, 1500);
 		this.showAnim = false;
 		this.routeLeave = true;
-		this.$store.commit('setAboutLanguages', false);
-		// this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
+		// this.$store.commit('setAboutLanguages', false);
+		this.$store.commit('setBgPage', {src: '123', class: 'aboutPage'});
 	},
 	beforeRouteUpdate(to, from, next) {
 		setTimeout(next, 1500); 
